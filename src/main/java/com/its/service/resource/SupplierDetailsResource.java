@@ -22,7 +22,8 @@ public class SupplierDetailsResource {
     public ResponseEntity<Object> save(@RequestBody SupplierDetailsDto dto) {
         SupplierDetails supplierDetails = new SupplierDetails();
         dto.to(supplierDetails);
-        supplierDetails = service.save(disasterType);
+//        supplierDetails = service.save(disasterType);
+        return null;
 //        return ok(success(DisasterTypeDto.from(disasterType), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
 }
