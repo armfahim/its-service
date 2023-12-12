@@ -24,7 +24,7 @@ public class SupplierDetails extends BaseEntity {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "SUPPLIER_ID", nullable = false)
+    @Column(name = "SUPPLIER_ID", nullable = false,unique = true)
     private String supplierID;
 
     @Column(name = "SUPPLIER_NAME", nullable = false)
@@ -33,14 +33,14 @@ public class SupplierDetails extends BaseEntity {
     @Column(name = "CONTACT_PERSON", nullable = false)
     private String contactPerson;
 
-    @Column(name = "PHONE", nullable = false)
+    @Column(name = "PHONE", nullable = false,unique = true)
     @Pattern(
             regexp = "^\\+?[0-9\\-\\s]+$",
             message = "Please provide a valid phone number"
     )
     private String phone;
 
-    @Column(name = "EMAIL", nullable = true)
+    @Column(name = "EMAIL", nullable = true,unique = true)
     @Email(message = "Please provide a valid email address")
     private String email;
 
