@@ -32,7 +32,7 @@ public class SupplierDetailsResource {
         try {
             supplierDetails = service.save(supplierDetails);
         } catch (DataIntegrityViolationException e) {
-            throw new ResourceNotFoundException("Please provide unique data.The info you've provide are already exists!");
+            throw new AlreadyExistsException("Please provide unique data.The info you've provide are already exists!");
         }
         return ok(success(SupplierDetailsDto.from(supplierDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }

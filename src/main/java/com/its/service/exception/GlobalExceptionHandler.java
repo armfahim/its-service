@@ -77,5 +77,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<JSONObject> handleBadRequestExceptions(Exception ex, WebRequest request) {
         return new ResponseEntity<>(ResponseBuilder.error((ex.getMessage())).getJson(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({AlreadyExistsException.class})
+    public ResponseEntity<JSONObject> handleAlreadyExistsExceptions(Exception ex, WebRequest request) {
+        String message = ex.getMessage().equals("") ? ALREADY_EXIST : ex.getMessage();
+        return new ResponseEntity<>(ResponseBuilder.error((ex.getMessage())).getJson(), HttpStatus.BAD_REQUEST);
+    }
 }
 
