@@ -19,14 +19,15 @@ public class PaginationUtils {
      * @param size   number of items per request
      * @return corresponding pageable, or null
      */
-    public static Pageable getPageable(String sortBy, Integer page, Integer size) {
+    public static Pageable getPageable(String sortBy, String dir, Integer page, Integer size) {
         Pageable pageable;
         if (sortBy.isEmpty()) pageable = PageRequest.of(page - 1, size);
         else {
-            String[] parts = sortBy.split(",");
-            pageable = PageRequest.of(page - 1, size, Sort.by(parts[0].trim()));
-            if (parts[1].trim().equals("desc"))
-                pageable = PageRequest.of(page - 1, size, Sort.by(parts[0].trim()).descending());
+            pageable = PageRequest.of(page - 1, size, Sort.by(dir.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy));
+//            String[] parts = sortBy.split(",");
+//            pageable = PageRequest.of(page - 1, size, Sort.by(parts[0].trim()));
+//            if (parts[1].trim().equals("desc"))
+//                pageable = PageRequest.of(page - 1, size, Sort.by(parts[0].trim()).descending());
         }
         return pageable;
     }

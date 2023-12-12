@@ -39,8 +39,8 @@ public class SupplierDetailsServiceImpl implements SupplierDetailsService {
     }
 
     @Override
-    public PaginatedResponse list(String sort, int page, int size) {
-        Page<SupplierDetails> pageData = repository.findAll(PaginationUtils.getPageable(sort, page, size));
+    public PaginatedResponse list(String sort, String dir, int page, int size) {
+        Page<SupplierDetails> pageData = repository.findAll(PaginationUtils.getPageable(sort, dir, page, size));
         List<SupplierDetailsDto> data = pageData.getContent().stream().map(SupplierDetailsDto::from).toList();
         return PaginationUtils.getPaginatedResponse(pageData, data);
     }

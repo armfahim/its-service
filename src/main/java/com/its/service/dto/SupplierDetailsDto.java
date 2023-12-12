@@ -16,7 +16,7 @@ public class SupplierDetailsDto {
     private String phone;
     private String email;
     private String address;
-    private String status;
+    private String recordStatus;
 
 
     public static SupplierDetailsDto from(SupplierDetails supplierDetails) {

@@ -15,6 +15,6 @@ public interface GenericService<T> {
 
     List<T> findAll();
 
-    PaginatedResponse list(String sort, int page, int size);
+    PaginatedResponse list(String sort, String dir, int page, int size);
 
 }

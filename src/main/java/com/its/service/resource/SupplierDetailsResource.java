@@ -4,13 +4,14 @@ import com.its.service.constant.MessageConstant;
 import com.its.service.dto.SupplierDetailsDto;
 import com.its.service.entity.SupplierDetails;
 import com.its.service.enums.RecordStatus;
+import com.its.service.exception.AlreadyExistsException;
+import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.helper.BasicAudit;
 import com.its.service.service.SupplierDetailsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static com.its.service.utils.ResponseBuilder.paginatedSuccess;
 import static com.its.service.utils.ResponseBuilder.success;
@@ -27,15 +28,20 @@ public class SupplierDetailsResource {
     public ResponseEntity<Object> save(@RequestBody SupplierDetailsDto dto) {
         SupplierDetails supplierDetails = new SupplierDetails();
         dto.to(supplierDetails);
-        BasicAudit.setAttributeForCreateUpdate(supplierDetails,false, RecordStatus.ACTIVE);
-        supplierDetails = service.save(supplierDetails);
+        BasicAudit.setAttributeForCreateUpdate(supplierDetails, false, RecordStatus.ACTIVE);
+        try {
+            supplierDetails = service.save(supplierDetails);
+        } catch (DataIntegrityViolationException e) {
+            throw new ResourceNotFoundException("Please provide unique data.The info you've provide are already exists!");
+        }
         return ok(success(SupplierDetailsDto.from(supplierDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
 
     @GetMapping(value = "/list")
     public ResponseEntity<Object> list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                        @RequestParam(value = "size", defaultValue = "10") Integer size,
-                                       @RequestParam(value = "sortBy", defaultValue = "") String sortBy) {
-        return ok(paginatedSuccess(service.list(sortBy, page, size)).getJson());
+                                       @RequestParam(value = "sortBy", defaultValue = "") String orderColumnName,
+                                       @RequestParam(value = "dir", defaultValue = "") String dir) {
+        return ok(paginatedSuccess(service.list(orderColumnName, dir, page, size)).getJson());
     }
 }
