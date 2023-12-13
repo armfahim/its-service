@@ -2,10 +2,10 @@ package com.its.service.resource;
 
 import com.its.service.constant.MessageConstant;
 import com.its.service.dto.SupplierDetailsDto;
+import com.its.service.dto.UpdateStatusDto;
 import com.its.service.entity.SupplierDetails;
 import com.its.service.enums.RecordStatus;
 import com.its.service.exception.AlreadyExistsException;
-import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.helper.BasicAudit;
 import com.its.service.service.SupplierDetailsService;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +35,29 @@ public class SupplierDetailsResource {
             throw new AlreadyExistsException("Please provide unique data.The info you've provide are already exists!");
         }
         return ok(success(SupplierDetailsDto.from(supplierDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
+    }
+
+    @PutMapping(value = "/update")
+    public ResponseEntity<Object> update(@RequestBody SupplierDetailsDto dto) {
+        SupplierDetails supplierDetails = service.findById(dto.getId());
+        dto.to(supplierDetails);
+        supplierDetails = service.update(supplierDetails);
+        return ok(success(SupplierDetailsDto.from(supplierDetails), MessageConstant.DATA_UPDATE_SUCCESS).getJson());
+    }
+
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Object> delete(@RequestParam Long id) {
+        SupplierDetails supplierDetails = service.findById(id);
+        service.delete(supplierDetails);
+        return ok(success(MessageConstant.DATA_DELETE_SUCCESS).getJson());
+    }
+
+    @PutMapping(value = "/update-status")
+    public ResponseEntity<Object> updateStatus(@RequestBody UpdateStatusDto dto) {
+        SupplierDetails supplierDetails = service.findById(dto.getId());
+        supplierDetails.setRecordStatus(dto.getStatus());
+        service.update(supplierDetails);
+        return ok(success(dto, MessageConstant.DATA_UPDATE_SUCCESS).getJson());
     }
 
     @GetMapping(value = "/list")
