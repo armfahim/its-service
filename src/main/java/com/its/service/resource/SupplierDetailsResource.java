@@ -64,7 +64,11 @@ public class SupplierDetailsResource {
     public ResponseEntity<Object> list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                        @RequestParam(value = "size", defaultValue = "10") Integer size,
                                        @RequestParam(value = "sortBy", defaultValue = "") String orderColumnName,
-                                       @RequestParam(value = "dir", defaultValue = "") String dir) {
-        return ok(paginatedSuccess(service.list(orderColumnName, dir, page, size)).getJson());
+                                       @RequestParam(value = "dir", defaultValue = "") String dir,
+                                       @RequestParam(value = "supplierId", defaultValue = "") String supplierId,
+                                       @RequestParam(value = "supplierName", defaultValue = "") String supplierName) {
+        System.out.println(supplierId);
+        System.out.println(supplierName);
+        return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierId,supplierName)).getJson());
     }
 }
