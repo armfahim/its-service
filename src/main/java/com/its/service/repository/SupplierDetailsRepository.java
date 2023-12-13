@@ -8,20 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface SupplierDetailsRepository extends JpaRepository<SupplierDetails, Long> {
 
-    @Query(value = """
-            SELECT * FROM supplier_details sd 
-            WHERE 
-            (:supplierId IS NULL OR sd.supplier_id = :supplierId) AND 
-            (:supplierName IS NULL OR sd.supplier_name = :supplierName)
-            """,
-            countQuery = """
-            SELECT COUNT(sd.supplier_id)
-            FROM supplier_details sd 
-            WHERE
-            (:supplierId IS NULL OR sd.supplier_id = :supplierId) AND
-            (:supplierName IS NULL OR sd.supplier_name = :supplierName)
-            """,
-            nativeQuery = true)
+    @Query(value = "SELECT sd FROM SupplierDetails sd " +
+            "WHERE (:supplierId IS NULL OR LOWER(sd.supplierID) LIKE LOWER(CONCAT('%', :supplierId, '%'))) " +
+            "AND (:supplierName IS NULL OR LOWER(sd.supplierName) LIKE LOWER(CONCAT('%', :supplierName, '%')))",
+            countQuery = "SELECT COUNT(sd) FROM SupplierDetails sd " +
+                    "WHERE (:supplierId IS NULL OR LOWER(sd.supplierID) LIKE LOWER(CONCAT('%', :supplierId, '%'))) " +
+                    "AND (:supplierName IS NULL OR LOWER(sd.supplierName) LIKE LOWER(CONCAT('%', :supplierName, '%')))")
     Page<SupplierDetails> findByListAndSearch(String supplierId, String supplierName, Pageable pageable);
 
     Page<SupplierDetails> findBySupplierIDContainingIgnoreCaseAndSupplierNameContainingIgnoreCase(String supplierId, String supplierName, Pageable pageable);
