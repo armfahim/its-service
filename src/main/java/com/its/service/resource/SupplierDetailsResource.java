@@ -67,6 +67,6 @@ public class SupplierDetailsResource {
                                        @RequestParam(value = "dir", defaultValue = "") String dir,
                                        @RequestParam(value = "supplierId", defaultValue = "") String supplierId,
                                        @RequestParam(value = "supplierName", defaultValue = "") String supplierName) {
-        return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierId,supplierName)).getJson());
+        return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierId, supplierName)).getJson());
     }
 }

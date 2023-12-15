@@ -41,7 +41,7 @@ public class SupplierDetailsServiceImpl implements SupplierDetailsService {
             throw new ResourceNotFoundException(MessageConstant.PRIMARY_ID_NOT_PROVIDED);
         }
         try {
-            BasicAudit.setAttributeForCreateUpdate(supplierDetails,true, RecordStatus.ACTIVE);
+            BasicAudit.setAttributeForCreateUpdate(supplierDetails, true, RecordStatus.ACTIVE);
             supplierDetails = save(supplierDetails);
         } catch (DataIntegrityViolationException e) {
             throw new AlreadyExistsException("Please provide unique data.The info you've provide are already exists!");
@@ -87,8 +87,8 @@ public class SupplierDetailsServiceImpl implements SupplierDetailsService {
         supplierName = supplierName.equals("") ? null : supplierName;
         sort = sort.isEmpty() ? "supplierName" : sort;
 
-        Page<SupplierDetails> pageData = repository.findByListAndSearch(supplierId,supplierName
-                ,PaginationUtils.getPageable(sort, dir, page, size));
+        Page<SupplierDetails> pageData = repository.findByListAndSearch(supplierId, supplierName
+                , PaginationUtils.getPageable(sort, dir, page, size));
         List<SupplierDetailsDto> data = pageData.getContent().stream().map(SupplierDetailsDto::from).toList();
         return PaginationUtils.getPaginatedResponse(pageData, data);
     }
