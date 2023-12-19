@@ -18,8 +18,8 @@ import static com.its.service.utils.ResponseBuilder.success;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
+@RequestMapping("/v1/supplier-details")
 @RequiredArgsConstructor
-@RequestMapping("v1/supplier-details")
 public class SupplierDetailsResource {
 
     private final SupplierDetailsService service;

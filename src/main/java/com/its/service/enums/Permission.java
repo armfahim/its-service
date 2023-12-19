@@ -1,4 +1,4 @@
-package com.its.service.entity.auth;
+package com.its.service.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -4,21 +4,15 @@ import com.its.service.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -26,10 +20,9 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
-import static com.its.service.entity.auth.Permission.*;
-import static com.its.service.entity.auth.Role.ADMIN;
+import static com.its.service.enums.Permission.*;
+import static com.its.service.enums.Role.ADMIN;
 import static org.springframework.http.HttpMethod.*;
-import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -46,14 +39,15 @@ public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
 
+    private final LogoutHandler logoutHandler;
+
     private static final String[] WHITE_LIST_URL = {
             "/v2/api-docs",
             "/configuration/ui",
             "/swagger-resources/**",
             "/configuration/security/**",
             "/swagger-ui/*",
-            "/api/v1/admin/*",
-            "/api/v1/auth/*",
+            "/its/api/v1/auth/**",
     };
 
 //    private final KeycloakAccessConverter keycloakAccessConverter;
@@ -67,19 +61,21 @@ public class SecurityConfig {
     /**
      * TODO: Active the commented line inside the method,
      * TODO: when jwt and role based authentication will be configured
+     *
+     * @return
      */
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public DefaultSecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-        .csrf(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-                                .requestMatchers("/api/v1/admin/**").hasAnyRole(ADMIN.name())
-                                .requestMatchers(GET, "/api/v1/admin/**").hasAnyAuthority(ADMIN_READ.name())
-                                .requestMatchers(POST, "/api/v1/admin/**").hasAnyAuthority(ADMIN_CREATE.name())
-                                .requestMatchers(PUT, "/api/v1/admin/**").hasAnyAuthority(ADMIN_UPDATE.name())
-                                .requestMatchers(DELETE, "/api/v1/admin/**").hasAnyAuthority(ADMIN_DELETE.name())
+                                .requestMatchers("its/api/v1/admin/**").hasAnyRole(ADMIN.name())
+                                .requestMatchers(GET, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_READ.name())
+                                .requestMatchers(POST, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_CREATE.name())
+                                .requestMatchers(PUT, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_UPDATE.name())
+                                .requestMatchers(DELETE, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_DELETE.name())
                                 .anyRequest()
                                 .authenticated()
                 )
@@ -90,8 +86,7 @@ public class SecurityConfig {
                         logout.logoutUrl("/api/v1/auth/logout")
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-                )
-        ;
+                );
 
         return http.build();
 //        http.csrf((csrf) -> csrf.disable())
@@ -110,12 +105,6 @@ public class SecurityConfig {
 //        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 //        http.authenticationProvider(daoAuthenticationProvider());
 //        return http.build();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManagerB(AuthenticationConfiguration auth) throws Exception {
-//        auth.userDetailsService(this.lmsUserDetailsServiceImpl).passwordEncoder(passwordEncoder());
-        return auth.getAuthenticationManager();
     }
 
     @Bean

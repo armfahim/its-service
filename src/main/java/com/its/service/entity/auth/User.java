@@ -1,6 +1,7 @@
 package com.its.service.entity.auth;
 
 import com.its.service.entity.BaseEntity;
+import com.its.service.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,11 +19,10 @@ import java.util.Collection;
 @AllArgsConstructor
 @Entity
 @Table(name = "ITS_USER")
-public class User extends BaseEntity implements UserDetails{
+public class User extends BaseEntity implements UserDetails {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
