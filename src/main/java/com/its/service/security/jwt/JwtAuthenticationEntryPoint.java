@@ -2,11 +2,10 @@ package com.its.service.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -35,24 +34,14 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, AuthenticationException authException) throws IOException, jakarta.servlet.ServletException {
         // Custom logic to handle authentication failures
-        if (authException.getClass().isAnnotationPresent(ResponseStatus.class)) {
-            // If the exception has a @ResponseStatus annotation, it is a business logic error
-            throw authException;
-        }
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.setContentType("application/json");
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-        Map<String, Object> errorDetails = new HashMap<>();
-        errorDetails.put("timestamp", System.currentTimeMillis());
-        errorDetails.put("status", HttpStatus.UNAUTHORIZED.value());
-        errorDetails.put("error", "Unauthorized");
-        errorDetails.put("message", "Authentication failed: " + authException.getMessage());
+        final Map<String, Object> body = new HashMap<>();
+        body.put("code", HttpServletResponse.SC_UNAUTHORIZED);
+        body.put("payload", "You need to login first in order to perform this action.");
 
-        String errorResponse = objectMapper.writeValueAsString(errorDetails);
-        response.getWriter().write(errorResponse);
-//        System.out.println("Entry Request: " + request.getRequestURI());
-//        System.out.println("Entry Contain: " + request.getRequestURI().contains("/its/api/v1/admin/"));
-//        if (request.getRequestURI().contains("/its/api/v1/admin/") == true)
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(response.getOutputStream(), body);
     }
 }

@@ -3,7 +3,7 @@ package com.its.service;
 import com.its.service.entity.auth.User;
 import com.its.service.repository.UserRepository;
 import com.its.service.request.RegisterRequest;
-import com.its.service.service.AuthenticationService;
+import com.its.service.service.auth.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

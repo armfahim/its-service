@@ -1,4 +1,4 @@
-package com.its.service.config;
+package com.its.service.resource.auth;
 
 import com.its.service.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,11 +16,7 @@ public class LogoutService implements LogoutHandler {
     private final TokenRepository tokenRepository;
 
     @Override
-    public void logout(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Authentication authentication
-    ) {
+    public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {

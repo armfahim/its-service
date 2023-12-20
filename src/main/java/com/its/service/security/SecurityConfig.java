@@ -5,7 +5,6 @@ import com.its.service.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,101 +35,36 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
 
-    private final AuthenticationProvider authenticationProvider;
-
     private final LogoutHandler logoutHandler;
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     private static final String[] WHITE_LIST_URL = {
-            "/v2/api-docs",
-            "/configuration/ui",
-            "/swagger-resources/**",
-            "/configuration/security/**",
-            "/swagger-ui/*",
-            "/its/api/v1/auth/**",
+            "/v1/auth/**",
     };
 
-//    private final KeycloakAccessConverter keycloakAccessConverter;
-
-//    private JwtAuthenticationConverter getJwtConverter() {
-//        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-//        converter.setJwtGrantedAuthoritiesConverter(keycloakAccessConverter);
-//        return converter;
-//    }
-
-    /**
-     * TODO: Active the commented line inside the method,
-     * TODO: when jwt and role based authentication will be configured
-     *
-     * @return
-     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf((csrf) -> csrf.disable())
                 .cors((cors) -> cors.disable())
                 .authorizeRequests(req ->
-                        req.requestMatchers("/its/api/v1/admin/**").permitAll()
-                                .requestMatchers(OPTIONS).permitAll()
-                                .requestMatchers(WHITE_LIST_URL).permitAll()
-                                .requestMatchers(GET, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_READ.name())
-                                .requestMatchers(POST, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_CREATE.name())
-                                .requestMatchers(PUT, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_UPDATE.name())
-                                .requestMatchers(DELETE, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_DELETE.name())
+                        req.requestMatchers(WHITE_LIST_URL).permitAll()
+                                .requestMatchers(GET, "/v1/admin/**").hasAnyAuthority(ADMIN_READ.name(), "ROLE_ADMIN")
+                                .requestMatchers(POST, "/v1/admin/**").hasAnyAuthority(ADMIN_CREATE.name(), "ROLE_ADMIN")
+                                .requestMatchers(PUT, "/v1/admin/**").hasAnyAuthority(ADMIN_UPDATE.name(), "ROLE_ADMIN")
+                                .requestMatchers(DELETE, "/v1/admin/**").hasAnyAuthority(ADMIN_DELETE.name(), "ROLE_ADMIN")
                                 .anyRequest().authenticated()
                 );
         http.sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
-                .authenticationProvider(authenticationProvider)
+                //.authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout ->
-                        logout.logoutUrl("/api/v1/auth/logout")
+                        logout.logoutUrl("/v1/auth/logout")
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext()))
                 .exceptionHandling((exception) -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint));
         return http.build();
-
-
-//        http
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(req ->
-//                        req.requestMatchers(WHITE_LIST_URL)
-//                                .permitAll()
-//                                .requestMatchers("its/api/v1/admin/**").hasAnyRole(ADMIN.name())
-//                                .requestMatchers(GET, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_READ.name())
-//                                .requestMatchers(POST, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_CREATE.name())
-//                                .requestMatchers(PUT, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_UPDATE.name())
-//                                .requestMatchers(DELETE, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_DELETE.name())
-//                                .anyRequest()
-//                                .authenticated()
-//                )
-//                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
-//                .authenticationProvider(authenticationProvider)
-//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-//                .logout(logout ->
-//                        logout.logoutUrl("/api/v1/auth/logout")
-//                                .addLogoutHandler(logoutHandler)
-//                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-//                );
-
-//       ========================
-//        return http.build();
-//        http.csrf((csrf) -> csrf.disable())
-//                .authorizeRequests(authorize -> authorize.
-//                        .anyRequest().permitAll()
-//                );
-//        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-//        http.authenticationManager(authenticationManagerBuilder.eraseCredentials(true).build());
-//        http.csrf((csrf) -> csrf.disable())
-//                .authorizeRequests()
-//                .dispatcherTypeMatchers(HttpMethod.GET).permitAll()
-//                .requestMatchers(PUBLIC_MATCHER).permitAll()
-//                .anyRequest().permitAll();
-//                .authenticationEntryPoint(unauthorizedHandler).and().sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-//        http.authenticationProvider(daoAuthenticationProvider());
-//        return http.build();
     }
 
     @Bean

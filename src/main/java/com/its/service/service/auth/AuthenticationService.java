@@ -1,4 +1,4 @@
-package com.its.service.service;
+package com.its.service.service.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.its.service.entity.auth.Token;
