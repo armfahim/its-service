@@ -23,14 +23,24 @@ public class User extends BaseEntity implements UserDetails {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
+    @Column(name = "FIRST_NAME")
     private String firstname;
+
+    @Column(name = "LAST_NAME")
     private String lastname;
+
+    @Column(name = "EMAIL", unique = true)
     private String email;
+
+    @Column(name = "USER_NAME", unique = true)
     private String username;
+
+    @Column(name = "PASSWORD")
     private String password;
 
     @Enumerated(EnumType.STRING)

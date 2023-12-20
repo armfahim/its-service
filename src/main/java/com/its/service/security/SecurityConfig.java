@@ -1,5 +1,6 @@
 package com.its.service.security;
 
+import com.its.service.security.jwt.JwtAuthenticationEntryPoint;
 import com.its.service.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -8,9 +9,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +21,6 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 
 import static com.its.service.enums.Permission.*;
-import static com.its.service.enums.Role.ADMIN;
 import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -40,6 +39,8 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
 
     private final LogoutHandler logoutHandler;
+
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     private static final String[] WHITE_LIST_URL = {
             "/v2/api-docs",
@@ -65,30 +66,55 @@ public class SecurityConfig {
      * @return
      */
     @Bean
-    public DefaultSecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req ->
-                        req.requestMatchers(WHITE_LIST_URL)
-                                .permitAll()
-                                .requestMatchers("its/api/v1/admin/**").hasAnyRole(ADMIN.name())
+                .csrf((csrf) -> csrf.disable())
+                .cors((cors) -> cors.disable())
+                .authorizeRequests(req ->
+                        req.requestMatchers("/its/api/v1/admin/**").permitAll()
+                                .requestMatchers(OPTIONS).permitAll()
+                                .requestMatchers(WHITE_LIST_URL).permitAll()
                                 .requestMatchers(GET, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_READ.name())
                                 .requestMatchers(POST, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_CREATE.name())
                                 .requestMatchers(PUT, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_UPDATE.name())
                                 .requestMatchers(DELETE, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_DELETE.name())
-                                .anyRequest()
-                                .authenticated()
-                )
-                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+                                .anyRequest().authenticated()
+                );
+        http.sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout ->
                         logout.logoutUrl("/api/v1/auth/logout")
                                 .addLogoutHandler(logoutHandler)
-                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-                );
-
+                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext()))
+                .exceptionHandling((exception) -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint));
         return http.build();
+
+
+//        http
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests(req ->
+//                        req.requestMatchers(WHITE_LIST_URL)
+//                                .permitAll()
+//                                .requestMatchers("its/api/v1/admin/**").hasAnyRole(ADMIN.name())
+//                                .requestMatchers(GET, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_READ.name())
+//                                .requestMatchers(POST, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_CREATE.name())
+//                                .requestMatchers(PUT, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_UPDATE.name())
+//                                .requestMatchers(DELETE, "its/api/v1/admin/**").hasAnyAuthority(ADMIN_DELETE.name())
+//                                .anyRequest()
+//                                .authenticated()
+//                )
+//                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+//                .authenticationProvider(authenticationProvider)
+//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+//                .logout(logout ->
+//                        logout.logoutUrl("/api/v1/auth/logout")
+//                                .addLogoutHandler(logoutHandler)
+//                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+//                );
+
+//       ========================
+//        return http.build();
 //        http.csrf((csrf) -> csrf.disable())
 //                .authorizeRequests(authorize -> authorize.
 //                        .anyRequest().permitAll()
