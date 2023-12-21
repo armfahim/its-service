@@ -1,7 +1,7 @@
 package com.its.service.resource.auth;
 
 import com.its.service.request.RegisterRequest;
-import com.its.service.service.AuthenticationService;
+import com.its.service.service.auth.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
