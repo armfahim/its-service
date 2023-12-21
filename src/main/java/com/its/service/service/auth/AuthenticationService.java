@@ -4,8 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.its.service.entity.auth.Token;
 import com.its.service.entity.auth.User;
 import com.its.service.enums.TokenType;
+import com.its.service.exception.AlreadyExistsException;
+import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.repository.TokenRepository;
 import com.its.service.repository.UserRepository;
+import com.its.service.request.AuthenticationRequest;
 import com.its.service.request.RegisterRequest;
 import com.its.service.response.AuthenticationResponse;
 import com.its.service.security.jwt.JwtService;
@@ -14,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +33,12 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        if (Boolean.TRUE.equals(userRepository.findByUsername(request.getUsername()))) {
+            throw new AlreadyExistsException("Username is already taken!");
+        }
+        if (Boolean.TRUE.equals(userRepository.findByEmail(request.getEmail()))) {
+            throw new AlreadyExistsException("Email is already taken!");
+        }
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
@@ -37,6 +47,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
+
         var savedUser = userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
@@ -47,24 +58,20 @@ public class AuthenticationService {
                 .build();
     }
 
-//    public AuthenticationResponse authenticate(AuthenticationRequest request) {
-//        authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        request.getEmail(),
-//                        request.getPassword()
-//                )
-//        );
-//        var user = repository.findByEmail(request.getEmail())
-//                .orElseThrow();
-//        var jwtToken = jwtService.generateToken(user);
-//        var refreshToken = jwtService.generateRefreshToken(user);
-//        revokeAllUserTokens(user);
-//        saveUserToken(user, jwtToken);
-//        return AuthenticationResponse.builder()
-//                .accessToken(jwtToken)
-//                .refreshToken(refreshToken)
-//                .build();
-//    }
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        var user = userRepository.findByUsername(request.getUsername()).orElseThrow(() -> {
+            throw new ResourceNotFoundException("Wrong username");
+        });
+        var jwtToken = jwtService.generateToken(user);
+        var refreshToken = jwtService.generateRefreshToken(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
 
     private void saveUserToken(User user, String jwtToken) {
         var token = Token.builder()

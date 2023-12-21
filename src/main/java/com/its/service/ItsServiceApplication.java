@@ -28,7 +28,7 @@ public class ItsServiceApplication {
     /**
      * Create admin and employee base user by system (auto creation)
      *
-     * @param service
+     * @param Authentication service
      * @return
      */
     @Bean
