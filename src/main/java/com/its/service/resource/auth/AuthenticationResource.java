@@ -1,7 +1,11 @@
 package com.its.service.resource.auth;
 
+import com.its.service.request.AuthenticationRequest;
 import com.its.service.request.RegisterRequest;
+import com.its.service.response.AuthenticationResponse;
 import com.its.service.service.auth.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/v1/admin")
 @RequiredArgsConstructor
-//test
 public class AuthenticationResource {
 
     private final AuthenticationService service;
@@ -22,20 +27,13 @@ public class AuthenticationResource {
         return ResponseEntity.ok(service.register(request));
     }
 
-//    @PostMapping("/authenticate")
-//    public ResponseEntity<AuthenticationResponse> authenticate(
-//            @RequestBody AuthenticationRequest request
-//    ) {
-//        return ResponseEntity.ok(service.authenticate(request));
-//    }
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+        return ResponseEntity.ok(service.authenticate(request));
+    }
 
-//    @PostMapping("/refresh-token")
-//    public void refreshToken(
-//            HttpServletRequest request,
-//            HttpServletResponse response
-//    ) throws IOException {
-//        service.refreshToken(request, response);
-//    }
-
-
+    @PostMapping("/refresh-token")
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        service.refreshToken(request, response);
+    }
 }
