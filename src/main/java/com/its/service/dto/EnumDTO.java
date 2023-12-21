@@ -1,4 +1,4 @@
-package com.its.service.utils;
+package com.its.service.dto;
 
 public class EnumDTO {
 	
