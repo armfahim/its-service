@@ -1,8 +1,8 @@
 package com.its.service.resource.auth;
 
+import com.its.service.constant.MessageConstant;
 import com.its.service.request.AuthenticationRequest;
 import com.its.service.request.RegisterRequest;
-import com.its.service.response.AuthenticationResponse;
 import com.its.service.service.auth.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
+import static com.its.service.utils.ResponseBuilder.success;
+import static org.springframework.http.ResponseEntity.ok;
+
 @RestController
-@RequestMapping("/v1/admin")
+@RequestMapping("/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationResource {
 
@@ -28,8 +31,8 @@ public class AuthenticationResource {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-        return ResponseEntity.ok(service.authenticate(request));
+    public ResponseEntity<Object> authenticate(@RequestBody AuthenticationRequest request) {
+        return ok(success(service.authenticate(request), MessageConstant.LOGIN_SUCCESSFUL).getJson());
     }
 
     @PostMapping("/refresh-token")

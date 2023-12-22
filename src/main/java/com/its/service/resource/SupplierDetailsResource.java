@@ -20,6 +20,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequestMapping("/v1/supplier-details")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class SupplierDetailsResource {
 
     private final SupplierDetailsService service;

@@ -11,6 +11,7 @@ import com.its.service.repository.UserRepository;
 import com.its.service.request.AuthenticationRequest;
 import com.its.service.request.RegisterRequest;
 import com.its.service.response.AuthenticationResponse;
+import com.its.service.response.UserResponse;
 import com.its.service.security.jwt.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -55,6 +56,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .user(UserResponse.from(user))
                 .build();
     }
 
@@ -70,6 +72,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .user(UserResponse.from(user))
                 .build();
     }
 

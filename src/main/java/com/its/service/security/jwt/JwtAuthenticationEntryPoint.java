@@ -14,23 +14,6 @@ import java.util.Map;
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-    private final ObjectMapper objectMapper;
-
-    public JwtAuthenticationEntryPoint(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
-
-//    @Override
-//    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
-//
-//        final String expired = (String) httpServletRequest.getAttribute("expired");
-//        if (expired!=null){
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED,expired);
-//        }else{
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Invalid Login details");
-//        }
-//    }
-
     @Override
     public void commence(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, AuthenticationException authException) throws IOException, jakarta.servlet.ServletException {
         // Custom logic to handle authentication failures

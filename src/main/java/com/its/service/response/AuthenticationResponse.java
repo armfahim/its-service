@@ -1,6 +1,7 @@
 package com.its.service.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.its.service.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +13,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationResponse {
 
-    @JsonProperty("access_token")
+    @JsonProperty("accessToken")
     private String accessToken;
-    @JsonProperty("refresh_token")
+
+    @JsonProperty("refreshToken")
     private String refreshToken;
+
+    @JsonProperty("user")
+    private UserResponse user;
 }

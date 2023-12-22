@@ -12,5 +12,6 @@ public class MessageConstant {
     public static final String DATA_DELETE_SUCCESS = "Data has been deleted successfully";
     public static final String DATA_NOT_PROVIDED = "Please provide correct data";
     public static final String PRIMARY_ID_NOT_PROVIDED = "Please provide primary id";
+    public static final String LOGIN_SUCCESSFUL = "Login Successfully";
 
 }
