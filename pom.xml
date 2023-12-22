@@ -11,7 +11,7 @@
     <groupId>com.its</groupId>
     <artifactId>service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>its-service</name>
     <description>Invoice Tracking System</description>
     <properties>
