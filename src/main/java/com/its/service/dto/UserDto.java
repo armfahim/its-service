@@ -1,6 +1,5 @@
 package com.its.service.dto;
 
-import com.its.service.entity.SupplierDetails;
 import com.its.service.entity.auth.User;
 import com.its.service.enums.Role;
 import lombok.Data;

@@ -22,9 +22,6 @@ public class SupplierDetails extends BaseEntity {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "SUPPLIER_ID", nullable = false, unique = true)
-    private String supplierID;
-
     @Column(name = "SUPPLIER_NAME", nullable = false)
     private String supplierName;
 

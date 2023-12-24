@@ -66,8 +66,7 @@ public class SupplierDetailsResource {
                                        @RequestParam(value = "size", defaultValue = "10") Integer size,
                                        @RequestParam(value = "sortBy", defaultValue = "") String orderColumnName,
                                        @RequestParam(value = "dir", defaultValue = "") String dir,
-                                       @RequestParam(value = "supplierId", defaultValue = "") String supplierId,
                                        @RequestParam(value = "supplierName", defaultValue = "") String supplierName) {
-        return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierId, supplierName)).getJson());
+        return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierName)).getJson());
     }
 }

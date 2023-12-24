@@ -10,7 +10,6 @@ import org.springframework.beans.BeanUtils;
 public class SupplierDetailsDto {
 
     private Long id;
-    private String supplierID;
     private String supplierName;
     private String contactPerson;
     private String phone;
@@ -26,7 +25,6 @@ public class SupplierDetailsDto {
     }
 
     public void to(SupplierDetails supplierDetails) {
-        supplierDetails.setSupplierID(supplierID);
         supplierDetails.setSupplierName(supplierName);
         supplierDetails.setContactPerson(contactPerson);
         supplierDetails.setPhone(phone);
