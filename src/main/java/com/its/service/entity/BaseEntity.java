@@ -1,6 +1,7 @@
 package com.its.service.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.its.service.entity.auth.User;
 import com.its.service.enums.RecordStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -31,11 +32,13 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "UPDATED_AT")
     protected Date updatedAt;
 
-    @Column(name = "CREATED_BY")
-    private Long createdBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CREATED_BY")
+    private User createdBy;
 
-    @Column(name = "UPDATED_BY")
-    private Long updatedBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UPDATED_BY")
+    private User updatedBy;
 
     @PrePersist
     public void prePersist() {

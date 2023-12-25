@@ -1,13 +1,13 @@
 package com.its.service.resource;
 
 import com.its.service.constant.MessageConstant;
-import com.its.service.dto.SupplierDetailsDto;
+import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.dto.UpdateStatusDto;
-import com.its.service.entity.SupplierDetails;
+import com.its.service.entity.InvoiceDetails;
 import com.its.service.enums.RecordStatus;
 import com.its.service.exception.AlreadyExistsException;
 import com.its.service.helper.BasicAudit;
-import com.its.service.service.SupplierDetailsService;
+import com.its.service.service.InvoiceDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -18,45 +18,45 @@ import static com.its.service.utils.ResponseBuilder.success;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("/v1/supplier-details")
+@RequestMapping("/v1/invoice-details")
 @RequiredArgsConstructor
-public class SupplierDetailsResource {
+public class InvoiceDetailsResource {
 
-    private final SupplierDetailsService service;
+    private final InvoiceDetailsService service;
 
     @PostMapping(value = "/save")
-    public ResponseEntity<Object> save(@RequestBody SupplierDetailsDto dto) {
-        SupplierDetails supplierDetails = new SupplierDetails();
-        dto.to(supplierDetails);
-        BasicAudit.setAttributeForCreateUpdate(supplierDetails, false, RecordStatus.ACTIVE);
+    public ResponseEntity<Object> save(@RequestBody InvoiceDetailsDto dto) {
+        InvoiceDetails invoiceDetails = new InvoiceDetails();
+        dto.to(invoiceDetails);
+        BasicAudit.setAttributeForCreateUpdate(invoiceDetails, false, RecordStatus.ACTIVE);
         try {
-            supplierDetails = service.save(supplierDetails);
+            invoiceDetails = service.save(invoiceDetails);
         } catch (DataIntegrityViolationException e) {
             throw new AlreadyExistsException("Please provide unique data.The info you've provided are already exists!");
         }
-        return ok(success(SupplierDetailsDto.from(supplierDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
+        return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Object> update(@RequestBody SupplierDetailsDto dto) {
-        SupplierDetails supplierDetails = service.findById(dto.getId());
-        dto.to(supplierDetails);
-        supplierDetails = service.update(supplierDetails);
-        return ok(success(SupplierDetailsDto.from(supplierDetails), MessageConstant.DATA_UPDATE_SUCCESS).getJson());
+    public ResponseEntity<Object> update(@RequestBody InvoiceDetailsDto dto) {
+        InvoiceDetails invoiceDetails = service.findById(dto.getId());
+        dto.to(invoiceDetails);
+        invoiceDetails = service.update(invoiceDetails);
+        return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_UPDATE_SUCCESS).getJson());
     }
 
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Object> delete(@RequestParam Long id) {
-        SupplierDetails supplierDetails = service.findById(id);
-        service.delete(supplierDetails);
+        InvoiceDetails invoiceDetails = service.findById(id);
+        service.delete(invoiceDetails);
         return ok(success(MessageConstant.DATA_DELETE_SUCCESS).getJson());
     }
 
     @PutMapping(value = "/update-status")
     public ResponseEntity<Object> updateStatus(@RequestBody UpdateStatusDto dto) {
-        SupplierDetails supplierDetails = service.findById(dto.getId());
-        supplierDetails.setRecordStatus(dto.getStatus());
-        return ok(success(SupplierDetailsDto.from(service.update(supplierDetails)), MessageConstant.DATA_UPDATE_SUCCESS).getJson());
+        InvoiceDetails invoiceDetails = service.findById(dto.getId());
+        invoiceDetails.setRecordStatus(dto.getStatus());
+        return ok(success(InvoiceDetailsDto.from(service.update(invoiceDetails)), MessageConstant.DATA_UPDATE_SUCCESS).getJson());
     }
 
     @GetMapping(value = "/list")
