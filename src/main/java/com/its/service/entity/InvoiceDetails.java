@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.Serial;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 @Entity
 @Data
@@ -67,4 +68,11 @@ public class InvoiceDetails extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SUPPLIER_ID")
     private SupplierDetails supplierDetails;
+
+    public void setTermByValue(String targetValue) {
+        this.term = Arrays.stream(Term.values())
+                .filter(enumTerm -> enumTerm.getDisplayName().equals(targetValue))
+                .findFirst()
+                .orElse(null);
+    }
 }

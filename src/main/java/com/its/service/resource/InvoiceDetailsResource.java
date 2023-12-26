@@ -5,11 +5,13 @@ import com.its.service.dto.EnumDTO;
 import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.dto.UpdateStatusDto;
 import com.its.service.entity.InvoiceDetails;
+import com.its.service.entity.SupplierDetails;
 import com.its.service.enums.RecordStatus;
 import com.its.service.enums.Term;
 import com.its.service.exception.AlreadyExistsException;
 import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.helper.BasicAudit;
+import com.its.service.repository.SupplierDetailsRepository;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.utils.EnumConversion;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.its.service.utils.ResponseBuilder.paginatedSuccess;
 import static com.its.service.utils.ResponseBuilder.success;
@@ -29,16 +32,21 @@ import static org.springframework.http.ResponseEntity.ok;
 public class InvoiceDetailsResource {
 
     private final InvoiceDetailsService service;
+    private final SupplierDetailsRepository supplierDetailsRepository;
 
     @PostMapping(value = "/save")
     public ResponseEntity<Object> save(@RequestBody InvoiceDetailsDto dto) {
         InvoiceDetails invoiceDetails = new InvoiceDetails();
         dto.to(invoiceDetails);
         BasicAudit.setAttributeForCreateUpdate(invoiceDetails, false, RecordStatus.ACTIVE);
+        SupplierDetails supplierDetails = new SupplierDetails();
         try {
+            if (Objects.nonNull(dto.getSupplierDetails()))
+                supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new ResourceNotFoundException("No supplier is available"));
+            invoiceDetails.setSupplierDetails(supplierDetails);
             invoiceDetails = service.save(invoiceDetails);
         } catch (DataIntegrityViolationException e) {
-            throw new AlreadyExistsException("Please provide unique data.The info you've provided are already exists!");
+            throw new AlreadyExistsException(MessageConstant.ALREADY_EXIST);
         }
         return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }

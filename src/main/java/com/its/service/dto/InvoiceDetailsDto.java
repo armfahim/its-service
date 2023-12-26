@@ -1,14 +1,13 @@
 package com.its.service.dto;
 
 import com.its.service.entity.InvoiceDetails;
-import com.its.service.entity.SupplierDetails;
-import com.its.service.enums.Term;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -18,17 +17,21 @@ public class InvoiceDetailsDto {
     private String invoiceNumber;
     private String invoiceDesc;
     private LocalDate invoiceDate;
-    private Term term;
+    private String term;
     private LocalDate paymentDueDate;
     private BigDecimal invoiceAmount;
     private BigDecimal creditAmount;
     private BigDecimal netDue;
     private String chequeNumber;
     private LocalDate paidDate;
-    private SupplierDetails supplierDetails;
+    private Long supplierDetails;
 
     public static InvoiceDetailsDto from(InvoiceDetails invoiceDetails) {
         InvoiceDetailsDto dto = new InvoiceDetailsDto();
+        if (Objects.nonNull(invoiceDetails.getSupplierDetails()))
+            dto.setSupplierDetails(invoiceDetails.getSupplierDetails().getId());
+        if (Objects.nonNull(invoiceDetails.getTerm()))
+            dto.setTerm(invoiceDetails.getTerm().getDisplayName());
         BeanUtils.copyProperties(invoiceDetails, dto);
         return dto;
     }
@@ -39,11 +42,11 @@ public class InvoiceDetailsDto {
         invoiceDetails.setInvoiceDate(invoiceDate);
         invoiceDetails.setInvoiceAmount(invoiceAmount);
         invoiceDetails.setChequeNumber(chequeNumber);
-        invoiceDetails.setSupplierDetails(supplierDetails);
+//        invoiceDetails.setSupplierDetails(supplierDetails);
         invoiceDetails.setCreditAmount(creditAmount);
         invoiceDetails.setNetDue(netDue);
         invoiceDetails.setPaidDate(paidDate);
-        invoiceDetails.setTerm(term);
+        invoiceDetails.setTermByValue(term);
         invoiceDetails.setPaymentDueDate(paymentDueDate);
     }
 }
