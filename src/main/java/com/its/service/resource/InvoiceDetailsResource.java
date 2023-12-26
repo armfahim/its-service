@@ -1,17 +1,23 @@
 package com.its.service.resource;
 
 import com.its.service.constant.MessageConstant;
+import com.its.service.dto.EnumDTO;
 import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.dto.UpdateStatusDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.enums.RecordStatus;
+import com.its.service.enums.Term;
 import com.its.service.exception.AlreadyExistsException;
+import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.helper.BasicAudit;
 import com.its.service.service.InvoiceDetailsService;
+import com.its.service.utils.EnumConversion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.its.service.utils.ResponseBuilder.paginatedSuccess;
 import static com.its.service.utils.ResponseBuilder.success;
@@ -66,5 +72,15 @@ public class InvoiceDetailsResource {
                                        @RequestParam(value = "dir", defaultValue = "") String dir,
                                        @RequestParam(value = "supplierName", defaultValue = "") String supplierName) {
         return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierName)).getJson());
+    }
+
+    @GetMapping(value = "/get-term")
+    public ResponseEntity<Object> getTerm() {
+        try {
+            List<EnumDTO> enumList = EnumConversion.enumToKeyValue(Term.class);
+            return ok(success(enumList, MessageConstant.SUCCESS).getJson());
+        } catch (Exception e) {
+            throw new ResourceNotFoundException(MessageConstant.NOT_FOUND);
+        }
     }
 }

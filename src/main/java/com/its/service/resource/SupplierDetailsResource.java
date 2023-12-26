@@ -6,12 +6,17 @@ import com.its.service.dto.UpdateStatusDto;
 import com.its.service.entity.SupplierDetails;
 import com.its.service.enums.RecordStatus;
 import com.its.service.exception.AlreadyExistsException;
+import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.helper.BasicAudit;
 import com.its.service.service.SupplierDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.its.service.utils.ResponseBuilder.paginatedSuccess;
 import static com.its.service.utils.ResponseBuilder.success;
@@ -66,5 +71,17 @@ public class SupplierDetailsResource {
                                        @RequestParam(value = "dir", defaultValue = "") String dir,
                                        @RequestParam(value = "supplierName", defaultValue = "") String supplierName) {
         return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierName)).getJson());
+    }
+
+    @GetMapping(value = "/all")
+    public ResponseEntity<Object> getAll() {
+        List<SupplierDetailsDto> dtos = new ArrayList<>();
+        try {
+            List<SupplierDetails> supplierDetails = service.findAll();
+            dtos = supplierDetails.stream().map(SupplierDetailsDto::from).collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new ResourceNotFoundException(MessageConstant.NOT_FOUND);
+        }
+        return ok(success(dtos, MessageConstant.SUCCESS).getJson());
     }
 }
