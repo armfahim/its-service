@@ -84,7 +84,14 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     }
 
     @Override
-    public PaginatedResponse listAndSearch(String sort, String dir, int page, int size, String supplierName) {
-        return null;
+    public PaginatedResponse listAndSearch(String sort, String dir, Integer page, Integer size, Long supplierId,
+                                           String fromInvoiceDate, String toInvoiceDate) {
+
+//        supplierId = supplierId.equals("") ? null : supplierId;
+        sort = sort.isEmpty() ? "invoice_number" : sort;
+
+        Page<InvoiceDetails> pageData = repository.findByListAndSearch(supplierId, fromInvoiceDate, toInvoiceDate, PaginationUtils.getPageable(sort, dir, page, size));
+        List<InvoiceDetailsDto> data = pageData.getContent().stream().map(InvoiceDetailsDto::from).toList();
+        return PaginationUtils.getPaginatedResponse(pageData, data);
     }
 }

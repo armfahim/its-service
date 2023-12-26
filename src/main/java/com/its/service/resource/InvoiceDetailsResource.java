@@ -19,6 +19,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -78,8 +79,10 @@ public class InvoiceDetailsResource {
                                        @RequestParam(value = "size", defaultValue = "10") Integer size,
                                        @RequestParam(value = "sortBy", defaultValue = "") String orderColumnName,
                                        @RequestParam(value = "dir", defaultValue = "") String dir,
-                                       @RequestParam(value = "supplierName", defaultValue = "") String supplierName) {
-        return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierName)).getJson());
+                                       @RequestParam(value = "supplier", defaultValue = "") Long supplierId,
+                                       @RequestParam(value = "fromInvoiceDate", defaultValue = "") String fromInvoiceDate,
+                                       @RequestParam(value = "toInvoiceDate", defaultValue = "") String toInvoiceDate) {
+        return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierId, fromInvoiceDate, toInvoiceDate)).getJson());
     }
 
     @GetMapping(value = "/get-term")
