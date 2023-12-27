@@ -56,7 +56,16 @@ public class InvoiceDetailsResource {
     public ResponseEntity<Object> update(@RequestBody InvoiceDetailsDto dto) {
         InvoiceDetails invoiceDetails = service.findById(dto.getId());
         dto.to(invoiceDetails);
-        invoiceDetails = service.update(invoiceDetails);
+
+        SupplierDetails supplierDetails = new SupplierDetails();
+        try {
+            if (Objects.nonNull(dto.getSupplierDetails()))
+                supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new ResourceNotFoundException("No supplier is available"));
+            invoiceDetails.setSupplierDetails(supplierDetails);
+            invoiceDetails = service.update(invoiceDetails);
+        } catch (DataIntegrityViolationException e) {
+            throw new AlreadyExistsException(MessageConstant.ALREADY_EXIST);
+        }
         return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_UPDATE_SUCCESS).getJson());
     }
 
