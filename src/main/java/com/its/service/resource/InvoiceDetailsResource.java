@@ -9,6 +9,7 @@ import com.its.service.entity.SupplierDetails;
 import com.its.service.enums.RecordStatus;
 import com.its.service.enums.Term;
 import com.its.service.exception.AlreadyExistsException;
+import com.its.service.exception.CustomMessagePresentException;
 import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.helper.BasicAudit;
 import com.its.service.repository.SupplierDetailsRepository;
@@ -19,7 +20,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -82,7 +82,12 @@ public class InvoiceDetailsResource {
                                        @RequestParam(value = "supplier", defaultValue = "") Long supplierId,
                                        @RequestParam(value = "fromInvoiceDate", defaultValue = "") String fromInvoiceDate,
                                        @RequestParam(value = "toInvoiceDate", defaultValue = "") String toInvoiceDate) {
-        return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierId, fromInvoiceDate, toInvoiceDate)).getJson());
+        try {
+            return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierId, fromInvoiceDate, toInvoiceDate)).getJson());
+        } catch (Exception e) {
+            throw new CustomMessagePresentException("Internal Server error");
+        }
+
     }
 
     @GetMapping(value = "/get-term")

@@ -24,6 +24,11 @@ public class DateUtils {
         return java.sql.Date.valueOf(localDate);
     }
 
+    public static LocalDate asLocalDate(String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        return localDate;
+    }
+
     public static Date asDate(String date) {
         return java.sql.Date.valueOf(date);
     }

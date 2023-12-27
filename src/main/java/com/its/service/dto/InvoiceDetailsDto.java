@@ -25,11 +25,14 @@ public class InvoiceDetailsDto {
     private String chequeNumber;
     private LocalDate paidDate;
     private Long supplierDetails;
+    private String supplierName;
 
     public static InvoiceDetailsDto from(InvoiceDetails invoiceDetails) {
         InvoiceDetailsDto dto = new InvoiceDetailsDto();
-        if (Objects.nonNull(invoiceDetails.getSupplierDetails()))
+        if (Objects.nonNull(invoiceDetails.getSupplierDetails())) {
             dto.setSupplierDetails(invoiceDetails.getSupplierDetails().getId());
+            dto.setSupplierName(invoiceDetails.getSupplierDetails().getSupplierName());
+        }
         if (Objects.nonNull(invoiceDetails.getTerm()))
             dto.setTerm(invoiceDetails.getTerm().getDisplayName());
         BeanUtils.copyProperties(invoiceDetails, dto);
