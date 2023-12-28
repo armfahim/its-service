@@ -8,7 +8,6 @@ import com.its.service.enums.RecordStatus;
 import com.its.service.exception.AlreadyExistsException;
 import com.its.service.exception.CustomMessagePresentException;
 import com.its.service.exception.ResourceNotFoundException;
-import com.its.service.helper.BasicAudit;
 import com.its.service.repository.SupplierDetailsRepository;
 import com.its.service.service.SupplierDetailsService;
 import com.its.service.utils.PaginatedResponse;
@@ -41,7 +40,6 @@ public class SupplierDetailsServiceImpl implements SupplierDetailsService {
             throw new ResourceNotFoundException(MessageConstant.PRIMARY_ID_NOT_PROVIDED);
         }
         try {
-            BasicAudit.setAttributeForCreateUpdate(supplierDetails, true, RecordStatus.ACTIVE);
             supplierDetails = save(supplierDetails);
         } catch (DataIntegrityViolationException e) {
             throw new AlreadyExistsException("Please provide unique data.The info you've provide are already exists!");
@@ -71,7 +69,7 @@ public class SupplierDetailsServiceImpl implements SupplierDetailsService {
 
     @Override
     public List<SupplierDetails> findAll() {
-        return repository.findAll();
+        return repository.findAllByRecordStatus(RecordStatus.ACTIVE);
     }
 
     @Override

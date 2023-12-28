@@ -4,6 +4,7 @@ package com.its.service.utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
@@ -74,6 +75,10 @@ public class DateUtils {
         if (Objects.isNull(date)) return null;
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static Period dateDiffAsPeriod(LocalDate from, LocalDate to){
+       return Period.between(from, to);
     }
 
 }

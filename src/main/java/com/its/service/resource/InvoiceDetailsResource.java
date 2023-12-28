@@ -20,8 +20,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.its.service.utils.ResponseBuilder.paginatedSuccess;
 import static com.its.service.utils.ResponseBuilder.success;
@@ -97,6 +99,18 @@ public class InvoiceDetailsResource {
             throw new CustomMessagePresentException("Internal Server error");
         }
 
+    }
+
+    @GetMapping(value = "/all")
+    public ResponseEntity<Object> getAll() {
+        List<InvoiceDetailsDto> dtos = new ArrayList<>();
+        try {
+            List<InvoiceDetails> invoiceDetails = service.findAll();
+            dtos = invoiceDetails.stream().map(InvoiceDetailsDto::from).collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new ResourceNotFoundException(MessageConstant.NOT_FOUND);
+        }
+        return ok(success(dtos, MessageConstant.SUCCESS).getJson());
     }
 
     @GetMapping(value = "/get-term")

@@ -8,7 +8,6 @@ import com.its.service.enums.RecordStatus;
 import com.its.service.exception.AlreadyExistsException;
 import com.its.service.exception.CustomMessagePresentException;
 import com.its.service.exception.ResourceNotFoundException;
-import com.its.service.helper.BasicAudit;
 import com.its.service.repository.InvoiceDetailsRepository;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.utils.DateUtils;
@@ -44,7 +43,6 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
             throw new ResourceNotFoundException(MessageConstant.PRIMARY_ID_NOT_PROVIDED);
         }
         try {
-            BasicAudit.setAttributeForCreateUpdate(invoiceDetails, true, RecordStatus.ACTIVE);
             invoiceDetails = save(invoiceDetails);
         } catch (DataIntegrityViolationException e) {
             throw new AlreadyExistsException("Please provide unique data.The info you've provide are already exists!");
@@ -74,7 +72,7 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     @Override
     public List<InvoiceDetails> findAll() {
-        return repository.findAll();
+        return repository.findAllByRecordStatus(RecordStatus.ACTIVE);
     }
 
     @Override
