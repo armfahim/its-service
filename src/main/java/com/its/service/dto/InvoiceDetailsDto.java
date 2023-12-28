@@ -24,6 +24,7 @@ public class InvoiceDetailsDto {
     private BigDecimal netDue;
     private String chequeNumber;
     private LocalDate paidDate;
+    private Boolean isPaid;
     private Long supplierDetails;
     private String supplierName;
 
@@ -45,11 +46,11 @@ public class InvoiceDetailsDto {
         invoiceDetails.setInvoiceDate(invoiceDate);
         invoiceDetails.setInvoiceAmount(invoiceAmount);
         invoiceDetails.setChequeNumber(chequeNumber);
-//        invoiceDetails.setSupplierDetails(supplierDetails);
         invoiceDetails.setCreditAmount(creditAmount);
         invoiceDetails.setNetDue(netDue);
-        invoiceDetails.setPaidDate(paidDate);
         invoiceDetails.setTermByValue(term);
         invoiceDetails.setPaymentDueDate(paymentDueDate);
+        invoiceDetails.setIsPaid(Objects.isNull(isPaid) ? Boolean.FALSE : isPaid);
+        invoiceDetails.setPaidDate(isPaid.equals(Boolean.FALSE) ? null : paidDate);
     }
 }

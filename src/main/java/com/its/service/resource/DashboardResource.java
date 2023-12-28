@@ -5,6 +5,7 @@ import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.repository.SupplierDetailsRepository;
+import com.its.service.service.DashboardService;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,22 +30,10 @@ public class DashboardResource {
 
     private final InvoiceDetailsService service;
     private final SupplierDetailsRepository supplierDetailsRepository;
+    private final DashboardService dashboardService;
 
     @GetMapping(value = "/highlights")
-    public ResponseEntity<Object> getAll() {
-        List<InvoiceDetailsDto> dtos = new ArrayList<>();
-        try {
-            List<InvoiceDetails> invoiceDetails = service.findAll();
-            int d = DateUtils.dateDiffAsPeriod(LocalDate.now(), invoiceDetails.get(0).getPaymentDueDate()).getDays();
-            dtos = invoiceDetails.stream().filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() > 3)
-                    .collect(Collectors.toList())
-                    .stream()
-                    .map(InvoiceDetailsDto::from)
-                    .collect(Collectors.toList());
-//            dtos = invoiceDetails.stream().map(InvoiceDetailsDto::from).collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new ResourceNotFoundException(MessageConstant.NOT_FOUND);
-        }
-        return ok(success(dtos, MessageConstant.SUCCESS).getJson());
+    public ResponseEntity<Object> getHighlights() {
+        return ok(success(dashboardService.getHighlights(), MessageConstant.SUCCESS).getJson());
     }
 }

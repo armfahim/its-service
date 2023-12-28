@@ -1,6 +1,7 @@
 package com.its.service.service;
 
 
+import com.its.service.entity.InvoiceDetails;
 import com.its.service.utils.PaginatedResponse;
 
 import java.util.List;

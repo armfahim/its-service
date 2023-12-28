@@ -19,6 +19,7 @@ import java.util.Arrays;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InvoiceDetails extends BaseEntity {
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -60,9 +61,12 @@ public class InvoiceDetails extends BaseEntity {
     @Column(name = "CHEQUE_NUMBER", nullable = false, columnDefinition = "varchar(255)")
     private String chequeNumber;
 
+    @Column(name = "IS_PAID")
+    private Boolean isPaid;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Column(name = "PAID_DATE", nullable = false)
+    @Column(name = "PAID_DATE")
     private LocalDate paidDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

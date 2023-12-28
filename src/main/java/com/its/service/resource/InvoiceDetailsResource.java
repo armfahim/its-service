@@ -43,14 +43,14 @@ public class InvoiceDetailsResource {
         dto.to(invoiceDetails);
         BasicAudit.setAttributeForCreateUpdate(invoiceDetails, false, RecordStatus.ACTIVE);
         SupplierDetails supplierDetails = new SupplierDetails();
-        try {
+//        try {
             if (Objects.nonNull(dto.getSupplierDetails()))
                 supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new ResourceNotFoundException("No supplier is available"));
             invoiceDetails.setSupplierDetails(supplierDetails);
             invoiceDetails = service.save(invoiceDetails);
-        } catch (DataIntegrityViolationException e) {
-            throw new AlreadyExistsException(MessageConstant.ALREADY_EXIST);
-        }
+//        } catch (DataIntegrityViolationException e) {
+//            throw new AlreadyExistsException(MessageConstant.ALREADY_EXIST);
+//        }
         return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
 

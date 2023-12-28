@@ -31,6 +31,9 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     @Override
     public InvoiceDetails save(InvoiceDetails invoiceDetails) {
+        if (Boolean.TRUE.equals(invoiceDetails.getIsPaid()) && Objects.isNull(invoiceDetails.getPaidDate())) {
+            throw new ResourceNotFoundException("Please provide paid date.");
+        }
         return repository.save(invoiceDetails);
     }
 
@@ -94,5 +97,10 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
         List<InvoiceDetailsDto> data = pageData.getContent().stream().map(InvoiceDetailsDto::from).toList();
         return PaginationUtils.getPaginatedResponse(pageData, data);
+    }
+
+    @Override
+    public List<InvoiceDetails> findAllByIsPaidFalse() {
+        return repository.findAllByRecordStatusAndIsPaidFalse(RecordStatus.ACTIVE);
     }
 }
