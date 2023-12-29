@@ -6,6 +6,7 @@ import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.enums.RecordStatus;
 import com.its.service.exception.AlreadyExistsException;
+import com.its.service.exception.AppException;
 import com.its.service.exception.CustomMessagePresentException;
 import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.repository.InvoiceDetailsRepository;
@@ -13,6 +14,7 @@ import com.its.service.service.InvoiceDetailsService;
 import com.its.service.utils.DateUtils;
 import com.its.service.utils.PaginatedResponse;
 import com.its.service.utils.PaginationUtils;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -30,9 +32,10 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
 
     @Override
+    @Transactional
     public InvoiceDetails save(InvoiceDetails invoiceDetails) {
         if (Boolean.TRUE.equals(invoiceDetails.getIsPaid()) && Objects.isNull(invoiceDetails.getPaidDate())) {
-            throw new ResourceNotFoundException("Please provide paid date.");
+            throw new AlreadyExistsException("Please provide paid date.");
         }
         return repository.save(invoiceDetails);
     }
@@ -48,7 +51,7 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
         try {
             invoiceDetails = save(invoiceDetails);
         } catch (DataIntegrityViolationException e) {
-            throw new AlreadyExistsException("Please provide unique data.The info you've provide are already exists!");
+            throw new AppException("Internal Server Error");
         }
         return invoiceDetails;
     }

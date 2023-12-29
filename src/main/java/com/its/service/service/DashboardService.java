@@ -21,12 +21,12 @@ public class DashboardService {
     private final InvoiceDetailsService invoiceDetailsService;
     private final SupplierDetailsService supplierDetailsService;
 
-    public DashboardResponse getHighlights() {
+    public DashboardResponse getHighlights(int dayToSelectDueInvoice) {
         try {
             List<InvoiceDetailsResponse> invDetailsResponses = invoiceDetailsService
                     .findAllByIsPaidFalse()
                     .stream()
-                    .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= 3)
+                    .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= dayToSelectDueInvoice)
                     .map(this::mapToInvoiceDetailsResponse)
                     .collect(Collectors.toList());
 

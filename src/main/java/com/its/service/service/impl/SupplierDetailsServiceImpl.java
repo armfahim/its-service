@@ -12,6 +12,7 @@ import com.its.service.repository.SupplierDetailsRepository;
 import com.its.service.service.SupplierDetailsService;
 import com.its.service.utils.PaginatedResponse;
 import com.its.service.utils.PaginationUtils;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,7 @@ public class SupplierDetailsServiceImpl implements SupplierDetailsService {
     private final SupplierDetailsRepository repository;
 
     @Override
+    @Transactional
     public SupplierDetails save(SupplierDetails supplierDetails) {
         return repository.save(supplierDetails);
     }

@@ -9,6 +9,7 @@ import com.its.service.entity.SupplierDetails;
 import com.its.service.enums.RecordStatus;
 import com.its.service.enums.Term;
 import com.its.service.exception.AlreadyExistsException;
+import com.its.service.exception.AppException;
 import com.its.service.exception.CustomMessagePresentException;
 import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.helper.BasicAudit;
@@ -16,7 +17,6 @@ import com.its.service.repository.SupplierDetailsRepository;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.utils.EnumConversion;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,14 +43,14 @@ public class InvoiceDetailsResource {
         dto.to(invoiceDetails);
         BasicAudit.setAttributeForCreateUpdate(invoiceDetails, false, RecordStatus.ACTIVE);
         SupplierDetails supplierDetails = new SupplierDetails();
-//        try {
+        try {
             if (Objects.nonNull(dto.getSupplierDetails()))
                 supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new ResourceNotFoundException("No supplier is available"));
             invoiceDetails.setSupplierDetails(supplierDetails);
             invoiceDetails = service.save(invoiceDetails);
-//        } catch (DataIntegrityViolationException e) {
-//            throw new AlreadyExistsException(MessageConstant.ALREADY_EXIST);
-//        }
+        } catch (Exception e) {
+            throw new AlreadyExistsException(MessageConstant.INTERNAL_SERVER_ERROR);
+        }
         return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
 
@@ -60,14 +60,10 @@ public class InvoiceDetailsResource {
         dto.to(invoiceDetails);
 
         SupplierDetails supplierDetails = new SupplierDetails();
-        try {
-            if (Objects.nonNull(dto.getSupplierDetails()))
-                supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new ResourceNotFoundException("No supplier is available"));
-            invoiceDetails.setSupplierDetails(supplierDetails);
-            invoiceDetails = service.update(invoiceDetails);
-        } catch (DataIntegrityViolationException e) {
-            throw new AlreadyExistsException(MessageConstant.ALREADY_EXIST);
-        }
+        if (Objects.nonNull(dto.getSupplierDetails()))
+            supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new AppException("No supplier is available"));
+        invoiceDetails.setSupplierDetails(supplierDetails);
+        invoiceDetails = service.update(invoiceDetails);
         return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_UPDATE_SUCCESS).getJson());
     }
 

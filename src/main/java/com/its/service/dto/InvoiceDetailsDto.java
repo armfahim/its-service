@@ -51,6 +51,10 @@ public class InvoiceDetailsDto {
         invoiceDetails.setTermByValue(term);
         invoiceDetails.setPaymentDueDate(paymentDueDate);
         invoiceDetails.setIsPaid(Objects.isNull(isPaid) ? Boolean.FALSE : isPaid);
-        invoiceDetails.setPaidDate(isPaid.equals(Boolean.FALSE) ? null : paidDate);
+        if(Objects.nonNull(isPaid) && Boolean.FALSE.equals(isPaid)){
+            invoiceDetails.setPaidDate(null);
+        }else{
+            invoiceDetails.setPaidDate(paidDate);
+        }
     }
 }
