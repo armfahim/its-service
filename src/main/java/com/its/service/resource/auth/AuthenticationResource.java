@@ -39,4 +39,9 @@ public class AuthenticationResource {
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         service.refreshToken(request, response);
     }
+
+    @PostMapping("/test")
+    public ResponseEntity<Object> test() throws IOException {
+        return ok(success("test successfully"));
+    }
 }

@@ -5,7 +5,7 @@ import com.its.service.dto.SupplierDetailsDto;
 import com.its.service.dto.UpdateStatusDto;
 import com.its.service.entity.SupplierDetails;
 import com.its.service.enums.RecordStatus;
-import com.its.service.exception.AlreadyExistsException;
+import com.its.service.exception.AppException;
 import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.helper.BasicAudit;
 import com.its.service.service.SupplierDetailsService;
@@ -37,7 +37,7 @@ public class SupplierDetailsResource {
         try {
             supplierDetails = service.save(supplierDetails);
         } catch (DataIntegrityViolationException e) {
-            throw new AlreadyExistsException("Please provide unique data.The info you've provided are already exists!");
+            throw new AppException(MessageConstant.ALREADY_EXIST);
         }
         return ok(success(SupplierDetailsDto.from(supplierDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
