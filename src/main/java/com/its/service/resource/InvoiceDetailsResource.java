@@ -17,6 +17,7 @@ import com.its.service.repository.SupplierDetailsRepository;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.utils.EnumConversion;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequestMapping("/v1/invoice-details")
 @RequiredArgsConstructor
+@Slf4j
 public class InvoiceDetailsResource {
 
     private final InvoiceDetailsService service;
@@ -49,6 +51,7 @@ public class InvoiceDetailsResource {
             invoiceDetails.setSupplierDetails(supplierDetails);
             invoiceDetails = service.save(invoiceDetails);
         } catch (Exception e) {
+            log.error("Save Failed", e);
             throw new AlreadyExistsException(MessageConstant.INTERNAL_SERVER_ERROR);
         }
         return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());

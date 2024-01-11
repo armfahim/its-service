@@ -17,17 +17,19 @@ public interface InvoiceDetailsRepository extends JpaRepository<InvoiceDetails, 
             "WHERE (:supplierId IS NULL OR s.id = :supplierId) " +
             "AND (:fromInvoiceDate IS NULL OR i.invoiceDate >= :fromInvoiceDate) " +
             "AND (:toInvoiceDate IS NULL OR i.invoiceDate <= :toInvoiceDate) " +
-            "AND (i.recordStatus = 'ACTIVE') ",
+            "AND (i.recordStatus = 'ACTIVE') " +
+            "AND (s.recordStatus = 'ACTIVE') ",
             countQuery = "SELECT COUNT(i) FROM InvoiceDetails i " +
                     "JOIN SupplierDetails s ON s.id = i.supplierDetails.id " +
                     "WHERE (:supplierId IS NULL OR s.id = :supplierId) " +
                     "AND (:fromInvoiceDate IS NULL OR i.invoiceDate >= :fromInvoiceDate) " +
                     "AND (:toInvoiceDate IS NULL OR i.invoiceDate <= :toInvoiceDate)" +
-                    "AND (i.recordStatus = 'ACTIVE') ",
+                    "AND (i.recordStatus = 'ACTIVE') " +
+                    "AND (s.recordStatus = 'ACTIVE') ",
             nativeQuery = false)
     Page<InvoiceDetails> findByListAndSearch(Long supplierId, LocalDate fromInvoiceDate, LocalDate toInvoiceDate, Pageable pageable);
 
-    List<InvoiceDetails> findAllByRecordStatus(RecordStatus recordStatus);
+    List<InvoiceDetails> findAllByRecordStatusAndSupplierDetailsRecordStatus(RecordStatus recordStatus, RecordStatus recordStatuss);
 
-    List<InvoiceDetails> findAllByRecordStatusAndIsPaidFalse(RecordStatus recordStatus);
+    List<InvoiceDetails> findAllByRecordStatusAndIsPaidFalseAndSupplierDetailsRecordStatus(RecordStatus recordStatus, RecordStatus recordStatuss);
 }

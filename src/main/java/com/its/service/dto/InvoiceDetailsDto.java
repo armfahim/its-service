@@ -1,5 +1,6 @@
 package com.its.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.its.service.entity.InvoiceDetails;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,14 +17,21 @@ public class InvoiceDetailsDto {
     private Long id;
     private String invoiceNumber;
     private String invoiceDesc;
+
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate invoiceDate;
-    private String term;
+
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate paymentDueDate;
+
+    @JsonFormat(pattern = "MM-dd-yyyy")
+    private LocalDate paidDate;
+
+    private String term;
     private BigDecimal invoiceAmount;
     private BigDecimal creditAmount;
     private BigDecimal netDue;
     private String chequeNumber;
-    private LocalDate paidDate;
     private Boolean isPaid;
     private Long supplierDetails;
     private String supplierName;
@@ -42,18 +50,18 @@ public class InvoiceDetailsDto {
 
     public void to(InvoiceDetails invoiceDetails) {
         invoiceDetails.setInvoiceNumber(invoiceNumber);
-        invoiceDetails.setInvoiceDesc(invoiceDesc);
+        invoiceDetails.setInvoiceDesc(Objects.nonNull(invoiceDesc) ? invoiceDesc.trim() : null);
         invoiceDetails.setInvoiceDate(invoiceDate);
         invoiceDetails.setInvoiceAmount(invoiceAmount);
-        invoiceDetails.setChequeNumber(chequeNumber);
+        invoiceDetails.setChequeNumber(Objects.nonNull(chequeNumber) ? chequeNumber.trim() : null);
         invoiceDetails.setCreditAmount(creditAmount);
         invoiceDetails.setNetDue(netDue);
         invoiceDetails.setTermByValue(term);
         invoiceDetails.setPaymentDueDate(paymentDueDate);
         invoiceDetails.setIsPaid(Objects.isNull(isPaid) ? Boolean.FALSE : isPaid);
-        if(Objects.nonNull(isPaid) && Boolean.FALSE.equals(isPaid)){
+        if (Objects.nonNull(isPaid) && Boolean.FALSE.equals(isPaid)) {
             invoiceDetails.setPaidDate(null);
-        }else{
+        } else {
             invoiceDetails.setPaidDate(paidDate);
         }
     }

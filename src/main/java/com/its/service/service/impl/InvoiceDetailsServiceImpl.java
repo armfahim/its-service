@@ -78,7 +78,7 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     @Override
     public List<InvoiceDetails> findAll() {
-        return repository.findAllByRecordStatus(RecordStatus.ACTIVE);
+        return repository.findAllByRecordStatusAndSupplierDetailsRecordStatus(RecordStatus.ACTIVE, RecordStatus.ACTIVE);
     }
 
     @Override
@@ -104,6 +104,6 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     @Override
     public List<InvoiceDetails> findAllByIsPaidFalse() {
-        return repository.findAllByRecordStatusAndIsPaidFalse(RecordStatus.ACTIVE);
+        return repository.findAllByRecordStatusAndIsPaidFalseAndSupplierDetailsRecordStatus(RecordStatus.ACTIVE, RecordStatus.ACTIVE);
     }
 }

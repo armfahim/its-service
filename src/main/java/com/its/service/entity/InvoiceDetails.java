@@ -58,7 +58,7 @@ public class InvoiceDetails extends BaseEntity {
     @Column(name = "NET_DUE", nullable = false, precision = 10, scale = 2)
     private BigDecimal netDue; // (invoiceAmount - creditAmount)
 
-    @Column(name = "CHEQUE_NUMBER", nullable = false, columnDefinition = "varchar(255)")
+    @Column(name = "CHEQUE_NUMBER", columnDefinition = "varchar(255)")
     private String chequeNumber;
 
     @Column(name = "IS_PAID")
