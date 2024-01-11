@@ -2,7 +2,7 @@ package com.its.service.enums;
 
 public enum Term {
     SEVEN("7"),
-    FOURTEEN("14"),
+    FIFTEEN("15"),
     TWENTYONE("21"),
     TWENTYEIGHT("28"),
     THIRTY("30");

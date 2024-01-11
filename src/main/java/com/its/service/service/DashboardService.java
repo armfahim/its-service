@@ -1,11 +1,14 @@
 package com.its.service.service;
 
 import com.its.service.constant.MessageConstant;
+import com.its.service.exception.AppException;
+import com.its.service.exception.CustomMessagePresentException;
 import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.response.DashboardResponse;
 import com.its.service.response.InvoiceDetailsResponse;
 import com.its.service.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DashboardService {
 
     private final InvoiceDetailsService invoiceDetailsService;
@@ -43,7 +47,8 @@ public class DashboardService {
 
             return responses;
         } catch (Exception e) {
-            throw new ResourceNotFoundException(MessageConstant.NOT_FOUND);
+            log.error("Failed ", e);
+            throw new AppException(MessageConstant.NOT_FOUND);
         }
     }
 
