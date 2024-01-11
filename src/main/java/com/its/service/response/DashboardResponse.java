@@ -1,8 +1,12 @@
 package com.its.service.response;
 
 import com.its.service.dto.InvoiceDetailsDto;
+import com.its.service.entity.InvoiceDetails;
+import com.its.service.utils.DateUtils;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Data
@@ -10,5 +14,38 @@ public class DashboardResponse {
 
     private int totalSuppliers;
     private int totalInvoices;
-    private List<InvoiceDetailsResponse> invoiceDetails;
+    private List<InvoiceDetailsResponse> pendingInvoices;
+    private List<InvoiceDetailsResponse> dueInvoices;
+
+    public static InvoiceDetailsResponse mapToInvoiceDetailsResponseForPending(InvoiceDetails invoice) {
+        Period period = DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate());
+        return InvoiceDetailsResponse.builder()
+                .paymentDueDate(invoice.getPaymentDueDate())
+                .id(invoice.getId())
+                .invoiceNumber(invoice.getInvoiceNumber())
+                .netDue(invoice.getNetDue())
+                .supplierName(invoice.getSupplierDetails().getSupplierName())
+                .paymentDueInDays(period.getDays())
+                .isPaid(invoice.getIsPaid())
+                .paymentDueInMonth(period.getMonths())
+                .paymentDueInYears(period.getYears())
+                .invoiceDate(invoice.getInvoiceDate())
+                .build();
+    }
+
+    public static InvoiceDetailsResponse mapToInvoiceDetailsResponseForDue(InvoiceDetails invoice) {
+        Period period = DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate());
+        return InvoiceDetailsResponse.builder()
+                .paymentDueDate(invoice.getPaymentDueDate())
+                .id(invoice.getId())
+                .invoiceNumber(invoice.getInvoiceNumber())
+                .netDue(invoice.getNetDue())
+                .supplierName(invoice.getSupplierDetails().getSupplierName())
+                .paymentDueInDays(Math.abs(period.getDays()))
+                .isPaid(invoice.getIsPaid())
+                .paymentDueInMonth(Math.abs(period.getMonths()))
+                .paymentDueInYears(Math.abs(period.getYears()))
+                .invoiceDate(invoice.getInvoiceDate())
+                .build();
+    }
 }

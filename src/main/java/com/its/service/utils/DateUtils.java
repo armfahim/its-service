@@ -81,4 +81,9 @@ public class DateUtils {
        return Period.between(from, to);
     }
 
+    public static boolean isBefore(LocalDate specifiedDate){
+        System.out.println("is before" + specifiedDate.isBefore(LocalDate.now()));
+        return specifiedDate.isBefore(LocalDate.now());
+    }
+
 }
