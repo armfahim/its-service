@@ -1,5 +1,6 @@
 package com.its.service.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,8 +19,12 @@ public class InvoiceDetailsResponse {
     private int paymentDueInMonth;
     private int paymentDueInYears;
     private String invoiceNumber;
+
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate invoiceDate;
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate paymentDueDate;
+
     private BigDecimal netDue;
     private Boolean isPaid;
     private String supplierName;
