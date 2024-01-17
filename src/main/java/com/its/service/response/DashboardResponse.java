@@ -33,7 +33,7 @@ public class DashboardResponse {
                 .build();
     }
 
-    public static InvoiceDetailsResponse mapToInvoiceDetailsResponseForDue(InvoiceDetails invoice) {
+    public static InvoiceDetailsResponse mapToInvoiceDetailsResponse(InvoiceDetails invoice) {
         Period period = DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate());
         return InvoiceDetailsResponse.builder()
                 .paymentDueDate(invoice.getPaymentDueDate())

@@ -2,8 +2,6 @@ package com.its.service.service;
 
 import com.its.service.constant.MessageConstant;
 import com.its.service.exception.AppException;
-import com.its.service.exception.CustomMessagePresentException;
-import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.response.DashboardResponse;
 import com.its.service.response.InvoiceDetailsResponse;
 import com.its.service.utils.DateUtils;
@@ -29,21 +27,21 @@ public class DashboardService {
                     .findAllByIsPaidFalse()
                     .stream()
                     .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= dayToSelectDueInvoice)
-                    .map(item -> DashboardResponse.mapToInvoiceDetailsResponseForDue(item))
+                    .map(item -> DashboardResponse.mapToInvoiceDetailsResponse(item))
                     .collect(Collectors.toList());
 
             List<InvoiceDetailsResponse> dueInvDetailsResponses = invoiceDetailsService
                     .findAllByIsPaidFalse()
                     .stream()
                     .filter(invoice -> invoice.getPaymentDueDate().isBefore(LocalDate.now()))
-                    .map(item -> DashboardResponse.mapToInvoiceDetailsResponseForDue(item))
+                    .map(item -> DashboardResponse.mapToInvoiceDetailsResponse(item))
                     .toList();
 
             DashboardResponse responses = new DashboardResponse();
             responses.setPendingInvoices(pendingInvDetailsResponses);
             responses.setDueInvoices(dueInvDetailsResponses);
-            responses.setTotalInvoices(getTotalInvoices());
-            responses.setTotalSuppliers(getTotalSuppliers());
+            responses.setTotalInvoices((int) getTotalInvoices());
+            responses.setTotalSuppliers((int) getTotalSuppliers());
 
             return responses;
         } catch (Exception e) {
@@ -53,11 +51,11 @@ public class DashboardService {
     }
 
 
-    private int getTotalSuppliers() {
-        return supplierDetailsService.findAll().size();
+    private long getTotalSuppliers() {
+        return supplierDetailsService.findAll().stream().count();
     }
 
-    private int getTotalInvoices() {
-        return invoiceDetailsService.findAll().size();
+    private long getTotalInvoices() {
+        return invoiceDetailsService.findAll().stream().count();
     }
 }
