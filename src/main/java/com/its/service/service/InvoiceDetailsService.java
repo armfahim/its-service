@@ -1,5 +1,6 @@
 package com.its.service.service;
 
+import com.its.service.dto.InvoiceDetailsViewDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.utils.PaginatedResponse;
 
@@ -12,4 +13,6 @@ public interface InvoiceDetailsService extends GenericService<InvoiceDetails> {
                                     String fromInvoiceDate, String toInvoiceDate);
 
     List<InvoiceDetails> findAllByIsPaidFalse();
+
+    InvoiceDetailsViewDto findViewById(Long id);
 }

@@ -3,6 +3,7 @@ package com.its.service.service.impl;
 import com.its.service.constant.DefaultConstant;
 import com.its.service.constant.MessageConstant;
 import com.its.service.dto.InvoiceDetailsDto;
+import com.its.service.dto.InvoiceDetailsViewDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.enums.RecordStatus;
 import com.its.service.exception.AlreadyExistsException;
@@ -105,5 +106,11 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     @Override
     public List<InvoiceDetails> findAllByIsPaidFalse() {
         return repository.findAllByRecordStatusAndIsPaidFalseAndSupplierDetailsRecordStatus(RecordStatus.ACTIVE, RecordStatus.ACTIVE);
+    }
+
+    @Override
+    public InvoiceDetailsViewDto findViewById(Long id) {
+        InvoiceDetails invoiceDetails = findById(id);
+        return InvoiceDetailsViewDto.from(invoiceDetails);
     }
 }

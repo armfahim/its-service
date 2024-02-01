@@ -121,4 +121,14 @@ public class InvoiceDetailsResource {
             throw new ResourceNotFoundException(MessageConstant.NOT_FOUND);
         }
     }
+
+//    @GetMapping(value = "/find/{id}")
+//    public ResponseEntity<Object> find(@PathVariable Long id) {
+//        return ok(success(TrainingProgramDto.from(service.findById(id))).getJson());
+//    }
+
+    @GetMapping(value = "/find-view/{id}")
+    public ResponseEntity<Object> findView(@PathVariable Long id) {
+        return ok(success(service.findViewById(id)).getJson());
+    }
 }
