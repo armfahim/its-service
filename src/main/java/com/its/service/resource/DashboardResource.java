@@ -29,7 +29,7 @@ public class DashboardResource {
     }
 
     @GetMapping(value = "/pending-invoices")
-    public ResponseEntity<Object> pendingInvoices(@RequestParam int dayToSelectDueInvoice) {
-        return ok(success(dashboardService.getPendingInvoices(dayToSelectDueInvoice), MessageConstant.SUCCESS).getJson());
+    public ResponseEntity<Object> pendingInvoices(@RequestParam int dayToSelectPendingInvoice) {
+        return ok(success(dashboardService.getPendingInvoices(dayToSelectPendingInvoice), MessageConstant.SUCCESS).getJson());
     }
 }

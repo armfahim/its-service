@@ -52,6 +52,7 @@ public class DashboardService {
                     .map(data -> data.getNetDue())
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
             responses.setNetDueOfPendingInvoices(NumberUtils.getRoundOffValue(netPending));
+            /***/
 
             responses.setTotalDueAmount(NumberUtils.getRoundOffValue(netDue.add(netPending)));
             responses.setTotalInvoices((int) getTotalInvoices());
@@ -73,10 +74,10 @@ public class DashboardService {
         return invoiceDetailsService.findAll().stream().count();
     }
 
-    public List<InvoiceDetailsResponse> getPendingInvoices(int dayToSelectDueInvoice) {
+    public List<InvoiceDetailsResponse> getPendingInvoices(int dayToSelectPendingInvoice) {
         return invoiceDetailsService.findAllByIsPaidFalse()
                 .stream()
-                .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= dayToSelectDueInvoice)
+                .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= dayToSelectPendingInvoice)
                 .map(item -> DashboardResponse.mapToInvoiceDetailsResponse(item))
                 .collect(Collectors.toList());
     }
