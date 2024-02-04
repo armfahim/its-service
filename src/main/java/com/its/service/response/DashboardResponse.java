@@ -5,6 +5,7 @@ import com.its.service.entity.InvoiceDetails;
 import com.its.service.utils.DateUtils;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -14,8 +15,11 @@ public class DashboardResponse {
 
     private int totalSuppliers;
     private int totalInvoices;
-    private List<InvoiceDetailsResponse> pendingInvoices;
     private List<InvoiceDetailsResponse> dueInvoices;
+    //Used String instead of BigDecimal due to format the number in commas //11,289.00
+    private String netDueOfDueInvoices;
+    private String netDueOfPendingInvoices;
+    private String totalDueAmount;
 
     public static InvoiceDetailsResponse mapToInvoiceDetailsResponseForPending(InvoiceDetails invoice) {
         Period period = DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate());

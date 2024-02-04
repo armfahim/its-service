@@ -24,7 +24,12 @@ public class DashboardResource {
     private final DashboardService dashboardService;
 
     @GetMapping(value = "/highlights")
-    public ResponseEntity<Object> getHighlights(@RequestParam int dayToSelectDueInvoice) {
-        return ok(success(dashboardService.getHighlights(dayToSelectDueInvoice), MessageConstant.SUCCESS).getJson());
+    public ResponseEntity<Object> getHighlights() {
+        return ok(success(dashboardService.getHighlights(), MessageConstant.SUCCESS).getJson());
+    }
+
+    @GetMapping(value = "/pending-invoices")
+    public ResponseEntity<Object> pendingInvoices(@RequestParam int dayToSelectDueInvoice) {
+        return ok(success(dashboardService.getPendingInvoices(dayToSelectDueInvoice), MessageConstant.SUCCESS).getJson());
     }
 }

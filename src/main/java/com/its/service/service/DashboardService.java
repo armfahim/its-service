@@ -1,14 +1,17 @@
 package com.its.service.service;
 
 import com.its.service.constant.MessageConstant;
+import com.its.service.entity.InvoiceDetails;
 import com.its.service.exception.AppException;
 import com.its.service.response.DashboardResponse;
 import com.its.service.response.InvoiceDetailsResponse;
 import com.its.service.utils.DateUtils;
+import com.its.service.utils.NumberUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,25 +24,35 @@ public class DashboardService {
     private final InvoiceDetailsService invoiceDetailsService;
     private final SupplierDetailsService supplierDetailsService;
 
-    public DashboardResponse getHighlights(int dayToSelectDueInvoice) {
+    public DashboardResponse getHighlights() {
         try {
-            List<InvoiceDetailsResponse> pendingInvDetailsResponses = invoiceDetailsService
-                    .findAllByIsPaidFalse()
-                    .stream()
-                    .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= dayToSelectDueInvoice)
-                    .map(item -> DashboardResponse.mapToInvoiceDetailsResponse(item))
-                    .collect(Collectors.toList());
-
-            List<InvoiceDetailsResponse> dueInvDetailsResponses = invoiceDetailsService
-                    .findAllByIsPaidFalse()
+            List<InvoiceDetails> invoiceDetailsPaidFalse = invoiceDetailsService.findAllByIsPaidFalse();
+            List<InvoiceDetailsResponse> dueInvDetailsResponses = invoiceDetailsPaidFalse
                     .stream()
                     .filter(invoice -> invoice.getPaymentDueDate().isBefore(LocalDate.now()))
                     .map(item -> DashboardResponse.mapToInvoiceDetailsResponse(item))
                     .toList();
 
             DashboardResponse responses = new DashboardResponse();
-            responses.setPendingInvoices(pendingInvDetailsResponses);
             responses.setDueInvoices(dueInvDetailsResponses);
+            BigDecimal netDue = dueInvDetailsResponses
+                    .stream()
+                    .map(data -> data.getNetDue())
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            responses.setNetDueOfDueInvoices(NumberUtils.getRoundOffValue(netDue));
+
+            /**
+             * Get invoice list that are not paid yet and set to become due in 1 day(static) or more days
+             * Used fixed/static 1 day parameter to get the desired data due to the needs of total pending amount.
+             */
+            BigDecimal netPending = invoiceDetailsPaidFalse
+                    .stream()
+                    .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= 1)
+                    .map(data -> data.getNetDue())
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            responses.setNetDueOfPendingInvoices(NumberUtils.getRoundOffValue(netPending));
+
+            responses.setTotalDueAmount(NumberUtils.getRoundOffValue(netDue.add(netPending)));
             responses.setTotalInvoices((int) getTotalInvoices());
             responses.setTotalSuppliers((int) getTotalSuppliers());
 
@@ -57,5 +70,13 @@ public class DashboardService {
 
     private long getTotalInvoices() {
         return invoiceDetailsService.findAll().stream().count();
+    }
+
+    public Object getPendingInvoices(int dayToSelectDueInvoice) {
+        return invoiceDetailsService.findAllByIsPaidFalse()
+                .stream()
+                .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= dayToSelectDueInvoice)
+                .map(item -> DashboardResponse.mapToInvoiceDetailsResponse(item))
+                .collect(Collectors.toList());
     }
 }
