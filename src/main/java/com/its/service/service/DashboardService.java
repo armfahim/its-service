@@ -42,8 +42,9 @@ public class DashboardService {
             responses.setNetDueOfDueInvoices(NumberUtils.getRoundOffValue(netDue));
 
             /**
-             * Get invoice list that are not paid yet and set to become due in 1 day(static) or more days
-             * Used fixed/static 1 day parameter to get the desired data due to the needs of total pending amount.
+             * Get invoice list that are set to become due in 1 day(static) or more days
+             * Used fixed/static 1 day parameter to get the total pending invoice's due amount,
+             * that have least 1 day to make due payment or more than 1 day,including current day.
              */
             BigDecimal netPending = invoiceDetailsPaidFalse
                     .stream()
@@ -72,7 +73,7 @@ public class DashboardService {
         return invoiceDetailsService.findAll().stream().count();
     }
 
-    public Object getPendingInvoices(int dayToSelectDueInvoice) {
+    public List<InvoiceDetailsResponse> getPendingInvoices(int dayToSelectDueInvoice) {
         return invoiceDetailsService.findAllByIsPaidFalse()
                 .stream()
                 .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= dayToSelectDueInvoice)
