@@ -2,6 +2,7 @@ package com.its.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.its.service.entity.InvoiceDetails;
+import com.its.service.utils.NumberUtils;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -20,9 +21,9 @@ public class InvoiceDetailsViewDto {
     private String term;
     @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate paymentDueDate;
-    private BigDecimal invoiceAmount;
-    private BigDecimal creditAmount;
-    private BigDecimal netDue;
+    private String invoiceAmount;
+    private String creditAmount;
+    private String netDue;
     private String chequeNumber;
     @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate paidDate;
@@ -35,6 +36,9 @@ public class InvoiceDetailsViewDto {
         dto.setTerm(invoiceDetails.getTerm().getDisplayName());
         dto.setIsPaid(Objects.nonNull(invoiceDetails.getPaidDate()) ? true : false);
         dto.setChequeNumber(StringUtils.isNotEmpty(invoiceDetails.getChequeNumber()) ? invoiceDetails.getChequeNumber() : null);
+        dto.setInvoiceAmount(NumberUtils.getRoundOffValue(invoiceDetails.getInvoiceAmount()));
+        dto.setCreditAmount(NumberUtils.getRoundOffValue(invoiceDetails.getCreditAmount()));
+        dto.setNetDue(NumberUtils.getRoundOffValue(invoiceDetails.getNetDue()));
         dto.setSupplierDetailsDto(SupplierDetailsDto.from(invoiceDetails.getSupplierDetails()));
         return dto;
     }
