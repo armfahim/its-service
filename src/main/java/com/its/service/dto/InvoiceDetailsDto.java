@@ -2,6 +2,7 @@ package com.its.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.its.service.entity.InvoiceDetails;
+import com.its.service.utils.NumberUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -28,9 +29,9 @@ public class InvoiceDetailsDto {
     private LocalDate paidDate;
 
     private String term;
-    private BigDecimal invoiceAmount;
-    private BigDecimal creditAmount;
-    private BigDecimal netDue;
+    private String invoiceAmount;
+    private String creditAmount;
+    private String netDue;
     private String chequeNumber;
     private Boolean isPaid;
     private Long supplierDetails;
@@ -45,6 +46,9 @@ public class InvoiceDetailsDto {
         if (Objects.nonNull(invoiceDetails.getTerm()))
             dto.setTerm(invoiceDetails.getTerm().getDisplayName());
         BeanUtils.copyProperties(invoiceDetails, dto);
+        dto.setInvoiceAmount(NumberUtils.getRoundOffValue(invoiceDetails.getInvoiceAmount()));
+        dto.setCreditAmount(NumberUtils.getRoundOffValue(invoiceDetails.getCreditAmount()));
+        dto.setNetDue(NumberUtils.getRoundOffValue(invoiceDetails.getNetDue()));
         return dto;
     }
 
@@ -52,10 +56,10 @@ public class InvoiceDetailsDto {
         invoiceDetails.setInvoiceNumber(invoiceNumber);
         invoiceDetails.setInvoiceDesc(Objects.nonNull(invoiceDesc) ? invoiceDesc.trim() : null);
         invoiceDetails.setInvoiceDate(invoiceDate);
-        invoiceDetails.setInvoiceAmount(invoiceAmount);
+        invoiceDetails.setInvoiceAmount(new BigDecimal(invoiceAmount));
         invoiceDetails.setChequeNumber(Objects.nonNull(chequeNumber) ? chequeNumber.trim() : null);
-        invoiceDetails.setCreditAmount(creditAmount);
-        invoiceDetails.setNetDue(netDue);
+        invoiceDetails.setCreditAmount(new BigDecimal(creditAmount));
+        invoiceDetails.setNetDue(new BigDecimal(netDue));
         invoiceDetails.setTermByValue(term);
         invoiceDetails.setPaymentDueDate(paymentDueDate);
         invoiceDetails.setIsPaid(Objects.isNull(isPaid) ? Boolean.FALSE : isPaid);
