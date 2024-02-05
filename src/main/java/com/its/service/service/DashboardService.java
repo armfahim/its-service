@@ -42,13 +42,13 @@ public class DashboardService {
             responses.setNetDueOfDueInvoices(NumberUtils.getRoundOffValue(netDue));
 
             /**
-             * Get invoice list that are set to become due in 1 day(static) or more days
-             * Used fixed/static 1 day parameter to get the total pending invoice's due amount,
-             * that have least 1 day to make due payment or more than 1 day,including current day.
+             * Get invoice list that are set to become due in today(static) or future days
+             * Used fixed/static 0 day parameter to get the total pending invoice's due amount,
+             * that have today to make due payment and more than current
              */
             BigDecimal netPending = invoiceDetailsPaidFalse
                     .stream()
-                    .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= 1)
+                    .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= 0)
                     .map(data -> data.getNetDue())
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
             responses.setNetDueOfPendingInvoices(NumberUtils.getRoundOffValue(netPending));
@@ -75,9 +75,10 @@ public class DashboardService {
     }
 
     public List<InvoiceDetailsResponse> getPendingInvoices(int dayToSelectPendingInvoice) {
+        final int modDay = dayToSelectPendingInvoice == 1 ? 0 : dayToSelectPendingInvoice;
         return invoiceDetailsService.findAllByIsPaidFalse()
                 .stream()
-                .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= dayToSelectPendingInvoice)
+                .filter(invoice -> DateUtils.dateDiffAsPeriod(LocalDate.now(), invoice.getPaymentDueDate()).getDays() >= modDay)
                 .map(item -> DashboardResponse.mapToInvoiceDetailsResponse(item))
                 .collect(Collectors.toList());
     }
