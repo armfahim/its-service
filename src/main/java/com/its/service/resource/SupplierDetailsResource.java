@@ -5,11 +5,12 @@ import com.its.service.dto.SupplierDetailsDto;
 import com.its.service.dto.UpdateStatusDto;
 import com.its.service.entity.SupplierDetails;
 import com.its.service.enums.RecordStatus;
-import com.its.service.exception.AppException;
+import com.its.service.exception.AlreadyExistsException;
 import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.helper.BasicAudit;
 import com.its.service.service.SupplierDetailsService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,19 +26,23 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequestMapping("/v1/supplier-details")
 @RequiredArgsConstructor
+@Slf4j
 public class SupplierDetailsResource {
 
     private final SupplierDetailsService service;
 
     @PostMapping(value = "/save")
     public ResponseEntity<Object> save(@RequestBody SupplierDetailsDto dto) {
+//        service.validateEmail(dto.getEmail());
+//        service.validatePhone(dto.getPhone());
         SupplierDetails supplierDetails = new SupplierDetails();
         dto.to(supplierDetails);
-        BasicAudit.setAttributeForCreateUpdate(supplierDetails, false, RecordStatus.ACTIVE);
         try {
+            BasicAudit.setAttributeForCreateUpdate(supplierDetails, false, RecordStatus.ACTIVE);
             supplierDetails = service.save(supplierDetails);
         } catch (DataIntegrityViolationException e) {
-            throw new AppException(MessageConstant.ALREADY_EXIST);
+            log.error(MessageConstant.INTERNAL_SERVER_ERROR, e);
+            throw new AlreadyExistsException(MessageConstant.ALREADY_EXIST);
         }
         return ok(success(SupplierDetailsDto.from(supplierDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
@@ -45,6 +50,8 @@ public class SupplierDetailsResource {
     @PutMapping(value = "/update")
     public ResponseEntity<Object> update(@RequestBody SupplierDetailsDto dto) {
         SupplierDetails supplierDetails = service.findById(dto.getId());
+//        service.isEmailChanged(dto.getEmail(), supplierDetails.getEmail());
+//        service.isPhoneChanged(dto.getPhone(), supplierDetails.getPhone());
         dto.to(supplierDetails);
         supplierDetails = service.update(supplierDetails);
         return ok(success(SupplierDetailsDto.from(supplierDetails), MessageConstant.DATA_UPDATE_SUCCESS).getJson());

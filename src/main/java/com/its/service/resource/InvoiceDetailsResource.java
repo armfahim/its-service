@@ -10,8 +10,6 @@ import com.its.service.enums.RecordStatus;
 import com.its.service.enums.Term;
 import com.its.service.exception.AlreadyExistsException;
 import com.its.service.exception.AppException;
-import com.its.service.exception.CustomMessagePresentException;
-import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.helper.BasicAudit;
 import com.its.service.repository.SupplierDetailsRepository;
 import com.its.service.service.InvoiceDetailsService;
@@ -47,7 +45,7 @@ public class InvoiceDetailsResource {
         SupplierDetails supplierDetails = new SupplierDetails();
         try {
             if (Objects.nonNull(dto.getSupplierDetails()))
-                supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new ResourceNotFoundException("No supplier is available"));
+                supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new AlreadyExistsException("No supplier is available"));
             invoiceDetails.setSupplierDetails(supplierDetails);
             invoiceDetails = service.save(invoiceDetails);
         } catch (Exception e) {
@@ -95,7 +93,7 @@ public class InvoiceDetailsResource {
         try {
             return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierId, fromInvoiceDate, toInvoiceDate)).getJson());
         } catch (Exception e) {
-            throw new CustomMessagePresentException("Internal Server error");
+            throw new AlreadyExistsException("Internal Server error");
         }
 
     }
@@ -107,7 +105,7 @@ public class InvoiceDetailsResource {
             List<InvoiceDetails> invoiceDetails = service.findAll();
             dtos = invoiceDetails.stream().map(InvoiceDetailsDto::from).collect(Collectors.toList());
         } catch (Exception e) {
-            throw new ResourceNotFoundException(MessageConstant.NOT_FOUND);
+            throw new AlreadyExistsException(MessageConstant.NOT_FOUND);
         }
         return ok(success(dtos, MessageConstant.SUCCESS).getJson());
     }
@@ -118,7 +116,7 @@ public class InvoiceDetailsResource {
             List<EnumDTO> enumList = EnumConversion.enumToKeyValue(Term.class);
             return ok(success(enumList, MessageConstant.SUCCESS).getJson());
         } catch (Exception e) {
-            throw new ResourceNotFoundException(MessageConstant.NOT_FOUND);
+            throw new AlreadyExistsException(MessageConstant.NOT_FOUND);
         }
     }
 

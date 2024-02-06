@@ -28,14 +28,14 @@ public class SupplierDetails extends BaseEntity {
     @Column(name = "CONTACT_PERSON", nullable = false)
     private String contactPerson;
 
-    @Column(name = "PHONE", nullable = false, unique = true)
+    @Column(name = "PHONE", nullable = false)
     @Pattern(
             regexp = "^\\+?[0-9\\-\\s]+$",
             message = "Please provide a valid phone number"
     )
     private String phone;
 
-    @Column(name = "EMAIL", nullable = true, unique = true)
+    @Column(name = "EMAIL", nullable = true)
     @Email(message = "Please provide a valid email address")
     private String email;
 

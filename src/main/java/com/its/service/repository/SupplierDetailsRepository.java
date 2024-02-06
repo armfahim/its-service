@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SupplierDetailsRepository extends JpaRepository<SupplierDetails, Long> {
 
@@ -20,5 +21,9 @@ public interface SupplierDetailsRepository extends JpaRepository<SupplierDetails
     Page<SupplierDetails> findByListAndSearch(String supplierName, Pageable pageable);
 
     List<SupplierDetails> findAllByRecordStatus(RecordStatus status);
+
+    Optional<SupplierDetails> findByEmailAndRecordStatus(String email,RecordStatus recordStatus);
+
+    Optional<SupplierDetails> findByPhoneAndRecordStatus(String phone,RecordStatus recordStatus);
 
 }

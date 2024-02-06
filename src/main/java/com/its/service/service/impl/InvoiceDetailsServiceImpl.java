@@ -7,9 +7,6 @@ import com.its.service.dto.InvoiceDetailsViewDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.enums.RecordStatus;
 import com.its.service.exception.AlreadyExistsException;
-import com.its.service.exception.AppException;
-import com.its.service.exception.CustomMessagePresentException;
-import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.repository.InvoiceDetailsRepository;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.utils.DateUtils;
@@ -44,36 +41,36 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     @Override
     public InvoiceDetails update(InvoiceDetails invoiceDetails) {
         if (Objects.isNull(invoiceDetails)) {
-            throw new ResourceNotFoundException(MessageConstant.DATA_NOT_PROVIDED);
+            throw new AlreadyExistsException(MessageConstant.DATA_NOT_PROVIDED);
         }
         if (Objects.isNull(invoiceDetails.getId()) || invoiceDetails.getId().equals(DefaultConstant.DEFAULT_VALUE_ZERO_LONG)) {
-            throw new ResourceNotFoundException(MessageConstant.PRIMARY_ID_NOT_PROVIDED);
+            throw new AlreadyExistsException(MessageConstant.PRIMARY_ID_NOT_PROVIDED);
         }
         try {
             invoiceDetails = save(invoiceDetails);
         } catch (DataIntegrityViolationException e) {
-            throw new AppException("Internal Server Error");
+            throw new AlreadyExistsException("Internal Server Error");
         }
         return invoiceDetails;
     }
 
     @Override
     public InvoiceDetails findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(MessageConstant.NOT_FOUND));
+        return repository.findById(id).orElseThrow(() -> new AlreadyExistsException(MessageConstant.NOT_FOUND));
     }
 
     @Override
     public void delete(InvoiceDetails invoiceDetails) {
         if (Objects.isNull(invoiceDetails)) {
-            throw new ResourceNotFoundException(MessageConstant.DATA_NOT_PROVIDED);
+            throw new AlreadyExistsException(MessageConstant.DATA_NOT_PROVIDED);
         }
         if (Objects.isNull(invoiceDetails.getId()) || invoiceDetails.getId().equals(DefaultConstant.DEFAULT_VALUE_ZERO_LONG)) {
-            throw new ResourceNotFoundException(MessageConstant.PRIMARY_ID_NOT_PROVIDED);
+            throw new AlreadyExistsException(MessageConstant.PRIMARY_ID_NOT_PROVIDED);
         }
         try {
             repository.delete(invoiceDetails);
         } catch (Exception e) {
-            throw new CustomMessagePresentException("Failed to deleted the data!");
+            throw new AlreadyExistsException("Failed to deleted the data!");
         }
     }
 
