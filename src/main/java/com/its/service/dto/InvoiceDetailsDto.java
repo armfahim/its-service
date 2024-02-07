@@ -2,6 +2,7 @@ package com.its.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.its.service.entity.InvoiceDetails;
+import com.its.service.exception.AlreadyExistsException;
 import com.its.service.utils.NumberUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -53,6 +54,9 @@ public class InvoiceDetailsDto {
     }
 
     public void to(InvoiceDetails invoiceDetails) {
+        if(invoiceAmount.length() > 10) throw new AlreadyExistsException("Invoice amount is allowed upto 10 digits");
+        if(creditAmount.length() > 10) throw new AlreadyExistsException("Credit amount is allowed upto 10 digits");
+        if(netDue.length() > 10) throw new AlreadyExistsException("Net due amount is allowed upto 10 digits");
         invoiceDetails.setInvoiceNumber(invoiceNumber);
         invoiceDetails.setInvoiceDesc(Objects.nonNull(invoiceDesc) ? invoiceDesc.trim() : null);
         invoiceDetails.setInvoiceDate(invoiceDate);

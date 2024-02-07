@@ -14,6 +14,7 @@ import com.its.service.utils.PaginatedResponse;
 import com.its.service.utils.PaginationUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     private final InvoiceDetailsRepository repository;
 
@@ -114,8 +116,13 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     @Override
     public void validateInvoiceNumber(String invoiceNumber) {
-        Optional<InvoiceDetails> optionalInvoiceDetails = repository.findByInvoiceNumberAndRecordStatus(invoiceNumber, RecordStatus.ACTIVE);
-        if (optionalInvoiceDetails.isPresent()) throw new AlreadyExistsException("Invoice number already exists.");
+        try {
+            Optional<InvoiceDetails> optionalInvoiceDetails = repository.findByInvoiceNumberAndRecordStatus(invoiceNumber, RecordStatus.ACTIVE);
+            if (optionalInvoiceDetails.isPresent()) throw new AlreadyExistsException("Invoice number already exists.");
+        } catch (Exception e) {
+            log.error("Unique invoice number validation failed");
+            throw new AlreadyExistsException("Unique invoice number validation failed");
+        }
     }
 
     @Override

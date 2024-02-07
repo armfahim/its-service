@@ -48,14 +48,14 @@ public class InvoiceDetails extends BaseEntity {
     @Column(name = "PAYMENT_DUE_DATE")
     private LocalDate paymentDueDate; // invoiceDate + term (days)
 
-    @Column(name = "INVOICE_AMOUNT", nullable = false, precision = 10, scale = 2)
-    // Example: 10 digits in total, with 2 digits after the decimal point
+    @Column(name = "INVOICE_AMOUNT", nullable = false, precision = 12, scale = 2)
+    // Example: 12 digits in total, with 2 digits after the decimal point
     private BigDecimal invoiceAmount;
 
-    @Column(name = "CREDIT_AMOUNT", nullable = false, precision = 10, scale = 2)
+    @Column(name = "CREDIT_AMOUNT", nullable = false, precision = 12, scale = 2)
     private BigDecimal creditAmount;
 
-    @Column(name = "NET_DUE", nullable = false, precision = 10, scale = 2)
+    @Column(name = "NET_DUE", nullable = false, precision = 12, scale = 2)
     private BigDecimal netDue; // (invoiceAmount - creditAmount)
 
     @Column(name = "CHEQUE_NUMBER", columnDefinition = "varchar(255)")
