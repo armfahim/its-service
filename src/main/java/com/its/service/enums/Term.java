@@ -5,7 +5,8 @@ public enum Term {
     FIFTEEN("15"),
     TWENTYONE("21"),
     TWENTYEIGHT("28"),
-    THIRTY("30");
+    THIRTY("30"),
+    COD("COD");
 
     private final String displayName;
 

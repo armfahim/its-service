@@ -45,7 +45,7 @@ public class InvoiceDetails extends BaseEntity {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Column(name = "PAYMENT_DUE_DATE", nullable = false)
+    @Column(name = "PAYMENT_DUE_DATE")
     private LocalDate paymentDueDate; // invoiceDate + term (days)
 
     @Column(name = "INVOICE_AMOUNT", nullable = false, precision = 10, scale = 2)
