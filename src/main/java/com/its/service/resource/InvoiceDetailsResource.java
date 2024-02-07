@@ -39,17 +39,18 @@ public class InvoiceDetailsResource {
 
     @PostMapping(value = "/save")
     public ResponseEntity<Object> save(@RequestBody InvoiceDetailsDto dto) {
+        service.validateInvoiceNumber(dto.getInvoiceNumber());
         InvoiceDetails invoiceDetails = new InvoiceDetails();
         dto.to(invoiceDetails);
-        BasicAudit.setAttributeForCreateUpdate(invoiceDetails, false, RecordStatus.ACTIVE);
-        SupplierDetails supplierDetails = new SupplierDetails();
         try {
+            SupplierDetails supplierDetails = new SupplierDetails();
             if (Objects.nonNull(dto.getSupplierDetails()))
                 supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new AlreadyExistsException("No supplier is available"));
             invoiceDetails.setSupplierDetails(supplierDetails);
+            BasicAudit.setAttributeForCreateUpdate(invoiceDetails, false, RecordStatus.ACTIVE);
             invoiceDetails = service.save(invoiceDetails);
         } catch (Exception e) {
-            log.error("Save Failed", e);
+            log.error("Failed to save invoice", e);
             throw new AlreadyExistsException(MessageConstant.INTERNAL_SERVER_ERROR);
         }
         return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
@@ -58,6 +59,7 @@ public class InvoiceDetailsResource {
     @PutMapping(value = "/update")
     public ResponseEntity<Object> update(@RequestBody InvoiceDetailsDto dto) {
         InvoiceDetails invoiceDetails = service.findById(dto.getId());
+        service.isInvoiceNumberChanged(dto.getInvoiceNumber(), invoiceDetails.getInvoiceNumber());
         dto.to(invoiceDetails);
 
         SupplierDetails supplierDetails = new SupplierDetails();

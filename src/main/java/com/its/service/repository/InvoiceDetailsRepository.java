@@ -7,8 +7,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface InvoiceDetailsRepository extends JpaRepository<InvoiceDetails, Long> {
 
@@ -32,4 +34,6 @@ public interface InvoiceDetailsRepository extends JpaRepository<InvoiceDetails, 
     List<InvoiceDetails> findAllByRecordStatusAndSupplierDetailsRecordStatus(RecordStatus recordStatus, RecordStatus recordStatuss);
 
     List<InvoiceDetails> findAllByRecordStatusAndIsPaidFalseAndSupplierDetailsRecordStatus(RecordStatus recordStatus, RecordStatus recordStatuss);
+
+    Optional<InvoiceDetails> findByInvoiceNumberAndRecordStatus(String invoiceNumber, RecordStatus recordStatus);
 }

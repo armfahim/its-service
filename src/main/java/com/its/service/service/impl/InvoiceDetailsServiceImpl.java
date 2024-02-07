@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -109,5 +110,16 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     public InvoiceDetailsViewDto findViewById(Long id) {
         InvoiceDetails invoiceDetails = findById(id);
         return InvoiceDetailsViewDto.from(invoiceDetails);
+    }
+
+    @Override
+    public void validateInvoiceNumber(String invoiceNumber) {
+        Optional<InvoiceDetails> optionalInvoiceDetails = repository.findByInvoiceNumberAndRecordStatus(invoiceNumber, RecordStatus.ACTIVE);
+        if (optionalInvoiceDetails.isPresent()) throw new AlreadyExistsException("Invoice number already exists.");
+    }
+
+    @Override
+    public void isInvoiceNumberChanged(String changedInvoiceNumber, String existsInvoiceNumber) {
+        if (!changedInvoiceNumber.equals(existsInvoiceNumber)) this.validateInvoiceNumber(changedInvoiceNumber);
     }
 }

@@ -15,4 +15,8 @@ public interface InvoiceDetailsService extends GenericService<InvoiceDetails> {
     List<InvoiceDetails> findAllByIsPaidFalse();
 
     InvoiceDetailsViewDto findViewById(Long id);
+
+    void validateInvoiceNumber(String invoiceNumber);
+
+    void isInvoiceNumberChanged(String changedInvoiceNumber, String existsInvoiceNumber);
 }
