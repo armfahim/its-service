@@ -2,6 +2,7 @@ package com.its.service.repository;
 
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.enums.RecordStatus;
+import com.its.service.enums.Term;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,7 +34,7 @@ public interface InvoiceDetailsRepository extends JpaRepository<InvoiceDetails, 
 
     List<InvoiceDetails> findAllByRecordStatusAndSupplierDetailsRecordStatus(RecordStatus recordStatus, RecordStatus recordStatuss);
 
-    List<InvoiceDetails> findAllByRecordStatusAndIsPaidFalseAndSupplierDetailsRecordStatus(RecordStatus recordStatus, RecordStatus recordStatuss);
+    List<InvoiceDetails> findAllByRecordStatusAndIsPaidFalseAndTermNotAndSupplierDetailsRecordStatus(RecordStatus recordStatus, Term term, RecordStatus recordStatuss);
 
     Optional<InvoiceDetails> findByInvoiceNumberAndRecordStatus(String invoiceNumber, RecordStatus recordStatus);
 }

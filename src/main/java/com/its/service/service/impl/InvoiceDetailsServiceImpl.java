@@ -6,6 +6,7 @@ import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.dto.InvoiceDetailsViewDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.enums.RecordStatus;
+import com.its.service.enums.Term;
 import com.its.service.exception.AlreadyExistsException;
 import com.its.service.repository.InvoiceDetailsRepository;
 import com.its.service.service.InvoiceDetailsService;
@@ -105,7 +106,7 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     @Override
     public List<InvoiceDetails> findAllByIsPaidFalse() {
-        return repository.findAllByRecordStatusAndIsPaidFalseAndSupplierDetailsRecordStatus(RecordStatus.ACTIVE, RecordStatus.ACTIVE);
+        return repository.findAllByRecordStatusAndIsPaidFalseAndTermNotAndSupplierDetailsRecordStatus(RecordStatus.ACTIVE, Term.COD, RecordStatus.ACTIVE);
     }
 
     @Override
