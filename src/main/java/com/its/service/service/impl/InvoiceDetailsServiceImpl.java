@@ -2,15 +2,19 @@ package com.its.service.service.impl;
 
 import com.its.service.constant.DefaultConstant;
 import com.its.service.constant.MessageConstant;
+import com.its.service.dto.EnumDTO;
 import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.dto.InvoiceDetailsViewDto;
+import com.its.service.dto.YearMonthDto;
 import com.its.service.entity.InvoiceDetails;
+import com.its.service.enums.Month;
 import com.its.service.enums.RecordStatus;
 import com.its.service.enums.Term;
 import com.its.service.exception.AlreadyExistsException;
 import com.its.service.repository.InvoiceDetailsRepository;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.utils.DateUtils;
+import com.its.service.utils.EnumConversion;
 import com.its.service.utils.PaginatedResponse;
 import com.its.service.utils.PaginationUtils;
 import jakarta.transaction.Transactional;
@@ -129,5 +133,15 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     @Override
     public void isInvoiceNumberChanged(String changedInvoiceNumber, String existsInvoiceNumber) {
         if (!changedInvoiceNumber.equals(existsInvoiceNumber)) this.validateInvoiceNumber(changedInvoiceNumber);
+    }
+
+    @Override
+    public Object getDistinctInvoicesYearsAndMonths() {
+        List<EnumDTO> monthEnums = EnumConversion.enumToKeyValue(Month.class);
+        List<String> x = repository.findDistinctInvoiceYearByInvoiceDate();
+        return YearMonthDto.builder()
+                .years(repository.findDistinctInvoiceYearByInvoiceDate())
+                .months(monthEnums)
+                .build();
     }
 }

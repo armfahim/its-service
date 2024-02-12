@@ -131,4 +131,9 @@ public class InvoiceDetailsResource {
     public ResponseEntity<Object> findView(@PathVariable Long id) {
         return ok(success(service.findViewById(id)).getJson());
     }
+
+    @GetMapping(value = "/distinct/years-months")
+    public ResponseEntity<Object> getInvoicesYearsAndMonths() {
+        return ResponseEntity.ok(success(service.getDistinctInvoicesYearsAndMonths()).getJson());
+    }
 }
