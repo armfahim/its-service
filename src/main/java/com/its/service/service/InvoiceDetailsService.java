@@ -19,4 +19,6 @@ public interface InvoiceDetailsService extends GenericService<InvoiceDetails> {
     void validateInvoiceNumber(String invoiceNumber);
 
     void isInvoiceNumberChanged(String changedInvoiceNumber, String existsInvoiceNumber);
+
+    Object getDistinctInvoicesYearsAndMonths();
 }
