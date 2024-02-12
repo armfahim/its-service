@@ -36,9 +36,9 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     @Override
     @Transactional
     public InvoiceDetails save(InvoiceDetails invoiceDetails) {
-        if (Boolean.TRUE.equals(invoiceDetails.getIsPaid()) && Objects.isNull(invoiceDetails.getPaidDate())) {
-            throw new AlreadyExistsException("Please provide paid date.");
-        }
+//        if (Boolean.TRUE.equals(invoiceDetails.getIsPaid()) && Objects.isNull(invoiceDetails.getPaidDate())) {
+//            throw new AlreadyExistsException("Please provide paid date.");
+//        }
         return repository.save(invoiceDetails);
     }
 
