@@ -26,4 +26,6 @@ public interface SupplierDetailsRepository extends JpaRepository<SupplierDetails
 
     Optional<SupplierDetails> findByPhoneAndRecordStatus(String phone,RecordStatus recordStatus);
 
+    Optional<SupplierDetails> findBySupplierName(String name);
+
 }

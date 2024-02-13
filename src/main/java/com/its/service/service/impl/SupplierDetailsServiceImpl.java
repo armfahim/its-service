@@ -115,5 +115,17 @@ public class SupplierDetailsServiceImpl implements SupplierDetailsService {
         if (!changedPhone.equalsIgnoreCase(existsPhone)) this.validatePhone(changedPhone);
     }
 
+    @Override
+    public void validateSupplierName(String supplierName) {
+        Optional<SupplierDetails> optionalSupplierDetails = repository.findBySupplierName(supplierName);
+        if (optionalSupplierDetails.isPresent())
+            throw new AlreadyExistsException(optionalSupplierDetails.get().getSupplierName() + " already exists.");
+    }
+
+    @Override
+    public void isSupplierNameChanged(String changedName, String existsName) {
+        if (!changedName.equalsIgnoreCase(existsName)) this.validateSupplierName(changedName);
+    }
+
 
 }

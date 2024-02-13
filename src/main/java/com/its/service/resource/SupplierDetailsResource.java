@@ -33,6 +33,7 @@ public class SupplierDetailsResource {
 
     @PostMapping(value = "/save")
     public ResponseEntity<Object> save(@RequestBody SupplierDetailsDto dto) {
+        service.validateSupplierName(dto.getSupplierName());
 //        service.validateEmail(dto.getEmail());
 //        service.validatePhone(dto.getPhone());
         SupplierDetails supplierDetails = new SupplierDetails();
@@ -50,6 +51,7 @@ public class SupplierDetailsResource {
     @PutMapping(value = "/update")
     public ResponseEntity<Object> update(@RequestBody SupplierDetailsDto dto) {
         SupplierDetails supplierDetails = service.findById(dto.getId());
+        service.isSupplierNameChanged(dto.getSupplierName(), supplierDetails.getSupplierName());
 //        service.isEmailChanged(dto.getEmail(), supplierDetails.getEmail());
 //        service.isPhoneChanged(dto.getPhone(), supplierDetails.getPhone());
         dto.to(supplierDetails);

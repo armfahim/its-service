@@ -123,13 +123,8 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     @Override
     public void validateInvoiceNumber(String invoiceNumber) {
-        try {
-            Optional<InvoiceDetails> optionalInvoiceDetails = repository.findByInvoiceNumberAndRecordStatus(invoiceNumber, RecordStatus.ACTIVE);
-            if (optionalInvoiceDetails.isPresent()) throw new AlreadyExistsException("Invoice number already exists.");
-        } catch (Exception e) {
-            log.error("Unique invoice number validation failed");
-            throw new AlreadyExistsException("Unique invoice number validation failed");
-        }
+        Optional<InvoiceDetails> optionalInvoiceDetails = repository.findByInvoiceNumberAndRecordStatus(invoiceNumber, RecordStatus.ACTIVE);
+        if (!optionalInvoiceDetails.isEmpty()) throw new AlreadyExistsException("Invoice number already exists.");
     }
 
     @Override
