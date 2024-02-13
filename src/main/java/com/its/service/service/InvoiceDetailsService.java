@@ -2,6 +2,7 @@ package com.its.service.service;
 
 import com.its.service.dto.InvoiceDetailsViewDto;
 import com.its.service.entity.InvoiceDetails;
+import com.its.service.response.InvoiceDetailsResponse;
 import com.its.service.utils.PaginatedResponse;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface InvoiceDetailsService extends GenericService<InvoiceDetails> {
     void isInvoiceNumberChanged(String changedInvoiceNumber, String existsInvoiceNumber);
 
     Object getDistinctInvoicesYearsAndMonths();
+
+    List<InvoiceDetailsResponse> findBySupplier(Long id);
 }

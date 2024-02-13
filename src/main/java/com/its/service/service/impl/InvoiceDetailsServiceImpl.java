@@ -12,6 +12,8 @@ import com.its.service.enums.RecordStatus;
 import com.its.service.enums.Term;
 import com.its.service.exception.AlreadyExistsException;
 import com.its.service.repository.InvoiceDetailsRepository;
+import com.its.service.response.DashboardResponse;
+import com.its.service.response.InvoiceDetailsResponse;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.utils.DateUtils;
 import com.its.service.utils.EnumConversion;
@@ -145,4 +147,15 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
                 .currentYear(String.valueOf(DateUtils.getCurrentYear()))
                 .build();
     }
+
+    @Override
+    public List<InvoiceDetailsResponse> findBySupplier(Long id) {
+        List<InvoiceDetails> invoiceDetails = repository.findBySupplierDetailsId(id);
+        if (invoiceDetails.isEmpty())
+            throw new AlreadyExistsException("No invoices have been found with this supplier");
+        return invoiceDetails.stream()
+                .map(DashboardResponse::mapToInvoiceDetailsResponse)
+                .toList();
+    }
+
 }

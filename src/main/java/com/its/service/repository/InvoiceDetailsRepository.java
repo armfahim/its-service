@@ -69,7 +69,7 @@ public interface InvoiceDetailsRepository extends JpaRepository<InvoiceDetails, 
             	AND sd.record_status = 'ACTIVE'
             	AND (:supplierId IS NULL or sd.id = :supplierId)
             """
-            ,nativeQuery = true)
+            , nativeQuery = true)
     InvoiceTotalAmountProjection findPurchaseAmountBySupplier(Long supplierId);
 
     @Query(value = """
@@ -90,6 +90,8 @@ public interface InvoiceDetailsRepository extends JpaRepository<InvoiceDetails, 
             ORDER BY
             	MONTH(id.invoice_date)
             """
-            ,nativeQuery = true)
-    MonthlyInvoiceTotalAmountProjection findPurchaseAmountBySupplierOrYearInMonth(String year, Long supplierId);
+            , nativeQuery = true)
+    List<MonthlyInvoiceTotalAmountProjection> findPurchaseAmountBySupplierOrYearInMonth(String year, Long supplierId);
+
+    List<InvoiceDetails> findBySupplierDetailsId(Long id);
 }

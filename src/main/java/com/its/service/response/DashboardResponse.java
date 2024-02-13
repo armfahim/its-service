@@ -50,6 +50,7 @@ public class DashboardResponse {
                 .paymentDueInMonth(Math.abs(period.getMonths()))
                 .paymentDueInYears(Math.abs(period.getYears()))
                 .invoiceDate(invoice.getInvoiceDate())
+                .invoiceAmount(invoice.getInvoiceAmount())
                 .build();
     }
 }
