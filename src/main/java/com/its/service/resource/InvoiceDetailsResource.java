@@ -3,6 +3,7 @@ package com.its.service.resource;
 import com.its.service.constant.MessageConstant;
 import com.its.service.dto.EnumDTO;
 import com.its.service.dto.InvoiceDetailsDto;
+import com.its.service.dto.PaymentStatusDto;
 import com.its.service.dto.UpdateStatusDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.entity.SupplierDetails;
@@ -135,5 +136,10 @@ public class InvoiceDetailsResource {
     @GetMapping(value = "/distinct/years-months")
     public ResponseEntity<Object> getInvoicesYearsAndMonths() {
         return ResponseEntity.ok(success(service.getDistinctInvoicesYearsAndMonths()).getJson());
+    }
+
+    @PutMapping(value = "/update-payment-status")
+    public ResponseEntity<Object> updatePaymentStatus(@RequestBody PaymentStatusDto dto) {
+        return ok(success(PaymentStatusDto.from(service.updatePaymentStatus(dto)), MessageConstant.DATA_UPDATE_SUCCESS).getJson());
     }
 }

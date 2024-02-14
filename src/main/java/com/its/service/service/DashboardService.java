@@ -35,6 +35,7 @@ public class DashboardService {
 
             DashboardResponse responses = new DashboardResponse();
             responses.setDueInvoices(dueInvDetailsResponses);
+
             BigDecimal netDue = dueInvDetailsResponses
                     .stream()
                     .map(data -> data.getNetDue())

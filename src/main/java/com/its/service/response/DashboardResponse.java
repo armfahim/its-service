@@ -1,11 +1,9 @@
 package com.its.service.response;
 
-import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.utils.DateUtils;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -51,6 +49,9 @@ public class DashboardResponse {
                 .paymentDueInYears(Math.abs(period.getYears()))
                 .invoiceDate(invoice.getInvoiceDate())
                 .invoiceAmount(invoice.getInvoiceAmount())
+                .paidDate(invoice.getPaidDate())
+                .chequeNumber(invoice.getChequeNumber())
+                .invoiceDesc(invoice.getInvoiceDesc())
                 .build();
     }
 }

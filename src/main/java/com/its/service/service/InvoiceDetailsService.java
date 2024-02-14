@@ -1,6 +1,7 @@
 package com.its.service.service;
 
 import com.its.service.dto.InvoiceDetailsViewDto;
+import com.its.service.dto.PaymentStatusDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.response.InvoiceDetailsResponse;
 import com.its.service.utils.PaginatedResponse;
@@ -24,4 +25,6 @@ public interface InvoiceDetailsService extends GenericService<InvoiceDetails> {
     Object getDistinctInvoicesYearsAndMonths();
 
     List<InvoiceDetailsResponse> findBySupplier(Long id);
+
+    InvoiceDetails updatePaymentStatus(PaymentStatusDto dto);
 }

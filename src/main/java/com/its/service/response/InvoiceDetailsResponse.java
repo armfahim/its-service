@@ -22,11 +22,16 @@ public class InvoiceDetailsResponse {
 
     @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate invoiceDate;
-    @JsonFormat(pattern = "MM-dd-yyyy")
+
     private LocalDate paymentDueDate;
 
     private BigDecimal invoiceAmount;
     private BigDecimal netDue;
     private Boolean isPaid;
     private String supplierName;
+
+    private String chequeNumber;
+    @JsonFormat(pattern = "MM-dd-yyyy")
+    private LocalDate paidDate;
+    private String invoiceDesc;
 }

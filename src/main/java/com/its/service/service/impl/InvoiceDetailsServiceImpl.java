@@ -2,10 +2,7 @@ package com.its.service.service.impl;
 
 import com.its.service.constant.DefaultConstant;
 import com.its.service.constant.MessageConstant;
-import com.its.service.dto.EnumDTO;
-import com.its.service.dto.InvoiceDetailsDto;
-import com.its.service.dto.InvoiceDetailsViewDto;
-import com.its.service.dto.YearMonthDto;
+import com.its.service.dto.*;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.enums.Month;
 import com.its.service.enums.RecordStatus;
@@ -151,6 +148,13 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
         return invoiceDetails.stream()
                 .map(DashboardResponse::mapToInvoiceDetailsResponse)
                 .toList();
+    }
+
+    @Override
+    public InvoiceDetails updatePaymentStatus(PaymentStatusDto dto) {
+        InvoiceDetails invoiceDetails = this.findById(dto.getId());
+        dto.to(invoiceDetails);
+        return this.update(invoiceDetails);
     }
 
 }

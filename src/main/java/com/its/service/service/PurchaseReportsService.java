@@ -12,7 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,9 +44,7 @@ public class PurchaseReportsService {
 
         Map<Integer, BigDecimal> monthlyInvoiceAmount = projectionsData.stream()
                 .collect(Collectors.toMap(MonthlyInvoiceTotalAmountProjection::getMonth, MonthlyInvoiceTotalAmountProjection::getMonthlyTotal));
-        List<Integer> monthValues = Arrays.stream(Month.values())
-                .map(month -> Integer.parseInt(month.getDisplayName()))
-                .collect(Collectors.toList());
+        List<Integer> monthValues = Month.getDisplayNameInList();
 
         monthlyInvoiceAmountDtoList = monthValues.stream()
                 .map(month -> {

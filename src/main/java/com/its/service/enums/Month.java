@@ -1,5 +1,9 @@
 package com.its.service.enums;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Month {
     January("1"),
     February("2"),
@@ -27,5 +31,11 @@ public enum Month {
     @Override
     public String toString() {
         return displayName;
+    }
+
+    public static List<Integer> getDisplayNameInList(){
+        return Arrays.stream(Month.values())
+                .map(month -> Integer.parseInt(month.getDisplayName()))
+                .collect(Collectors.toList());
     }
 }
