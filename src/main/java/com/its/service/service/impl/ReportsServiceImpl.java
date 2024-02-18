@@ -40,7 +40,7 @@ public class ReportsServiceImpl implements ReportsService {
     @Override
     public ResponseEntity<byte[]> generatePdf(Map<String, Object> params, String reportName) {
         try {
-            Locale locale = Locale.ENGLISH;
+            Locale locale = Locale.US;
             JasperPrint invoiceViewReport = new JasperPrint();
 
             // Create parameters map.
