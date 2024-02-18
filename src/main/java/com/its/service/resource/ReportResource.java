@@ -21,7 +21,7 @@ public class ReportResource {
 
     private final ReportsService reportsService;
 
-    @GetMapping("report")
+    @GetMapping("invoice-details")
     public ResponseEntity<byte[]> generateInvoiceDetailsPdf(@RequestParam(required = false) Long invoiceId) {
 
         String reportName = "invoice_view.jrxml";

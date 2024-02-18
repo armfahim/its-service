@@ -15,7 +15,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequestMapping("/v1/purchase")
 @RequiredArgsConstructor
-public class PurchaseReportsResource {
+public class PurchaseSummaryResource {
 
     private final PurchaseReportsService purchaseReportsService;
 
