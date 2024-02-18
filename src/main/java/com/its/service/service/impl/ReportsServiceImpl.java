@@ -1,6 +1,9 @@
 package com.its.service.service.impl;
 
+import com.its.service.entity.InvoiceDetails;
 import com.its.service.exception.AlreadyExistsException;
+import com.its.service.repository.InvoiceDetailsRepository;
+import com.its.service.service.InvoiceDetailsService;
 import com.its.service.service.ReportsService;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +33,10 @@ public class ReportsServiceImpl implements ReportsService {
 
     private static final String JASPER_TEMPLATE_PATH = "classpath:reports/";
 
+    private final InvoiceDetailsRepository invoiceDetailsRepository;
+
+    private final InvoiceDetailsService invoiceDetailsService;
+
     @Override
     public ResponseEntity<byte[]> generatePdf(Map<String, Object> params, String reportName) {
         try {
@@ -47,10 +54,13 @@ public class ReportsServiceImpl implements ReportsService {
                             .compileReport(ResourceUtils.getFile(JASPER_TEMPLATE_PATH + reportName).getAbsolutePath()),
                     parameters, dbConn);
 
+            InvoiceDetails invoiceDetails = invoiceDetailsService.findById((Long) params.get("INVOICE_ID"));
+
             HttpHeaders headers = new HttpHeaders();
             // set the PDF format
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("filename", "invoice_details.pdf");
+            headers.setContentDispositionFormData("filename",
+                    invoiceDetails.getInvoiceNumber() + "_" + invoiceDetails.getSupplierDetails().getSupplierName() + "_" + ".pdf");
 
             // create the report in PDF format
             return new ResponseEntity<>(JasperExportManager.exportReportToPdf(invoiceViewReport), headers,
