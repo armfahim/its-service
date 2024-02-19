@@ -70,7 +70,7 @@ public class ReportsServiceImpl implements ReportsService {
                     HttpStatus.OK);
         } catch (JRException | SQLException e) {
             log.error("error", e);
-            throw new AlreadyExistsException("PDF generation failed. Internal server error [" + e + "]" + "Current directory: " + new File(".").getAbsolutePath());
+            throw new AlreadyExistsException("PDF generation failed. Internal server error [" + e + "]");
         }
     }
 
