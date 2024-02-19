@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 9.0.0.final using JasperReports Library version 6.21.0-4f56c4f36cd19e17675219a9ac4692d5f0f13b06  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice_view" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab62f1f5-2a99-41c9-a47d-684cc4a27f22">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="its_dev"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -338,11 +338,11 @@ WHERE id.id = $P{INVOICE_ID}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<imageExpression><![CDATA[$P{LOGO_PATH} + "apnaagora.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["apnaagora.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="2" y="85" width="121" height="42" uuid="a4e6d727-ff85-4c28-b248-8502f2b26457"/>
-				<textElement textAlignment="Justified" verticalAlignment="Middle" rotation="None">
+				<reportElement x="1" y="79" width="121" height="54" uuid="a4e6d727-ff85-4c28-b248-8502f2b26457"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Apna Agora
@@ -386,7 +386,8 @@ Tallahassee, Florida]]></text>
 				<textFieldExpression><![CDATA[$F{contact_person}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="6" y="78" width="274" height="26" uuid="7738c504-bb2a-4cd2-a92a-57479bffadf8"/>
+				<reportElement x="6" y="77" width="274" height="35" uuid="7738c504-bb2a-4cd2-a92a-57479bffadf8"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -405,22 +406,26 @@ Tallahassee, Florida]]></text>
 				<text><![CDATA[Payment Details:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="37" width="100" height="14" uuid="5fd594f6-43a4-419e-a601-5851e6385c17"/>
-				<textElement>
+				<reportElement x="353" y="34" width="100" height="21" uuid="5fd594f6-43a4-419e-a601-5851e6385c17">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Due:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="60" width="100" height="14" uuid="ed751a95-2288-4e3c-b7d5-7d43e0f10f65"/>
-				<textElement>
+				<reportElement x="353" y="54" width="100" height="25" uuid="ed751a95-2288-4e3c-b7d5-7d43e0f10f65">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Payment Status:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="85" width="100" height="14" uuid="b3a1dee2-8cd3-4e7d-99ce-5cf155c4fc0a"/>
-				<textElement>
+				<reportElement x="353" y="79" width="100" height="25" uuid="b3a1dee2-8cd3-4e7d-99ce-5cf155c4fc0a"/>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Paid date:]]></text>
@@ -433,23 +438,25 @@ Tallahassee, Florida]]></text>
 				<text><![CDATA[Cheque Number:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="457" y="112" width="100" height="26" uuid="d05acd79-8e48-44b4-9e3a-564283f48ccd"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="455" y="105" width="100" height="26" uuid="d05acd79-8e48-44b4-9e3a-564283f48ccd"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[org.apache.commons.lang3.StringUtils.defaultIfBlank($F{cheque_number}, "N/A")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="460" y="85" width="96" height="25" uuid="bb866f00-ee5b-4f84-8e2e-a33a510aac21"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="455" y="79" width="100" height="25" uuid="bb866f00-ee5b-4f84-8e2e-a33a510aac21">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{paid_date} == null ? "N/A" : $F{paid_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="460" y="60" width="95" height="18" forecolor="#C93936" uuid="35b5aa8b-b184-4ba0-85de-759d438886b8"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="460" y="54" width="95" height="18" forecolor="#C93936" uuid="35b5aa8b-b184-4ba0-85de-759d438886b8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{is_paid} ? "PAID" : "UNPAID"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement key="" isPrintRepeatedValues="false" x="460" y="37" width="93" height="21" forecolor="#9247DE" uuid="89734569-a2a5-4586-b387-0aa0ca770438"/>
-				<textElement textAlignment="Right"/>
+				<reportElement key="" isPrintRepeatedValues="false" x="460" y="34" width="93" height="21" forecolor="#9247DE" uuid="89734569-a2a5-4586-b387-0aa0ca770438"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["$"+new java.text.DecimalFormat("#,##0.00").format($F{net_due})]]></textFieldExpression>
 			</textField>
 			<line>
@@ -459,15 +466,17 @@ Tallahassee, Florida]]></text>
 			</line>
 			<staticText>
 				<reportElement x="310" y="265" width="100" height="21" uuid="d827afdc-04de-493a-aef3-9964bc3b4737"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Invoice Amount:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="310" y="295" width="100" height="21" uuid="151ea985-f031-437d-8851-d2d1070a3452"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Credit Amount:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="310" y="324" width="100" height="21" uuid="e2d89314-d268-4a4b-b6e7-7244783cb5b3"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Net Due:]]></text>
@@ -476,12 +485,12 @@ Tallahassee, Florida]]></text>
 				<reportElement x="457" y="265" width="97" height="21" forecolor="#9247DE" uuid="f2c90f7c-8e55-4370-91e0-14fb8eba775d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["$"+new java.text.DecimalFormat("#,##0.00").format($F{invoice_amount})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="457" y="295" width="97" height="21" forecolor="#9247DE" uuid="690fd135-e5c8-479a-94b3-4b7d2f075d41"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["$"+new java.text.DecimalFormat("#,##0.00").format($F{credit_amount})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -489,7 +498,7 @@ Tallahassee, Florida]]></text>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["$"+new java.text.DecimalFormat("#,##0.00").format($F{net_due})]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -534,7 +543,7 @@ Tallahassee, Florida]]></text>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{invoice_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{invoice_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="209" y="210" width="174" height="20" backcolor="#F6F6F6" uuid="1ab9f1ce-4ac4-49c0-9695-d58c7ba9b981">
@@ -543,7 +552,7 @@ Tallahassee, Florida]]></text>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{invoice_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{invoice_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="383" y="210" width="170" height="20" backcolor="#F6F6F6" uuid="8e001773-3a9c-4220-8f36-1c35465dff50">
@@ -552,7 +561,7 @@ Tallahassee, Florida]]></text>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{invoice_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{payment_due_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="310" y="289" width="243" height="1" forecolor="#ACE6E8" uuid="d8f5ee87-e72d-4b82-ae2e-043f0ab8b7a9">
