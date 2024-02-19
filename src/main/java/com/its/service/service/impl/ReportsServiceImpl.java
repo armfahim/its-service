@@ -35,8 +35,6 @@ public class ReportsServiceImpl implements ReportsService {
 
     private static final String JASPER_TEMPLATE_PATH = "classpath:reports/";
 
-    private final InvoiceDetailsRepository invoiceDetailsRepository;
-
     private final InvoiceDetailsService invoiceDetailsService;
 
     @Override
@@ -50,7 +48,7 @@ public class ReportsServiceImpl implements ReportsService {
             parameters.putAll(params);
 
             Connection dbConn = dataSource.getConnection();
-            InputStream in = getClass().getResourceAsStream("/reports/" + reportName);
+
             invoiceViewReport = JasperFillManager.fillReport(
                     JasperCompileManager
 //                            .compileReport(ResourceUtils.getFile(JASPER_TEMPLATE_PATH + reportName).getAbsolutePath()),
@@ -58,7 +56,6 @@ public class ReportsServiceImpl implements ReportsService {
                     parameters, dbConn);
 
             InvoiceDetails invoiceDetails = invoiceDetailsService.findById((Long) params.get("INVOICE_ID"));
-
             HttpHeaders headers = new HttpHeaders();
             // set the PDF format
             headers.setContentType(MediaType.APPLICATION_PDF);
