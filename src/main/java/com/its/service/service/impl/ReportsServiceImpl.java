@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
+import java.io.File;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Locale;
@@ -67,7 +68,7 @@ public class ReportsServiceImpl implements ReportsService {
                     HttpStatus.OK);
         } catch (Exception e) {
             log.error("error", e);
-            throw new AlreadyExistsException("PDF generation failed. Internal server error [" + e + "]");
+            throw new AlreadyExistsException("PDF generation failed. Internal server error [" + e + "]" + "Current directory: " + new File(".").getAbsolutePath());
         }
     }
 
