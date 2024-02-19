@@ -8,25 +8,23 @@ import com.its.service.service.ReportsService;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import org.springframework.core.io.ClassPathResource;
+import net.sf.jasperreports.engine.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -52,21 +50,11 @@ public class ReportsServiceImpl implements ReportsService {
             parameters.putAll(params);
 
             Connection dbConn = dataSource.getConnection();
-
-            String strJson = null;
-            ClassPathResource classPathResource = new ClassPathResource(JASPER_TEMPLATE_PATH + reportName);
-            try {
-                byte[] binaryData = FileCopyUtils.copyToByteArray(classPathResource.getInputStream());
-                strJson = new String(binaryData, StandardCharsets.UTF_8);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
+            InputStream in = getClass().getResourceAsStream("/reports/" + reportName);
             invoiceViewReport = JasperFillManager.fillReport(
                     JasperCompileManager
 //                            .compileReport(ResourceUtils.getFile(JASPER_TEMPLATE_PATH + reportName).getAbsolutePath()),
-                            .compileReport(strJson),
+                            .compileReport(getClass().getResourceAsStream("/reports/" + reportName)),
                     parameters, dbConn);
 
             InvoiceDetails invoiceDetails = invoiceDetailsService.findById((Long) params.get("INVOICE_ID"));
@@ -80,7 +68,7 @@ public class ReportsServiceImpl implements ReportsService {
             // create the report in PDF format
             return new ResponseEntity<>(JasperExportManager.exportReportToPdf(invoiceViewReport), headers,
                     HttpStatus.OK);
-        } catch (Exception e) {
+        } catch (JRException | SQLException e) {
             log.error("error", e);
             throw new AlreadyExistsException("PDF generation failed. Internal server error [" + e + "]" + "Current directory: " + new File(".").getAbsolutePath());
         }
