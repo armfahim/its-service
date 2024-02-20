@@ -70,7 +70,7 @@ public class SupplierDetailsServiceImpl implements SupplierDetailsService {
 
     @Override
     public List<SupplierDetails> findAll() {
-        return repository.findAllByRecordStatus(RecordStatus.ACTIVE);
+        return repository.findAllByRecordStatusOrderBySupplierNameAsc(RecordStatus.ACTIVE);
     }
 
     @Override

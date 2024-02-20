@@ -20,7 +20,7 @@ public interface SupplierDetailsRepository extends JpaRepository<SupplierDetails
                     "AND (sd.recordStatus = 'ACTIVE') ")
     Page<SupplierDetails> findByListAndSearch(String supplierName, Pageable pageable);
 
-    List<SupplierDetails> findAllByRecordStatus(RecordStatus status);
+    List<SupplierDetails> findAllByRecordStatusOrderBySupplierNameAsc(RecordStatus status);
 
     Optional<SupplierDetails> findByEmailAndRecordStatus(String email,RecordStatus recordStatus);
 
