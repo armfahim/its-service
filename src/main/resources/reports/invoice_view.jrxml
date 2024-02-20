@@ -252,7 +252,7 @@ WHERE
   END as terms
 FROM invoice_details id 
 JOIN supplier_details sd ON id.supplier_id  = sd.id
-WHERE id.id = $P{INVOICE_ID};]]>
+WHERE id.id = $P{INVOICE_ID}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
@@ -365,7 +365,7 @@ WHERE id.id = $P{INVOICE_ID};]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<imageExpression><![CDATA["apnaagora.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[$P{LOGO_PATH} +"apnaagora.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="1" y="79" width="121" height="54" uuid="a4e6d727-ff85-4c28-b248-8502f2b26457"/>
