@@ -358,7 +358,9 @@ WHERE
 				<imageExpression><![CDATA[$P{LOGO_PATH} +"apnaagora.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="1" y="79" width="121" height="54" uuid="a4e6d727-ff85-4c28-b248-8502f2b26457"/>
+				<reportElement x="1" y="82" width="121" height="52" uuid="a4e6d727-ff85-4c28-b248-8502f2b26457">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -441,33 +443,33 @@ Tallahassee, Florida]]></text>
 				<text><![CDATA[Payment Status:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="79" width="100" height="25" uuid="b3a1dee2-8cd3-4e7d-99ce-5cf155c4fc0a"/>
+				<reportElement x="353" y="81" width="100" height="25" uuid="b3a1dee2-8cd3-4e7d-99ce-5cf155c4fc0a"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Paid date:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="105" width="100" height="27" uuid="9af70238-fcd3-4908-9ae7-fc2afe0317b5"/>
+				<reportElement x="353" y="107" width="100" height="27" uuid="9af70238-fcd3-4908-9ae7-fc2afe0317b5"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cheque Number:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="455" y="105" width="100" height="26" uuid="d05acd79-8e48-44b4-9e3a-564283f48ccd"/>
+				<reportElement x="455" y="107" width="100" height="26" uuid="d05acd79-8e48-44b4-9e3a-564283f48ccd"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[org.apache.commons.lang3.StringUtils.defaultIfBlank($F{cheque_number}, "N/A")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="455" y="80" width="100" height="25" uuid="bb866f00-ee5b-4f84-8e2e-a33a510aac21">
+				<reportElement x="455" y="81" width="100" height="25" uuid="bb866f00-ee5b-4f84-8e2e-a33a510aac21">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{paid_date} == null ? "N/A" : $F{paid_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="460" y="54" width="95" height="18" forecolor="#C93936" uuid="35b5aa8b-b184-4ba0-85de-759d438886b8"/>
+				<reportElement x="460" y="58" width="95" height="18" forecolor="#C93936" uuid="35b5aa8b-b184-4ba0-85de-759d438886b8"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{is_paid} ? "PAID" : "UNPAID"]]></textFieldExpression>
 			</textField>
