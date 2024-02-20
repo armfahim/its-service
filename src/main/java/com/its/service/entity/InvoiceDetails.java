@@ -31,7 +31,7 @@ public class InvoiceDetails extends BaseEntity {
     @Column(name = "INVOICE_NUMBER", nullable = false)
     private String invoiceNumber;
 
-    @Column(name = "INVOICE_DESC", columnDefinition = "varchar(MAX)")
+    @Column(name = "INVOICE_DESC", length = 1024)
     private String invoiceDesc;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

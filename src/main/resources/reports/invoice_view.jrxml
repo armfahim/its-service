@@ -123,23 +123,9 @@
 		</parameter>
 		<parameter name="LOGO_PATH" class="java.lang.String"/>
 		<queryString>
-			<![CDATA[SELECT
-	*,
-	CASE
-		WHEN id.term = 'SEVEN' THEN '7'
-		WHEN id.term = 'FIFTEEN' THEN '15'
-		WHEN id.term = 'TWENTYONE' THEN '21'
-		WHEN id.term = 'TWENTYEIGHT' THEN '28'
-		WHEN id.term = 'THIRTY' THEN '30'
-		WHEN id.term = 'COD' THEN 'COD'
-		ELSE NULL
-	END as terms
-FROM
-	invoice_details id
-JOIN supplier_details sd ON
-	id.supplier_id = sd.id
-WHERE
-	id.id = $P{INVOICE_ID}]]>
+			<![CDATA[SELECT * FROM invoice_details id 
+JOIN supplier_details sd ON id.supplier_id  = sd.id
+WHERE id.id = $P{INVOICE_ID}]]>
 		</queryString>
 		<field name="id" class="java.lang.Long">
 			<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -240,19 +226,23 @@ WHERE
 		<defaultValueExpression><![CDATA[$F{id}]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT *,
-  CASE 
-    WHEN id.term = 'SEVEN' THEN '7'
-    WHEN id.term = 'FIFTEEN' THEN '15'
-    WHEN id.term = 'TWENTYONE' THEN '21'
-    WHEN id.term = 'TWENTYEIGHT' THEN '28'
-    WHEN id.term = 'THIRTY' THEN '30'
-    WHEN id.term = 'COD' THEN 'COD'
-    ELSE NULL 
-  END as terms
-FROM invoice_details id 
-JOIN supplier_details sd ON id.supplier_id  = sd.id
-WHERE id.id = $P{INVOICE_ID}]]>
+		<![CDATA[SELECT
+	*,
+	CASE
+		WHEN ids.term = 'FIFTEEN' THEN '15'
+		WHEN ids.term = 'SEVEN' THEN '7'
+		WHEN ids.term = 'TWENTYONE' THEN '21'
+		WHEN ids.term = 'TWENTYEIGHT' THEN '28'
+		WHEN ids.term = 'THIRTY' THEN '30'
+		WHEN ids.term = 'COD' THEN 'COD'
+		ELSE NULL
+	END as terms
+FROM
+	invoice_details ids
+JOIN supplier_details sd ON
+	ids.supplier_id = sd.id
+WHERE
+	ids.id = $P{INVOICE_ID}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
@@ -286,9 +276,9 @@ WHERE id.id = $P{INVOICE_ID}]]>
 		<property name="com.jaspersoft.studio.field.label" value="invoice_date"/>
 		<property name="com.jaspersoft.studio.field.name" value="invoice_date"/>
 	</field>
-	<field name="invoice_desc" class="java.sql.Clob">
+	<field name="invoice_desc" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="invoice_desc"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="invoice_details"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value=""/>
 		<property name="com.jaspersoft.studio.field.name" value="invoice_desc"/>
 	</field>
 	<field name="invoice_number" class="java.lang.String">
@@ -470,7 +460,7 @@ Tallahassee, Florida]]></text>
 				<textFieldExpression><![CDATA[org.apache.commons.lang3.StringUtils.defaultIfBlank($F{cheque_number}, "N/A")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="455" y="79" width="100" height="25" uuid="bb866f00-ee5b-4f84-8e2e-a33a510aac21">
+				<reportElement x="455" y="80" width="100" height="25" uuid="bb866f00-ee5b-4f84-8e2e-a33a510aac21">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
@@ -579,7 +569,7 @@ Tallahassee, Florida]]></text>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{terms}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{invoice_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="383" y="210" width="170" height="20" backcolor="#F6F6F6" uuid="8e001773-3a9c-4220-8f36-1c35465dff50">
@@ -613,7 +603,7 @@ Tallahassee, Florida]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="3" y="26" width="553" height="30" forecolor="#56B6BF" uuid="9af3cb2a-1f92-406c-a3ec-712e5bc78981"/>
-				<textFieldExpression><![CDATA[$F{invoice_desc}  == null ? "No data to display"  : $F{invoice_desc}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{invoice_desc} == null || $F{invoice_desc}.trim().isEmpty() ? "No data to display" : $F{invoice_desc}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
