@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 9.0.0.final using JasperReports Library version 6.21.0-4f56c4f36cd19e17675219a9ac4692d5f0f13b06  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice_view" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab62f1f5-2a99-41c9-a47d-684cc4a27f22">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="its_dev"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -123,9 +123,23 @@
 		</parameter>
 		<parameter name="LOGO_PATH" class="java.lang.String"/>
 		<queryString>
-			<![CDATA[SELECT * FROM invoice_details id 
-JOIN supplier_details sd ON id.supplier_id  = sd.id
-WHERE id.id = $P{INVOICE_ID}]]>
+			<![CDATA[SELECT
+	*,
+	CASE
+		WHEN id.term = 'SEVEN' THEN '7'
+		WHEN id.term = 'FIFTEEN' THEN '15'
+		WHEN id.term = 'TWENTYONE' THEN '21'
+		WHEN id.term = 'TWENTYEIGHT' THEN '28'
+		WHEN id.term = 'THIRTY' THEN '30'
+		WHEN id.term = 'COD' THEN 'COD'
+		ELSE NULL
+	END as terms
+FROM
+	invoice_details id
+JOIN supplier_details sd ON
+	id.supplier_id = sd.id
+WHERE
+	id.id = $P{INVOICE_ID}]]>
 		</queryString>
 		<field name="id" class="java.lang.Long">
 			<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -226,102 +240,115 @@ WHERE id.id = $P{INVOICE_ID}]]>
 		<defaultValueExpression><![CDATA[$F{id}]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT * FROM invoice_details id 
+		<![CDATA[SELECT *,
+  CASE 
+    WHEN id.term = 'SEVEN' THEN '7'
+    WHEN id.term = 'FIFTEEN' THEN '15'
+    WHEN id.term = 'TWENTYONE' THEN '21'
+    WHEN id.term = 'TWENTYEIGHT' THEN '28'
+    WHEN id.term = 'THIRTY' THEN '30'
+    WHEN id.term = 'COD' THEN 'COD'
+    ELSE NULL 
+  END as terms
+FROM invoice_details id 
 JOIN supplier_details sd ON id.supplier_id  = sd.id
-WHERE id.id = $P{INVOICE_ID}]]>
+WHERE id.id = $P{INVOICE_ID};]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="id"/>
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
 	</field>
 	<field name="created_at" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="created_at"/>
 		<property name="com.jaspersoft.studio.field.label" value="created_at"/>
+		<property name="com.jaspersoft.studio.field.name" value="created_at"/>
 	</field>
 	<field name="record_status" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="record_status"/>
 		<property name="com.jaspersoft.studio.field.label" value="record_status"/>
+		<property name="com.jaspersoft.studio.field.name" value="record_status"/>
 	</field>
 	<field name="updated_at" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="updated_at"/>
 		<property name="com.jaspersoft.studio.field.label" value="updated_at"/>
+		<property name="com.jaspersoft.studio.field.name" value="updated_at"/>
 	</field>
 	<field name="cheque_number" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="cheque_number"/>
 		<property name="com.jaspersoft.studio.field.label" value="cheque_number"/>
+		<property name="com.jaspersoft.studio.field.name" value="cheque_number"/>
 	</field>
 	<field name="credit_amount" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="credit_amount"/>
 		<property name="com.jaspersoft.studio.field.label" value="credit_amount"/>
+		<property name="com.jaspersoft.studio.field.name" value="credit_amount"/>
 	</field>
 	<field name="invoice_amount" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="invoice_amount"/>
 		<property name="com.jaspersoft.studio.field.label" value="invoice_amount"/>
+		<property name="com.jaspersoft.studio.field.name" value="invoice_amount"/>
 	</field>
 	<field name="invoice_date" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="invoice_date"/>
 		<property name="com.jaspersoft.studio.field.label" value="invoice_date"/>
+		<property name="com.jaspersoft.studio.field.name" value="invoice_date"/>
 	</field>
 	<field name="invoice_desc" class="java.sql.Clob">
-		<property name="com.jaspersoft.studio.field.name" value="invoice_desc"/>
 		<property name="com.jaspersoft.studio.field.label" value="invoice_desc"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="invoice_details"/>
+		<property name="com.jaspersoft.studio.field.name" value="invoice_desc"/>
 	</field>
 	<field name="invoice_number" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="invoice_number"/>
 		<property name="com.jaspersoft.studio.field.label" value="invoice_number"/>
-	</field>
-	<field name="is_paid" class="java.lang.Boolean">
-		<property name="com.jaspersoft.studio.field.name" value="is_paid"/>
-		<property name="com.jaspersoft.studio.field.label" value="is_paid"/>
+		<property name="com.jaspersoft.studio.field.name" value="invoice_number"/>
 	</field>
 	<field name="net_due" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="net_due"/>
 		<property name="com.jaspersoft.studio.field.label" value="net_due"/>
+		<property name="com.jaspersoft.studio.field.name" value="net_due"/>
 	</field>
 	<field name="paid_date" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="paid_date"/>
 		<property name="com.jaspersoft.studio.field.label" value="paid_date"/>
+		<property name="com.jaspersoft.studio.field.name" value="paid_date"/>
 	</field>
 	<field name="payment_due_date" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="payment_due_date"/>
 		<property name="com.jaspersoft.studio.field.label" value="payment_due_date"/>
+		<property name="com.jaspersoft.studio.field.name" value="payment_due_date"/>
 	</field>
 	<field name="term" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="term"/>
 		<property name="com.jaspersoft.studio.field.label" value="term"/>
+		<property name="com.jaspersoft.studio.field.name" value="term"/>
 	</field>
 	<field name="created_by" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="created_by"/>
 		<property name="com.jaspersoft.studio.field.label" value="created_by"/>
+		<property name="com.jaspersoft.studio.field.name" value="created_by"/>
 	</field>
 	<field name="updated_by" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="updated_by"/>
 		<property name="com.jaspersoft.studio.field.label" value="updated_by"/>
+		<property name="com.jaspersoft.studio.field.name" value="updated_by"/>
 	</field>
 	<field name="supplier_id" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="supplier_id"/>
 		<property name="com.jaspersoft.studio.field.label" value="supplier_id"/>
+		<property name="com.jaspersoft.studio.field.name" value="supplier_id"/>
+	</field>
+	<field name="is_paid" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="is_paid"/>
+		<property name="com.jaspersoft.studio.field.name" value="is_paid"/>
 	</field>
 	<field name="address" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="address"/>
 		<property name="com.jaspersoft.studio.field.label" value="address"/>
+		<property name="com.jaspersoft.studio.field.name" value="address"/>
 	</field>
 	<field name="contact_person" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="contact_person"/>
 		<property name="com.jaspersoft.studio.field.label" value="contact_person"/>
+		<property name="com.jaspersoft.studio.field.name" value="contact_person"/>
 	</field>
 	<field name="email" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="email"/>
 		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
 	</field>
 	<field name="phone" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="phone"/>
 		<property name="com.jaspersoft.studio.field.label" value="phone"/>
+		<property name="com.jaspersoft.studio.field.name" value="phone"/>
 	</field>
 	<field name="supplier_name" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="supplier_name"/>
 		<property name="com.jaspersoft.studio.field.label" value="supplier_name"/>
+		<property name="com.jaspersoft.studio.field.name" value="supplier_name"/>
+	</field>
+	<field name="terms" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="terms"/>
 	</field>
 	<variable name="credit_amount_SUM" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{credit_amount}]]></variableExpression>
@@ -338,7 +365,7 @@ WHERE id.id = $P{INVOICE_ID}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<imageExpression><![CDATA[$P{LOGO_PATH} + "apnaagora.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["apnaagora.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="1" y="79" width="121" height="54" uuid="a4e6d727-ff85-4c28-b248-8502f2b26457"/>
@@ -552,7 +579,7 @@ Tallahassee, Florida]]></text>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{invoice_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{terms}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="383" y="210" width="170" height="20" backcolor="#F6F6F6" uuid="8e001773-3a9c-4220-8f36-1c35465dff50">
