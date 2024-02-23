@@ -571,7 +571,7 @@ Tallahassee, Florida]]></text>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{invoice_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{terms}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="383" y="210" width="170" height="20" backcolor="#F6F6F6" uuid="8e001773-3a9c-4220-8f36-1c35465dff50">
