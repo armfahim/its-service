@@ -19,8 +19,6 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequiredArgsConstructor
 public class DashboardResource {
 
-    private final InvoiceDetailsService service;
-    private final SupplierDetailsRepository supplierDetailsRepository;
     private final DashboardService dashboardService;
 
     @GetMapping(value = "/highlights")

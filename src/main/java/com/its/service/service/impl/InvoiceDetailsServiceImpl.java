@@ -35,7 +35,6 @@ import java.util.Optional;
 public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     private final InvoiceDetailsRepository repository;
 
-
     @Override
     @Transactional
     public InvoiceDetails save(InvoiceDetails invoiceDetails) {
