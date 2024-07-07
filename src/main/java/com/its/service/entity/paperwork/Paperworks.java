@@ -26,7 +26,7 @@ public class Paperworks extends BaseEntity {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "PAPERWORK_TITLE", nullable = false, unique = true, length = 20)
+    @Column(name = "PAPERWORK_TITLE", nullable = false, unique = true, length = 25)
     private String paperworkTitle;
 
     @Column(name = "MONTH", nullable = false)
@@ -34,6 +34,9 @@ public class Paperworks extends BaseEntity {
 
     @Column(name = "YEAR", nullable = false,length = 4)
     private String year;
+
+    @Column(name = "IS_COMPLETED")
+    private Boolean isCompleted = false;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "paperworks", cascade = CascadeType.ALL)
     private List<PaperworkBreakdown> paperworkBreakdownList;

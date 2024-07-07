@@ -98,7 +98,6 @@ public class InvoiceDetailsResource {
         } catch (Exception e) {
             throw new AlreadyExistsException("Internal Server error");
         }
-
     }
 
     @GetMapping(value = "/all")
