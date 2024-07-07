@@ -1,11 +1,13 @@
 package com.its.service.service.impl.paperworks;
 
+import com.its.service.constant.MessageConstant;
 import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.dto.SupplierDetailsDto;
 import com.its.service.dto.paperworks.PaperworksDto;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.entity.paperwork.Paperworks;
 import com.its.service.enums.RecordStatus;
+import com.its.service.exception.AlreadyExistsException;
 import com.its.service.helper.BasicAudit;
 import com.its.service.repository.paperworks.PaperworksRepository;
 import com.its.service.service.paperworks.PaperworksService;
@@ -37,6 +39,7 @@ public class PaperworksServiceImpl implements PaperworksService {
         return paperworks.getYear() + "-" + paperworks.getMonth() + "-" + "Paperwork";
     }
 
+
     @Override
     public Paperworks update(Paperworks paperworks) {
         return null;
@@ -44,7 +47,7 @@ public class PaperworksServiceImpl implements PaperworksService {
 
     @Override
     public Paperworks findById(Long id) {
-        return null;
+        return repository.findById(id).orElseThrow(() -> new AlreadyExistsException(MessageConstant.NOT_FOUND));
     }
 
     @Override
