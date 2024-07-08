@@ -37,6 +37,21 @@ public class PaperworkBreakdown extends BaseEntity {
     @Column(name = "PAPERWORK_DATE", nullable = false, unique = true)
     private LocalDate paperworkDate;
 
+    //Start - Sales Record(Incoming)
+    @Column(name = "MERCHANT_SALE", precision = 12, scale = 2)
+    private BigDecimal merchantSale;
+
+    @Column(name = "SALES_TAX", precision = 12, scale = 2)
+    private BigDecimal salesTax;
+
+    @Column(name = "INSIDE_SALES", precision = 12, scale = 2)
+    private BigDecimal insideSales;
+
+    @Column(name = "TOTAL_SALES_RECORD", precision = 12, scale = 2)
+    private BigDecimal totalSalesRecord; // merchantSale + salesTax + insideSales + totalSalesRecord
+    //End
+
+    //Start - Inside Sales Breakdown
     @Column(name = "CREDIT_CARD", precision = 12, scale = 2)
     private BigDecimal creditCard;
 
@@ -66,6 +81,7 @@ public class PaperworkBreakdown extends BaseEntity {
 
     @Column(name = "TOTAL", precision = 12, scale = 2)
     private BigDecimal total; // totalCreditDebitCard + ebt + expense + officeExpense + trustFund + houseAc + storeDeposit
+    //End
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PAPERWORKS_ID")
