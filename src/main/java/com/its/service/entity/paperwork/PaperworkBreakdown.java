@@ -79,8 +79,17 @@ public class PaperworkBreakdown extends BaseEntity {
     @Column(name = "STORE_DEPOSIT", precision = 12, scale = 2)
     private BigDecimal storeDeposit;
 
-    @Column(name = "TOTAL", precision = 12, scale = 2)
-    private BigDecimal total; // totalCreditDebitCard + ebt + expense + officeExpense + trustFund + houseAc + storeDeposit
+    @Column(name = "TOTAL_CASH_PURCHASE", precision = 12, scale = 2)
+    private BigDecimal totalCashPurchase; // This will come from CashPurchase entity
+
+    @Column(name = "TOTAL_INSIDE_SALES", precision = 12, scale = 2)
+    private BigDecimal totalInsideSales; // totalCreditDebitCard + ebt + expense + officeExpense + trustFund + houseAc + storeDeposit+ totalCashPurchase
+
+    @Column(name = "CASH_OVER_SHORT", precision = 12, scale = 2)
+    private BigDecimal cashOverShort;
+
+    @Column(name = "NOTES",columnDefinition="TEXT")
+    private String notes;
     //End
 
     @ManyToOne(fetch = FetchType.LAZY)
