@@ -25,7 +25,7 @@ public class CashPurchase extends BaseEntity {
     private Long id;
 
     @Column(name = "PURCHASE_AMOUNT", precision = 12, scale = 2)
-    private BigDecimal purchaseAmount;
+    private BigDecimal cashPurchaseAmount;
 
     @Column(name = "ITEM_NAME", nullable = false)
     private String itemName;

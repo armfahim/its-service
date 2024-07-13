@@ -79,6 +79,9 @@ public class PaperworkBreakdown extends BaseEntity {
     @Column(name = "STORE_DEPOSIT", precision = 12, scale = 2)
     private BigDecimal storeDeposit;
 
+    @Column(name = "TOTAL_INSIDE_SALES_BREAKDOWN", precision = 12, scale = 2)
+    private BigDecimal totalInsideSalesBreakdown;
+
     @Column(name = "TOTAL_CASH_PURCHASE", precision = 12, scale = 2)
     private BigDecimal totalCashPurchase; // This will come from CashPurchase entity
 

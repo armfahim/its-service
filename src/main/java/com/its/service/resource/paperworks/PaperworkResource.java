@@ -4,6 +4,7 @@ import com.its.service.constant.MessageConstant;
 import com.its.service.dto.paperworks.PaperworksDto;
 import com.its.service.entity.paperwork.Paperworks;
 import com.its.service.exception.AlreadyExistsException;
+import com.its.service.response.PaperworksDetailsResponse;
 import com.its.service.service.paperworks.PaperworksService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +54,12 @@ public class PaperworkResource {
 
     @GetMapping(value = "/find/{id}")
     public ResponseEntity<Object> find(@PathVariable Long id) {
-        return ok(success((service.findById(id))).getJson());
+        return ok(success((PaperworksDetailsResponse.from(service.findById(id)))).getJson());
+    }
+
+    @GetMapping(value = "/find/details/{id}")
+    public ResponseEntity<Object> findPaperworkAndBreakdownDatesById(@PathVariable Long id) {
+        return ok(success(service.findPaperworkAndBreakdownDatesById(id)).getJson());
     }
 
 }

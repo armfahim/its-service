@@ -1,15 +1,15 @@
 package com.its.service.service.impl.paperworks;
 
 import com.its.service.constant.MessageConstant;
-import com.its.service.dto.InvoiceDetailsDto;
-import com.its.service.dto.SupplierDetailsDto;
 import com.its.service.dto.paperworks.PaperworksDto;
-import com.its.service.entity.InvoiceDetails;
+import com.its.service.entity.paperwork.PaperworkBreakdown;
 import com.its.service.entity.paperwork.Paperworks;
+import com.its.service.enums.Month;
 import com.its.service.enums.RecordStatus;
 import com.its.service.exception.AlreadyExistsException;
 import com.its.service.helper.BasicAudit;
 import com.its.service.repository.paperworks.PaperworksRepository;
+import com.its.service.response.PaperworksDetailsResponse;
 import com.its.service.service.paperworks.PaperworksService;
 import com.its.service.utils.PaginatedResponse;
 import com.its.service.utils.PaginationUtils;
@@ -18,7 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -77,5 +80,33 @@ public class PaperworksServiceImpl implements PaperworksService {
 
         List<PaperworksDto> data = pageData.getContent().stream().map(PaperworksDto::from).toList();
         return PaginationUtils.getPaginatedResponse(pageData, data);
+    }
+
+    @Override
+    public PaperworksDetailsResponse findPaperworkAndBreakdownDatesById(Long id) {
+        Paperworks paperworks = this.findById(id);
+        PaperworksDetailsResponse response = PaperworksDetailsResponse.from(paperworks);
+
+        //Get the exists date list from paperwork breakdown dates
+        List<LocalDate> existsDate = new ArrayList<>();
+        if (paperworks.getPaperworkBreakdownList() != null
+                && !paperworks.getPaperworkBreakdownList().isEmpty()) {
+
+            existsDate = paperworks.getPaperworkBreakdownList().stream()
+                    .map(PaperworkBreakdown::getPaperworkDate)
+                    .toList();
+            response.setExistsPaperworkBreakDownDates(existsDate); //Set to response
+        }
+        //Get the new input date by comparing if exists or get the first day of month
+        if (!existsDate.isEmpty()) {
+            Optional<LocalDate> latestDate = existsDate.stream().max(LocalDate::compareTo);
+            latestDate.ifPresent(localDate -> response.setNewInputDate(localDate.plusDays(1)));
+        } else {
+            String monthNumber = Month.valueOf(paperworks.getMonth()).getDisplayName(); // Get the month number from Month enum
+            LocalDate firstDay = LocalDate.of(Integer.parseInt(paperworks.getYear())
+                    , Integer.parseInt(monthNumber), 1); // Get the first day of paperwork year and moth
+            response.setNewInputDate(firstDay);
+        }
+        return response;
     }
 }
