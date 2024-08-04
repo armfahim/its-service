@@ -20,9 +20,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -61,6 +59,12 @@ public class PaperworkBreakdownServiceImpl implements PaperworkBreakdownService 
         Paperworks paperworks = paperworksRepository.findById(paperworksId).orElseThrow(() -> new AlreadyExistsException("Paperworks hasn't been found"));
         Optional<PaperworkBreakdown> optionalPaperworkBreakdown = repository.findByPaperworksAndPaperworkDate(paperworks, paperworkBreakdownDate);
         return optionalPaperworkBreakdown.orElse(null);
+    }
+
+    @Override
+    public List<PaperworkBreakdown> findAllPaperworkBreakdownByPaperworkId(Long paperworksId) {
+        Optional<List<PaperworkBreakdown>> optionalList = repository.findByPaperworksId(paperworksId);
+        return optionalList.orElse(null);
     }
 
     @Override

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 import static com.its.service.utils.ResponseBuilder.success;
@@ -35,15 +36,15 @@ public class PaperworkBreakdownResource {
 
     @PutMapping(value = "/update")
     public ResponseEntity<Object> update(@RequestBody PaperworkBreakdownDto dto) {
-        if(Objects.isNull(dto.getId())){
+        if (Objects.isNull(dto.getId())) {
             throw new AlreadyExistsException("Paperwork breakdown ID is missing");
         }
         return ok(success(PaperworkBreakdownDto.from(service.update(dto)), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
 
     @GetMapping(value = "/find/paperwork-breakdown-date")
-    public ResponseEntity<Object> findPaperworkBreakdownByDateAndId(@RequestParam(value = "paperworksId", defaultValue = "1") Long paperworksId,
-                                                                    @RequestParam(value = "paperworkBreakdownDate", defaultValue = "10") String paperworkBreakdownDate) {
+    public ResponseEntity<Object> findPaperworkBreakdownByDateAndId(@RequestParam(value = "paperworksId") Long paperworksId,
+                                                                    @RequestParam(value = "paperworkBreakdownDate") String paperworkBreakdownDate) {
         if (Objects.isNull(paperworksId)) return new ResponseEntity<>(
                 "Paperwork breakdown ID is missing",
                 HttpStatus.OK);
@@ -55,7 +56,19 @@ public class PaperworkBreakdownResource {
         if (Objects.nonNull(obj)) {
             return ok(success(PaperworkBreakdownDto.from(obj)).getJson());
         } else {
-            return ok(success(PaperworkBreakdownDto.from(localDate)).getJson());
+            return ok(success(PaperworkBreakdownDto.from(localDate)).getJson()); // if Obj is null, then set the paperwork date to the provided date.
         }
+    }
+
+    @GetMapping(value = "/find/all/by/paperwork/{paperworksId}")
+    public ResponseEntity<Object> findAllPaperworkBreakdownByPaperworkId(@PathVariable Long paperworksId) {
+        if (Objects.isNull(paperworksId)) return new ResponseEntity<>(
+                "Paperwork breakdown ID is missing",
+                HttpStatus.OK);
+        List<PaperworkBreakdown> obj = service.findAllPaperworkBreakdownByPaperworkId(paperworksId);
+        if (Objects.nonNull(obj)) {
+            return ok(success(obj.stream().map(PaperworkBreakdownDto::from).toList()).getJson());
+        }
+        return null;
     }
 }

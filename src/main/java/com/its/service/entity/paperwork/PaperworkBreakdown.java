@@ -48,7 +48,7 @@ public class PaperworkBreakdown extends BaseEntity {
     private BigDecimal insideSales;
 
     @Column(name = "TOTAL_SALES_RECORD", precision = 12, scale = 2)
-    private BigDecimal totalSalesRecord; // merchantSale + salesTax + insideSales + totalSalesRecord
+    private BigDecimal totalSalesRecord; // merchantSale + salesTax + insideSales
     //End
 
     //Start - Inside Sales Breakdown
