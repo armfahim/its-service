@@ -1,14 +1,22 @@
 package com.its.service.security;
 
+import com.its.service.entity.auth.User;
 import com.its.service.security.jwt.JwtAuthenticationEntryPoint;
 import com.its.service.security.jwt.JwtAuthenticationFilter;
+import com.its.service.security.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -40,9 +48,11 @@ public class SecurityConfig {
     private final LogoutHandler logoutHandler;
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtService jwtService;
 
     private static final String[] WHITE_LIST_URL = {
-            "/v1/auth/**"
+            "/v1/auth/**",
+            "/v1/auth/oauth2/authorization/**"
     };
 
     @Bean
@@ -62,6 +72,16 @@ public class SecurityConfig {
         http.sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 //.authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .oauth2Login(oauth2 -> oauth2
+                        .successHandler((request, response, authentication) -> {
+                            String token = jwtService.generateToken((UserDetails) authentication);
+                            response.sendRedirect("/its/api/v1/auth/login-success?token=" + token);
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            response.sendRedirect("/its/api/v1/auth/test");
+                        })
+                )
+                .formLogin().disable()
                 .logout(logout ->
                         logout.logoutUrl("/v1/auth/logout")
                                 .addLogoutHandler(logoutHandler)
@@ -90,6 +110,21 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
+    }
+
+    @Bean
+    public OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService() {
+        DefaultOAuth2UserService delegate = new DefaultOAuth2UserService();
+        return userRequest -> {
+            OAuth2User oauth2User = delegate.loadUser(userRequest);
+
+            // Custom logic to process user details, e.g., map to local user details
+            String email = oauth2User.getAttribute("email");
+
+            // Custom processing can be added here
+
+            return oauth2User;
+        };
     }
 
     /**

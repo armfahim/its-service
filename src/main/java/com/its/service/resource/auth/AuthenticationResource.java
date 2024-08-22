@@ -41,4 +41,9 @@ public class AuthenticationResource {
     public ResponseEntity<Object> test() throws IOException {
         return ok(success("test successfully"));
     }
+
+//    @GetMapping("/oauth2/authorization/{provider}")
+//    public void redirectToOAuth2Provider(@PathVariable String provider, HttpServletResponse response) throws IOException {
+//        response.sendRedirect("/oauth2/authorization/" + provider);
+//    }
 }
