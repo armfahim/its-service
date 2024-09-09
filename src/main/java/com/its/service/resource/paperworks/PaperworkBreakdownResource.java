@@ -51,7 +51,7 @@ public class PaperworkBreakdownResource {
         if (Objects.isNull(paperworkBreakdownDate)) return new ResponseEntity<>(
                 "Paperwork breakdown date is missing",
                 HttpStatus.OK);
-        LocalDate localDate = DateUtils.asLocalDate(paperworkBreakdownDate);
+        LocalDate localDate = DateUtils.asLocalDateWithFormat(paperworkBreakdownDate);
         PaperworkBreakdown obj = service.findPaperworkBreakdownByDateAndId(paperworksId, localDate);
         if (Objects.nonNull(obj)) {
             return ok(success(PaperworkBreakdownDto.from(obj)).getJson());

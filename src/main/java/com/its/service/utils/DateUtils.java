@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Objects;
 
@@ -29,6 +31,18 @@ public class DateUtils {
         LocalDate localDate = LocalDate.parse(date);
         return localDate;
     }
+
+    public static LocalDate asLocalDateWithFormat(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        try {
+            LocalDate localDate = LocalDate.parse(date, formatter);
+            return localDate;
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format: " + e.getMessage());
+            return null; // Or handle the exception as needed
+        }
+    }
+
 
     public static Date asDate(String date) {
         return java.sql.Date.valueOf(date);
