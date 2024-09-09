@@ -1,5 +1,6 @@
 package com.its.service.dto.paperworks;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.its.service.entity.paperwork.CashPurchase;
 import com.its.service.entity.paperwork.PaperworkBreakdown;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class PaperworkBreakdownDto {
     private Long id;
 
     @NotNull
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate paperworkDate;
     @NotNull
     private BigDecimal merchantSale;
