@@ -1,14 +1,13 @@
 package com.its.service.resource;
 
+import com.its.service.config.jasper.CustomizeReport;
 import com.its.service.service.ReportsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -17,7 +16,7 @@ import java.util.Objects;
 @RequestMapping("/v1/report")
 @RequiredArgsConstructor
 @Slf4j
-public class ReportResource {
+public class ReportResource extends BaseResource {
 
     private final ReportsService reportsService;
 
@@ -32,5 +31,11 @@ public class ReportResource {
         parameters.put("INVOICE_ID", invoiceId);
 
         return reportsService.generatePdf(parameters, reportName);
+    }
+
+    @PostMapping("/paperwork-breakdown-report")
+    public ResponseEntity<byte[]> paperworkBreakdownReport(@RequestBody String reqObj) throws IOException {
+        CustomizeReport report = reportsService.paperworkBreakdownReport(reqObj);
+        return respondReportOutputWithoutHeader(report, false);
     }
 }

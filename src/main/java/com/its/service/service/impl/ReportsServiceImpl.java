@@ -1,10 +1,21 @@
 package com.its.service.service.impl;
 
+import com.its.service.config.jasper.BaseJasperService;
+import com.its.service.config.jasper.CustomizeReport;
+import com.its.service.config.jasper.JsCommonFunction;
+import com.its.service.dto.paperworks.PaperworkBreakdownDto;
+import com.its.service.dto.report.CommonReportDto;
+import com.its.service.dto.report.CommonRequestDto;
+import com.its.service.entity.AppReportEntity;
 import com.its.service.entity.InvoiceDetails;
+import com.its.service.entity.paperwork.PaperworkBreakdown;
+import com.its.service.enums.AppReportName;
 import com.its.service.exception.AlreadyExistsException;
-import com.its.service.repository.InvoiceDetailsRepository;
+import com.its.service.service.AppReportService;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.service.ReportsService;
+import com.its.service.service.paperworks.PaperworkBreakdownService;
+import com.its.service.utils.CommonFunctions;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,27 +26,24 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class ReportsServiceImpl implements ReportsService {
+public class ReportsServiceImpl extends CommonFunctions implements ReportsService {
 
     private final HikariDataSource dataSource;
 
     private static final String JASPER_TEMPLATE_PATH = "classpath:reports/";
 
     private final InvoiceDetailsService invoiceDetailsService;
+    private final AppReportService appReportService;
+    private final BaseJasperService baseJasperService;
+    private final PaperworkBreakdownService paperworkBreakdownService;
 
     @Override
     public ResponseEntity<byte[]> generatePdf(Map<String, Object> params, String reportName) {
@@ -69,6 +77,40 @@ public class ReportsServiceImpl implements ReportsService {
             log.error("error", e);
             throw new AlreadyExistsException("PDF generation failed. Internal server error [" + e + "]");
         }
+    }
+
+    @Override
+    public CustomizeReport paperworkBreakdownReport(String reqObj) {
+        CommonRequestDto reqDto = deserializeObject(reqObj, CommonRequestDto.class);
+        if (reqDto == null) {
+            return null;
+        }
+
+        CommonReportDto reportDto = new CommonReportDto();
+
+        List<PaperworkBreakdown> dataObj = paperworkBreakdownService.findAllPaperworkBreakdownByPaperworkId(reqDto.getId());
+        if (Objects.nonNull(dataObj)) {
+            List<PaperworkBreakdownDto> dataList = dataObj.stream().map(PaperworkBreakdownDto::from).toList();
+            reportDto.setDataList(dataList);
+        }
+
+        AppReportEntity appReportEntity = appReportService.findByReportId(AppReportName.DISCHARGED_PATIENT_REPORT.getId());
+//        reportDto.setCustomerLogo(getCustomerLogo(appReportEntity.getRptHeaderImage()));
+
+        CustomizeReport report = JsCommonFunction.bindReport(appReportEntity, reportDto, reqDto.getReportFormat());
+
+        ByteArrayOutputStream baos = null;
+        try {
+            baos = baseJasperService.generateReport(report);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JsCommonFunction.finallyOutputStream(baos);
+        }
+
+        CustomizeReport reportFinal = new CustomizeReport();
+        reportFinal.setContent(baos.toByteArray());
+        return reportFinal;
     }
 
     // Fill template order parametres
