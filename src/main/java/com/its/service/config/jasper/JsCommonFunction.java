@@ -202,7 +202,7 @@ public class JsCommonFunction {
 
         Map<String, Object> parameterMap = new HashMap<String, Object>();
         parameterMap.put("SUBREPORT_DIR", getResoucePath(reportPathAndName.getRPath()));
-        parameterMap.put("LOGO_PATH", "classpath:reports/");
+        parameterMap.put("LOGO_PATH", "classpath:reports");
 
         reportDto.setReportTitle(appReportEntity.getRptTitle());
         reportDto.setFacilityName(appReportEntity.getRptFacilityName());
