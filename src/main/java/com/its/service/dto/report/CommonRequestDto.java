@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class CommonRequestDto {
 
-    private String reportFormat = "PDF";
+    private String reportFormat;
     private String deptFlag = "A";
     private Long userNo;
     private Long id;

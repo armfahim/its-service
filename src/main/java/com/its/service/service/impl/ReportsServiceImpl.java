@@ -9,12 +9,14 @@ import com.its.service.dto.report.CommonRequestDto;
 import com.its.service.entity.AppReportEntity;
 import com.its.service.entity.InvoiceDetails;
 import com.its.service.entity.paperwork.PaperworkBreakdown;
+import com.its.service.entity.paperwork.Paperworks;
 import com.its.service.enums.AppReportName;
 import com.its.service.exception.AlreadyExistsException;
 import com.its.service.service.AppReportService;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.service.ReportsService;
 import com.its.service.service.paperworks.PaperworkBreakdownService;
+import com.its.service.service.paperworks.PaperworksService;
 import com.its.service.utils.CommonFunctions;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +46,7 @@ public class ReportsServiceImpl extends CommonFunctions implements ReportsServic
     private final AppReportService appReportService;
     private final BaseJasperService baseJasperService;
     private final PaperworkBreakdownService paperworkBreakdownService;
+    private final PaperworksService paperworksService;
 
     @Override
     public ResponseEntity<byte[]> generatePdf(Map<String, Object> params, String reportName) {
@@ -80,7 +83,7 @@ public class ReportsServiceImpl extends CommonFunctions implements ReportsServic
     }
 
     @Override
-    public CustomizeReport paperworkBreakdownReport(String reqObj) {
+    public CustomizeReport paperworkReport(String reqObj) {
         CommonRequestDto reqDto = deserializeObject(reqObj, CommonRequestDto.class);
         if (reqDto == null) {
             return null;
@@ -91,13 +94,19 @@ public class ReportsServiceImpl extends CommonFunctions implements ReportsServic
         List<PaperworkBreakdown> dataObj = paperworkBreakdownService.findAllPaperworkBreakdownByPaperworkId(reqDto.getId());
         if (Objects.nonNull(dataObj)) {
             List<PaperworkBreakdownDto> dataList = dataObj.stream().map(PaperworkBreakdownDto::from).toList();
+
             reportDto.setDataList(dataList);
         }
 
-        AppReportEntity appReportEntity = appReportService.findByReportId(AppReportName.DISCHARGED_PATIENT_REPORT.getId());
+        AppReportEntity appReportEntity = appReportService.findByReportId(AppReportName.PAPERWORK_REPORT.getId());
 //        reportDto.setCustomerLogo(getCustomerLogo(appReportEntity.getRptHeaderImage()));
 
-        CustomizeReport report = JsCommonFunction.bindReport(appReportEntity, reportDto, reqDto.getReportFormat());
+        Paperworks paperworks = paperworksService.findById(reqDto.getId());
+        if (Objects.nonNull(paperworks)) {
+            appReportEntity.setRptTitle(appReportEntity.getRptTitle() + " for " + paperworks.getMonth() + "," + paperworks.getYear());
+        }
+
+        CustomizeReport report = JsCommonFunction.bindReport(appReportEntity, reportDto, Objects.nonNull(reqDto.getReportFormat()) ? reqDto.getReportFormat() : "PDF");
 
         ByteArrayOutputStream baos = null;
         try {

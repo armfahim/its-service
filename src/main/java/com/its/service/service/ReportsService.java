@@ -9,5 +9,5 @@ public interface ReportsService {
 
     ResponseEntity<byte[]> generatePdf(Map<String, Object> parameters, String reportName);
 
-    CustomizeReport paperworkBreakdownReport(String reqObj);
+    CustomizeReport paperworkReport(String reqObj);
 }

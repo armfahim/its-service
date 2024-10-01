@@ -33,9 +33,9 @@ public class ReportResource extends BaseResource {
         return reportsService.generatePdf(parameters, reportName);
     }
 
-    @PostMapping("/paperwork-breakdown-report")
+    @PostMapping("/paperwork-report")
     public ResponseEntity<byte[]> paperworkBreakdownReport(@RequestBody String reqObj) throws IOException {
-        CustomizeReport report = reportsService.paperworkBreakdownReport(reqObj);
+        CustomizeReport report = reportsService.paperworkReport(reqObj);
         return respondReportOutputWithoutHeader(report, false);
     }
 }

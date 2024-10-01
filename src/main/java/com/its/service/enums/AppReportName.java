@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 public enum AppReportName {
-    DISCHARGED_PATIENT_REPORT("DISCHARGED_PATIENT_REPORT", "Discharged Patient Report");
+    PAPERWORK_REPORT("PAPERWORK_REPORT", "Paperwork Report");
 
 
     private String name;

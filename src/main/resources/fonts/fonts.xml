@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+	  
+	  <fontFamily name="Roboto">
+		<normal><![CDATA[fonts/roboto/Roboto-Regular.ttf]]></normal>
+		<pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+		<pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+		<exportFonts/>
+	</fontFamily>
+	
+	<fontFamily name="Roboto-Bold">
+		<normal><![CDATA[fonts/roboto/roboto-condensed.bold.ttf]]></normal>
+		<bold><![CDATA[fonts/roboto/roboto-condensed.bold.ttf]]></bold>
+		<pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+		<pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+		<exportFonts/>
+	</fontFamily>
+	
+	<fontFamily name="segoeui">
+		<normal><![CDATA[fonts/segoeui/segoeui.ttf]]></normal>
+		<bold><![CDATA[fonts/segoeui/Segoe UI Bold.ttf]]></bold>
+		<pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+		<pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+		<exportFonts/>
+	</fontFamily>
+	
+	<fontFamily name="Nikosh">
+		<normal><![CDATA[fonts/Nikosh/Nikosh.ttf]]></normal>
+		<pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+		<pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+		<exportFonts/>
+	</fontFamily>
+	
+</fontFamilies>

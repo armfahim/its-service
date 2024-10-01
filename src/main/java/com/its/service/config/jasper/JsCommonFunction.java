@@ -8,9 +8,9 @@ import com.its.service.entity.AppReportEntity;
 import com.its.service.service.AppReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +25,13 @@ import java.util.*;
 
 
 @Component
+@RequiredArgsConstructor
 public class JsCommonFunction {
 
     @Autowired
     HttpSession httpSession;
 
-    @Autowired
-    static AppReportService appReportService;
+    private final AppReportService appReportService;
 
 /*    static int reportStaticPathFlag;
     static String reportStaticPathUrl;
@@ -50,7 +50,7 @@ public class JsCommonFunction {
 
     static {
         reportNamList
-                .add(new ReportPathAndName("global", "DISCHARGED_PATIENT_REPORT", "/", "discharged_patient"));
+                .add(new ReportPathAndName("global", "PAPERWORK_REPORT", "/reports", "paperwork"));
 
     }
 
@@ -202,6 +202,7 @@ public class JsCommonFunction {
 
         Map<String, Object> parameterMap = new HashMap<String, Object>();
         parameterMap.put("SUBREPORT_DIR", getResoucePath(reportPathAndName.getRPath()));
+        parameterMap.put("LOGO_PATH", "classpath:reports/");
 
         reportDto.setReportTitle(appReportEntity.getRptTitle());
         reportDto.setFacilityName(appReportEntity.getRptFacilityName());
@@ -210,7 +211,7 @@ public class JsCommonFunction {
         reportList.add(reportDto);
 
         CustomizeReport report = new CustomizeReport();
-        report.setOutputFilename(appReportEntity.getRptName());
+        report.setOutputFilename(appReportEntity.getRptTitle());
         report.setReportName(reportPathAndName.getRName());
         report.setReportDir(getResoucePath(reportPathAndName.getRPath()) + "/");
         report.setReportFormat(printFormat(reportFormat));
