@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -108,5 +109,14 @@ public class PaperworksServiceImpl implements PaperworksService {
             response.setNewInputDate(firstDay);
         }
         return response;
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (Objects.isNull(id)) {
+            throw new AlreadyExistsException(MessageConstant.DATA_NOT_PROVIDED);
+        }
+        Optional<Paperworks> paperworks = repository.findById(id);
+        paperworks.ifPresent(repository::delete);
     }
 }

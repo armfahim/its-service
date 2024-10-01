@@ -10,4 +10,6 @@ public interface PaperworksService extends GenericService<Paperworks> {
     PaginatedResponse listAndSearch(String sort, String dir, Integer page, Integer size, String year, String month, String paperworkTitle);
 
     PaperworksDetailsResponse findPaperworkAndBreakdownDatesById(Long id);
+
+    void delete(Long id);
 }

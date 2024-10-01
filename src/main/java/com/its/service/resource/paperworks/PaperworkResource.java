@@ -62,4 +62,10 @@ public class PaperworkResource {
         return ok(success(service.findPaperworkAndBreakdownDatesById(id)).getJson());
     }
 
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Object> delete(@RequestParam Long id) {
+        service.delete(id);
+        return ok(success(MessageConstant.DATA_DELETE_SUCCESS).getJson());
+    }
+
 }

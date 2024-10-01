@@ -74,7 +74,7 @@
 		<band height="20">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="210" y="0" width="30" height="20" backcolor="#55F2C3" uuid="b895e4ea-fa19-4c9a-b725-64f8a899b934">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="208" y="0" width="30" height="20" backcolor="#55F2C3" uuid="b895e4ea-fa19-4c9a-b725-64f8a899b934">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -92,7 +92,7 @@
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="-6" y="0" width="36" height="20" backcolor="#EDF0EF" uuid="b491d83c-65a6-4784-b268-99d844642efa">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="-8" y="0" width="36" height="20" backcolor="#EDF0EF" uuid="b491d83c-65a6-4784-b268-99d844642efa">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
@@ -111,7 +111,7 @@
 				<text><![CDATA[Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="95" y="0" width="52" height="20" backcolor="#EDF0EF" uuid="75de68bd-f424-4e29-b405-2b802abaf2d8">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="93" y="0" width="52" height="20" backcolor="#EDF0EF" uuid="75de68bd-f424-4e29-b405-2b802abaf2d8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -129,7 +129,7 @@
 				<text><![CDATA[Sales Tax]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="147" y="0" width="63" height="20" backcolor="#EDF0EF" uuid="ecdbf3b5-7e7d-4665-947c-c2331dc9f4cc">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="145" y="0" width="63" height="20" backcolor="#EDF0EF" uuid="ecdbf3b5-7e7d-4665-947c-c2331dc9f4cc">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -147,7 +147,7 @@
 				<text><![CDATA[Inside Sales]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="265" y="0" width="25" height="20" backcolor="#EDF0EF" uuid="45499bec-4ae4-4a9f-860e-8ee105c3273f">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="263" y="0" width="25" height="20" backcolor="#EDF0EF" uuid="45499bec-4ae4-4a9f-860e-8ee105c3273f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
@@ -166,7 +166,7 @@
 				<text><![CDATA[DC]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="240" y="0" width="25" height="20" backcolor="#EDF0EF" uuid="96e78226-4a1e-42ee-9b7f-566adb714c94">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="238" y="0" width="25" height="20" backcolor="#EDF0EF" uuid="96e78226-4a1e-42ee-9b7f-566adb714c94">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -184,7 +184,7 @@
 				<text><![CDATA[CC]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="290" y="0" width="55" height="20" backcolor="#EDF0EF" uuid="1efa32cf-aab7-4a9e-b90d-f95a8c0af08b">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="288" y="0" width="55" height="20" backcolor="#EDF0EF" uuid="1efa32cf-aab7-4a9e-b90d-f95a8c0af08b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -202,7 +202,7 @@
 				<text><![CDATA[Ttl CC/DC]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="370" y="0" width="28" height="20" backcolor="#EDF0EF" uuid="2e7ac98c-752c-478a-b6b0-b78c8f06df8e">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="368" y="0" width="28" height="20" backcolor="#EDF0EF" uuid="2e7ac98c-752c-478a-b6b0-b78c8f06df8e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -220,7 +220,7 @@
 				<text><![CDATA[Exp.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="398" y="0" width="45" height="20" backcolor="#EDF0EF" uuid="aa1cf1f6-82fc-4001-9170-df3d71444eba">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="396" y="0" width="45" height="20" backcolor="#EDF0EF" uuid="aa1cf1f6-82fc-4001-9170-df3d71444eba">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -238,7 +238,7 @@
 				<text><![CDATA[Off Exp.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="30" y="0" width="65" height="20" backcolor="#EDF0EF" uuid="257eab12-71c0-4fd9-a8c3-7416fe4aa790">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="28" y="0" width="65" height="20" backcolor="#EDF0EF" uuid="257eab12-71c0-4fd9-a8c3-7416fe4aa790">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -257,7 +257,7 @@
 				<text><![CDATA[Merch. Sales]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="345" y="0" width="25" height="20" backcolor="#EDF0EF" uuid="a81fc618-8944-42e5-a219-fbc8c6f40f3b">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="343" y="0" width="25" height="20" backcolor="#EDF0EF" uuid="a81fc618-8944-42e5-a219-fbc8c6f40f3b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -275,7 +275,7 @@
 				<text><![CDATA[EBT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="443" y="0" width="60" height="20" backcolor="#EDF0EF" uuid="644fb048-42c9-4647-842a-11c06a13c0ff">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="441" y="0" width="60" height="20" backcolor="#EDF0EF" uuid="644fb048-42c9-4647-842a-11c06a13c0ff">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -293,7 +293,7 @@
 				<text><![CDATA[Trust Fund]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="503" y="0" width="60" height="20" backcolor="#EDF0EF" uuid="e3735f2b-66d1-4d86-9ce5-60b220142cc5">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="501" y="0" width="60" height="20" backcolor="#EDF0EF" uuid="e3735f2b-66d1-4d86-9ce5-60b220142cc5">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -311,7 +311,7 @@
 				<text><![CDATA[House A/C]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="563" y="0" width="45" height="20" backcolor="#EDF0EF" uuid="8c1427b6-9e7f-40b4-8211-c434370abd3e">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="561" y="0" width="45" height="20" backcolor="#EDF0EF" uuid="8c1427b6-9e7f-40b4-8211-c434370abd3e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -329,7 +329,7 @@
 				<text><![CDATA[Str Dep.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="608" y="0" width="55" height="20" backcolor="#EDF0EF" uuid="62ec2863-85a8-4030-9d9e-67708e1944e6">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="606" y="0" width="55" height="20" backcolor="#EDF0EF" uuid="62ec2863-85a8-4030-9d9e-67708e1944e6">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -347,7 +347,7 @@
 				<text><![CDATA[Cash Pur.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="663" y="0" width="30" height="20" backcolor="#55F2C3" uuid="de676a83-10be-4a2e-9169-ee12bde41653">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="661" y="0" width="30" height="20" backcolor="#55F2C3" uuid="de676a83-10be-4a2e-9169-ee12bde41653">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -365,7 +365,7 @@
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="693" y="0" width="80" height="20" backcolor="#EDF0EF" uuid="821260c4-429a-49b7-a210-648e738b7dd6">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="691" y="0" width="80" height="20" backcolor="#EDF0EF" uuid="821260c4-429a-49b7-a210-648e738b7dd6">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -383,7 +383,7 @@
 				<text><![CDATA[Cash Ovr/Short]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="ContainerHeight" mode="Opaque" x="773" y="0" width="49" height="20" backcolor="#EDF0EF" uuid="c86f915f-b424-4cf9-9190-ff0d88565576">
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="771" y="0" width="49" height="20" backcolor="#EDF0EF" uuid="c86f915f-b424-4cf9-9190-ff0d88565576">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -406,7 +406,7 @@
 		<band height="18" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="95" y="0" width="52" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="cb604192-4c42-4d02-b077-3d986897d854">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="93" y="0" width="52" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="cb604192-4c42-4d02-b077-3d986897d854">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -424,7 +424,7 @@
 				<textFieldExpression><![CDATA["$"+$F{salesTax}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="-6" y="0" width="36" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="9477a3f1-2d0c-4f0a-9143-d8350815548a">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="-8" y="0" width="36" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="9477a3f1-2d0c-4f0a-9143-d8350815548a">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
@@ -443,7 +443,7 @@
 				<textFieldExpression><![CDATA[$F{paperworkDate}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="210" y="0" width="30" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" backcolor="#55F2C3" uuid="0651d467-ffc2-4e07-89df-d72d02ed9a74">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="208" y="0" width="30" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" backcolor="#55F2C3" uuid="0651d467-ffc2-4e07-89df-d72d02ed9a74">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -462,7 +462,7 @@
 				<textFieldExpression><![CDATA["$"+$F{totalSalesRecord}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="147" y="0" width="63" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="fe8a3b0c-b16f-4020-87c9-4cf908229d84">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="145" y="0" width="63" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="fe8a3b0c-b16f-4020-87c9-4cf908229d84">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -480,7 +480,7 @@
 				<textFieldExpression><![CDATA["$"+$F{insideSales}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="290" y="0" width="55" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="1d65330c-1d1f-4568-a0b1-f19f5f0d4d73">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="288" y="0" width="55" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="1d65330c-1d1f-4568-a0b1-f19f5f0d4d73">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -499,7 +499,7 @@
 				<textFieldExpression><![CDATA["$"+$F{totalCreditDebitCard}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="265" y="0" width="25" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="72cbf53c-6ea7-412b-93eb-249f4d80bcc0">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="263" y="0" width="25" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="72cbf53c-6ea7-412b-93eb-249f4d80bcc0">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -517,7 +517,7 @@
 				<textFieldExpression><![CDATA["$"+$F{debitCard}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="240" y="0" width="25" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="633c049a-9171-409a-acf4-fd54815ceef4">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="238" y="0" width="25" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="633c049a-9171-409a-acf4-fd54815ceef4">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -535,7 +535,7 @@
 				<textFieldExpression><![CDATA["$"+$F{creditCard}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="345" y="0" width="25" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="6af782d3-679a-47bf-bed1-342dfb412698">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="343" y="0" width="25" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="6af782d3-679a-47bf-bed1-342dfb412698">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -554,7 +554,7 @@
 				<textFieldExpression><![CDATA["$"+$F{ebt}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="370" y="0" width="28" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="0ed0ac3e-fac2-44fe-bfab-54df3492a660">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="368" y="0" width="28" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="0ed0ac3e-fac2-44fe-bfab-54df3492a660">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -573,7 +573,7 @@
 				<textFieldExpression><![CDATA["$"+$F{expense}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="30" y="0" width="65" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="8ea6c5ed-1899-4666-a81a-f9b7e63a3386">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="28" y="0" width="65" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="8ea6c5ed-1899-4666-a81a-f9b7e63a3386">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -591,7 +591,7 @@
 				<textFieldExpression><![CDATA["$"+$F{merchantSale}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="398" y="0" width="45" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="42314806-e809-4e8d-a627-6e2d8af917f0">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="396" y="0" width="45" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="42314806-e809-4e8d-a627-6e2d8af917f0">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -610,7 +610,7 @@
 				<textFieldExpression><![CDATA["$"+$F{officeExpense}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="443" y="0" width="60" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="5d0a81e5-b5ec-4ac2-8b05-f4ef3df9f482">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="441" y="0" width="60" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="5d0a81e5-b5ec-4ac2-8b05-f4ef3df9f482">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -629,7 +629,7 @@
 				<textFieldExpression><![CDATA["$"+$F{trustFund}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="503" y="0" width="60" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="4fc63438-e13c-4ce6-9673-6e7ffeea2f6a">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="501" y="0" width="60" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="4fc63438-e13c-4ce6-9673-6e7ffeea2f6a">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -648,7 +648,7 @@
 				<textFieldExpression><![CDATA["$"+$F{houseAc}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="563" y="0" width="45" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="86306b08-8b01-4f65-843d-0012eb00109f">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="561" y="0" width="45" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="86306b08-8b01-4f65-843d-0012eb00109f">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -667,7 +667,7 @@
 				<textFieldExpression><![CDATA["$"+$F{storeDeposit}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="663" y="0" width="30" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" backcolor="#55F2C3" uuid="208398e4-b454-4fbc-970a-af079dfe28c3">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="661" y="0" width="30" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" backcolor="#55F2C3" uuid="208398e4-b454-4fbc-970a-af079dfe28c3">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -686,7 +686,7 @@
 				<textFieldExpression><![CDATA["$"+$F{totalInsideSalesBreakdown}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="693" y="0" width="80" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="8f71342b-4576-47e6-bfbf-7d4bff87a4b0">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="691" y="0" width="80" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="8f71342b-4576-47e6-bfbf-7d4bff87a4b0">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -704,7 +704,7 @@
 				<textFieldExpression><![CDATA["$"+$F{cashOverShort}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="773" y="0" width="49" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="b1406e3d-af32-4477-bccf-2c6b328b85ba">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="771" y="0" width="49" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="b1406e3d-af32-4477-bccf-2c6b328b85ba">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -723,7 +723,7 @@
 				<textFieldExpression><![CDATA[$F{notes}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="608" y="0" width="55" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="df0ad30b-2f12-4df3-872d-0e435bfeb88f">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="606" y="0" width="55" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="df0ad30b-2f12-4df3-872d-0e435bfeb88f">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -747,7 +747,7 @@
 		<band height="18">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="30" y="0" width="65" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" backcolor="#F7F7F7" uuid="b0d2d04f-91df-478e-bd58-3d1ed91c48d3">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="28" y="0" width="65" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" backcolor="#F7F7F7" uuid="b0d2d04f-91df-478e-bd58-3d1ed91c48d3">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box rightPadding="2">
@@ -757,14 +757,15 @@
 					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandMerchantSales}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{grandMerchantSales} != null ? "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandMerchantSales}) : "$0.00"
+]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="345" y="0" width="25" height="18" backcolor="#F7F7F7" uuid="79d680f5-5d1b-4b98-ac21-8628626c1604">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="343" y="0" width="25" height="18" backcolor="#F7F7F7" uuid="79d680f5-5d1b-4b98-ac21-8628626c1604">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -780,10 +781,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandEbt}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandEbt} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandEbt}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="290" y="0" width="55" height="18" backcolor="#F7F7F7" uuid="430da0ba-0c42-4d26-a7c1-c4c7b2a41705">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="288" y="0" width="55" height="18" backcolor="#F7F7F7" uuid="430da0ba-0c42-4d26-a7c1-c4c7b2a41705">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -800,10 +802,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandCreditDebit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandCreditDebit} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandCreditDebit}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="370" y="0" width="28" height="18" backcolor="#F7F7F7" uuid="dded4a53-589d-4365-99b1-786c39eea321">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="368" y="0" width="28" height="18" backcolor="#F7F7F7" uuid="dded4a53-589d-4365-99b1-786c39eea321">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -819,10 +822,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandExpense}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandExpense} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandExpense}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="210" y="0" width="30" height="18" backcolor="#55F2C3" uuid="13622013-fbaa-42c6-a42d-e7612c1fd3a2">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="208" y="0" width="30" height="18" backcolor="#55F2C3" uuid="13622013-fbaa-42c6-a42d-e7612c1fd3a2">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -837,10 +841,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandOfSalesRecordTotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandOfSalesRecordTotal} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandOfSalesRecordTotal}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="265" y="0" width="25" height="18" backcolor="#F7F7F7" uuid="18c4db02-4251-48b7-9b99-195a57dce489">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="263" y="0" width="25" height="18" backcolor="#F7F7F7" uuid="18c4db02-4251-48b7-9b99-195a57dce489">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
@@ -856,10 +861,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandDebitCard}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandDebitCard} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandDebitCard}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="ElementGroupHeight" mode="Opaque" x="-6" y="0" width="36" height="18" backcolor="#F7F7F7" uuid="ee1487f7-560b-4f8f-b5d4-55a771356daa">
+				<reportElement stretchType="ElementGroupHeight" mode="Opaque" x="-8" y="0" width="36" height="18" backcolor="#F7F7F7" uuid="ee1487f7-560b-4f8f-b5d4-55a771356daa">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
@@ -878,7 +884,7 @@
 				<textFieldExpression><![CDATA["GT :"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="147" y="0" width="63" height="18" backcolor="#F7F7F7" uuid="23c5699b-e9aa-4fa6-bfa5-990084884943">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="145" y="0" width="63" height="18" backcolor="#F7F7F7" uuid="23c5699b-e9aa-4fa6-bfa5-990084884943">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -893,10 +899,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandInsideSales}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandInsideSales} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandInsideSales}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="398" y="0" width="45" height="18" backcolor="#F7F7F7" uuid="da20d1b2-03e1-4642-9934-ee54e11b6bc6">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="396" y="0" width="45" height="18" backcolor="#F7F7F7" uuid="da20d1b2-03e1-4642-9934-ee54e11b6bc6">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -912,10 +919,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandOfficeExpense}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandOfficeExpense} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandOfficeExpense}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="95" y="0" width="52" height="18" backcolor="#F7F7F7" uuid="415ade52-7dea-46a9-a435-b8aecfc52971">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="93" y="0" width="52" height="18" backcolor="#F7F7F7" uuid="415ade52-7dea-46a9-a435-b8aecfc52971">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -930,10 +938,12 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandSalesTax}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandSalesTax} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandSalesTax}) : "$0.00"
+]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="240" y="0" width="25" height="18" backcolor="#F7F7F7" uuid="df1c0089-1ff8-4936-9b1d-bf21700cd256">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="238" y="0" width="25" height="18" backcolor="#F7F7F7" uuid="df1c0089-1ff8-4936-9b1d-bf21700cd256">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -948,10 +958,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandCreditCard}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandCreditCard} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandCreditCard}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="443" y="0" width="60" height="18" backcolor="#F7F7F7" uuid="6c19c851-7b51-4c4f-99bb-2e59f1c71b4f">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="441" y="0" width="60" height="18" backcolor="#F7F7F7" uuid="6c19c851-7b51-4c4f-99bb-2e59f1c71b4f">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -966,29 +977,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandTrustFund}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandTrustFund} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandTrustFund}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="503" y="0" width="60" height="18" backcolor="#F7F7F7" uuid="94e85108-64f7-43f3-a55b-715825eaa8ad">
-					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<box rightPadding="2">
-					<pen lineWidth="0.25" lineStyle="Solid"/>
-					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="Roboto-Bold" size="9" isBold="true"/>
-					<paragraph rightIndent="0"/>
-				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandHouseAc}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="563" y="0" width="45" height="18" backcolor="#F7F7F7" uuid="d9b51533-21b6-405d-9387-7ba5e21fa990">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="501" y="0" width="60" height="18" backcolor="#F7F7F7" uuid="94e85108-64f7-43f3-a55b-715825eaa8ad">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1004,10 +997,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandStoreDeposit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandHouseAc} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandHouseAc}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="608" y="0" width="55" height="18" backcolor="#F7F7F7" uuid="4ac4c202-d363-4720-8965-263adc513e7f">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="561" y="0" width="45" height="18" backcolor="#F7F7F7" uuid="d9b51533-21b6-405d-9387-7ba5e21fa990">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1023,10 +1017,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandCashPurchase}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandStoreDeposit} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandStoreDeposit}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="663" y="0" width="30" height="18" backcolor="#55F2C3" uuid="e4da6dec-971c-484d-9455-08cc34bd6ae9">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="606" y="0" width="55" height="18" backcolor="#F7F7F7" uuid="4ac4c202-d363-4720-8965-263adc513e7f">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1042,10 +1037,11 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandBreakdownTotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandCashPurchase} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandCashPurchase}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="693" y="0" width="80" height="18" backcolor="#F7F7F7" uuid="ee370a2c-a909-43a5-948c-1d0b7af59634">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="661" y="0" width="30" height="18" backcolor="#55F2C3" uuid="e4da6dec-971c-484d-9455-08cc34bd6ae9">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1061,10 +1057,31 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA["$"+$V{grandCashOverShort}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{grandBreakdownTotal} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandBreakdownTotal}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="773" y="0" width="49" height="18" backcolor="#F7F7F7" uuid="66a36551-db22-40a7-a2b7-883c3c3bb1c8">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="691" y="0" width="80" height="18" backcolor="#F7F7F7" uuid="ee370a2c-a909-43a5-948c-1d0b7af59634">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box rightPadding="2">
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Roboto-Bold" size="9" isBold="true"/>
+					<paragraph rightIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{grandCashOverShort} != null) ? 
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandCashOverShort}) : "$0.00"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="771" y="0" width="49" height="18" backcolor="#F7F7F7" uuid="66a36551-db22-40a7-a2b7-883c3c3bb1c8">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>

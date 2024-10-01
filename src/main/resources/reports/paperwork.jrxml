@@ -28,6 +28,7 @@
 	<pageHeader>
 		<band height="80">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement positionType="FixRelativeToBottom" x="104" y="59" width="691" height="20" uuid="d8c42ed0-d7d6-441c-ac82-82555f75920f">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
