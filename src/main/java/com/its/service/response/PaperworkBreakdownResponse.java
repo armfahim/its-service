@@ -1,6 +1,7 @@
-package com.its.service.dto.paperworks;
+package com.its.service.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.its.service.dto.paperworks.CashPurchaseDto;
 import com.its.service.entity.paperwork.CashPurchase;
 import com.its.service.entity.paperwork.PaperworkBreakdown;
 import lombok.Data;
@@ -16,11 +17,12 @@ import java.util.Objects;
 
 @Data
 @NoArgsConstructor
-public class PaperworkBreakdownDto {
+public class PaperworkBreakdownResponse {
 
     private Long id;
 
     @NotNull
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate paperworkDate;
     @NotNull
     private BigDecimal merchantSale;
@@ -78,32 +80,32 @@ public class PaperworkBreakdownDto {
         if (Objects.nonNull(cashPurchaseList)) {
             if (Objects.nonNull(paperworkBreakdown.getCashPurchaseList()))
                 paperworkBreakdown.getCashPurchaseList().clear();
-                cashPurchaseList.forEach(data -> {
-                    CashPurchase cashPurchase = new CashPurchase();
-                    CashPurchaseDto.to(cashPurchase, data);
-                    cashPurchase.setPaperworkBreakdown(paperworkBreakdown);
-                    cashPurchases.add(cashPurchase);
-                });
+            cashPurchaseList.forEach(data -> {
+                CashPurchase cashPurchase = new CashPurchase();
+                CashPurchaseDto.to(cashPurchase, data);
+                cashPurchase.setPaperworkBreakdown(paperworkBreakdown);
+                cashPurchases.add(cashPurchase);
+            });
             paperworkBreakdown.setCashPurchaseList(cashPurchases);
         }
     }
 
-    public static PaperworkBreakdownDto from(PaperworkBreakdown paperworkBreakdown) {
-        PaperworkBreakdownDto dto = new PaperworkBreakdownDto();
-        BeanUtils.copyProperties(paperworkBreakdown, dto);
+    public static PaperworkBreakdownResponse from(PaperworkBreakdown paperworkBreakdown) {
+        PaperworkBreakdownResponse response = new PaperworkBreakdownResponse();
+        BeanUtils.copyProperties(paperworkBreakdown, response);
         List<CashPurchaseDto> cashPurchaseDtos = new ArrayList<>();
         if (Objects.nonNull(paperworkBreakdown.getCashPurchaseList())) {
             paperworkBreakdown.getCashPurchaseList().forEach(data -> {
                 cashPurchaseDtos.add(CashPurchaseDto.from(data));
             });
-            dto.setCashPurchaseList(cashPurchaseDtos);
+            response.setCashPurchaseList(cashPurchaseDtos);
         }
-        return dto;
+        return response;
     }
 
-    public static PaperworkBreakdownDto from(LocalDate paperworkBreakdownDate) {
-        PaperworkBreakdownDto dto = new PaperworkBreakdownDto();
-        dto.setPaperworkDate(paperworkBreakdownDate);
-        return dto;
+    public static PaperworkBreakdownResponse from(LocalDate paperworkBreakdownDate) {
+        PaperworkBreakdownResponse response = new PaperworkBreakdownResponse();
+        response.setPaperworkDate(paperworkBreakdownDate);
+        return response;
     }
 }

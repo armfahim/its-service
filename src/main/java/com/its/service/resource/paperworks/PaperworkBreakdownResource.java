@@ -4,6 +4,7 @@ import com.its.service.constant.MessageConstant;
 import com.its.service.dto.paperworks.PaperworkBreakdownDto;
 import com.its.service.entity.paperwork.PaperworkBreakdown;
 import com.its.service.exception.AlreadyExistsException;
+import com.its.service.response.PaperworkBreakdownResponse;
 import com.its.service.service.paperworks.PaperworkBreakdownService;
 import com.its.service.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class PaperworkBreakdownResource {
     public ResponseEntity<Object> save(@RequestBody PaperworkBreakdownDto dto) {
         if (service.existsByPaperworkBreakdownDate(dto.getPaperworkDate()))
             throw new AlreadyExistsException("Data already exists by this date");
-        return ok(success(PaperworkBreakdownDto.from(service.save(dto)), MessageConstant.DATA_SAVE_SUCCESS).getJson());
+        return ok(success(PaperworkBreakdownResponse.from(service.save(dto)), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
 
     @PutMapping(value = "/update")
@@ -39,7 +40,7 @@ public class PaperworkBreakdownResource {
         if (Objects.isNull(dto.getId())) {
             throw new AlreadyExistsException("Paperwork breakdown ID is missing");
         }
-        return ok(success(PaperworkBreakdownDto.from(service.update(dto)), MessageConstant.DATA_SAVE_SUCCESS).getJson());
+        return ok(success(PaperworkBreakdownResponse.from(service.update(dto)), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
 
     @GetMapping(value = "/find/paperwork-breakdown-date")
@@ -54,9 +55,9 @@ public class PaperworkBreakdownResource {
         LocalDate localDate = DateUtils.asLocalDateWithFormat(paperworkBreakdownDate);
         PaperworkBreakdown obj = service.findPaperworkBreakdownByDateAndId(paperworksId, localDate);
         if (Objects.nonNull(obj)) {
-            return ok(success(PaperworkBreakdownDto.from(obj)).getJson());
+            return ok(success(PaperworkBreakdownResponse.from(obj)).getJson());
         } else {
-            return ok(success(PaperworkBreakdownDto.from(localDate)).getJson()); // if Obj is null, then set the paperwork date to the provided date.
+            return ok(success(PaperworkBreakdownResponse.from(localDate)).getJson()); // if Obj is null, then set the paperwork date to the provided date.
         }
     }
 
@@ -67,7 +68,7 @@ public class PaperworkBreakdownResource {
                 HttpStatus.OK);
         List<PaperworkBreakdown> obj = service.findAllPaperworkBreakdownByPaperworkId(paperworksId);
         if (Objects.nonNull(obj)) {
-            return ok(success(obj.stream().map(PaperworkBreakdownDto::from).toList()).getJson());
+            return ok(success(obj.stream().map(PaperworkBreakdownResponse::from).toList()).getJson());
         }
         return null;
     }

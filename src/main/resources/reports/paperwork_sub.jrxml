@@ -440,7 +440,7 @@
 					<font fontName="Roboto" size="9" isBold="false"/>
 					<paragraph leftIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{paperworkDate}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{paperworkDate} != null ? $F{paperworkDate}.format(java.time.format.DateTimeFormatter.ofPattern("MM-dd-yyyy")) : ""]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="208" y="0" width="30" height="18" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" backcolor="#55F2C3" uuid="0651d467-ffc2-4e07-89df-d72d02ed9a74">
@@ -761,8 +761,7 @@
 					<font fontName="Roboto-Bold" size="9" isBold="true"/>
 					<paragraph rightIndent="0"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{grandMerchantSales} != null ? "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandMerchantSales}) : "$0.00"
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{grandMerchantSales} != null ? "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandMerchantSales}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="343" y="0" width="25" height="18" backcolor="#F7F7F7" uuid="79d680f5-5d1b-4b98-ac21-8628626c1604">
@@ -939,8 +938,7 @@
 					<paragraph rightIndent="0"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($V{grandSalesTax} != null) ? 
-    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandSalesTax}) : "$0.00"
-]]></textFieldExpression>
+    "$" + new java.text.DecimalFormat("#,##,##0.00").format($V{grandSalesTax}) : "$0.00"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Opaque" x="238" y="0" width="25" height="18" backcolor="#F7F7F7" uuid="df1c0089-1ff8-4936-9b1d-bf21700cd256">
