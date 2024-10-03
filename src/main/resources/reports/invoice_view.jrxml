@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice_view" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab62f1f5-2a99-41c9-a47d-684cc4a27f22">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="its_dev"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -347,9 +347,10 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="135" splitType="Stretch">
+		<band height="125" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<image>
-				<reportElement x="1" y="-12" width="90" height="90" uuid="b9c959c3-0ce3-4315-a231-16b9a32a392a">
+				<reportElement x="1" y="1" width="79" height="78" uuid="b9c959c3-0ce3-4315-a231-16b9a32a392a">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -358,7 +359,7 @@ WHERE
 				<imageExpression><![CDATA[$P{LOGO_PATH} +"apnaagora.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="1" y="82" width="121" height="52" uuid="a4e6d727-ff85-4c28-b248-8502f2b26457">
+				<reportElement x="1" y="81" width="121" height="40" uuid="a4e6d727-ff85-4c28-b248-8502f2b26457">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None">
@@ -367,15 +368,15 @@ WHERE
 				<text><![CDATA[Apna Agora
 Tallahassee, Florida]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="454" y="-8" width="100" height="30" forecolor="#747EED" uuid="91fffa02-cc21-4531-9e69-5c962b9b0aa7"/>
-				<textElement textAlignment="Right" markup="styled">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="454" y="1" width="100" height="18" forecolor="#747EED" uuid="91fffa02-cc21-4531-9e69-5c962b9b0aa7"/>
+				<textElement textAlignment="Right" rotation="None" markup="styled">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["#" + $F{invoice_number}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="469" y="24" width="85" height="30" forecolor="#C93936" backcolor="rgba(74, 228, 69, 0.0)" uuid="4d835f8c-e582-4183-bff2-1b062641d8d7"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="469" y="19" width="85" height="30" forecolor="#C93936" backcolor="rgba(74, 228, 69, 0.0)" uuid="4d835f8c-e582-4183-bff2-1b062641d8d7"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{is_paid} ? "PAID" : "UNPAID"]]></textFieldExpression>
 			</textField>
