@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice_view" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab62f1f5-2a99-41c9-a47d-684cc4a27f22">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="its_dev"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -343,13 +343,11 @@ WHERE
 	<variable name="credit_amount_SUM" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{credit_amount}]]></variableExpression>
 	</variable>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
 	<title>
-		<band height="135" splitType="Stretch">
+		<band height="147" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<image>
-				<reportElement x="1" y="-12" width="90" height="90" uuid="b9c959c3-0ce3-4315-a231-16b9a32a392a">
+				<reportElement x="0" y="1" width="79" height="78" uuid="b9c959c3-0ce3-4315-a231-16b9a32a392a">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -358,63 +356,63 @@ WHERE
 				<imageExpression><![CDATA[$P{LOGO_PATH} +"apnaagora.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="1" y="82" width="121" height="52" uuid="a4e6d727-ff85-4c28-b248-8502f2b26457">
+				<reportElement x="0" y="81" width="180" height="40" uuid="a4e6d727-ff85-4c28-b248-8502f2b26457">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None">
-					<font size="12" isBold="true"/>
+					<font size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Apna Agora
 Tallahassee, Florida]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="454" y="-8" width="100" height="30" forecolor="#747EED" uuid="91fffa02-cc21-4531-9e69-5c962b9b0aa7"/>
-				<textElement textAlignment="Right" markup="styled">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="454" y="1" width="100" height="18" forecolor="#747EED" uuid="91fffa02-cc21-4531-9e69-5c962b9b0aa7"/>
+				<textElement textAlignment="Right" rotation="None" markup="styled">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["#" + $F{invoice_number}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="469" y="24" width="85" height="30" forecolor="#C93936" backcolor="rgba(74, 228, 69, 0.0)" uuid="4d835f8c-e582-4183-bff2-1b062641d8d7"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="454" y="19" width="100" height="30" forecolor="#C93936" backcolor="rgba(74, 228, 69, 0.0)" uuid="4d835f8c-e582-4183-bff2-1b062641d8d7"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{is_paid} ? "PAID" : "UNPAID"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="66" splitType="Stretch"/>
-	</pageHeader>
 	<columnHeader>
-		<band height="349" splitType="Stretch">
+		<band height="335" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement x="6" y="8" width="100" height="22" forecolor="#BD918F" backcolor="#E69D9C" uuid="f4535214-bd54-467c-b789-db1348cf468d"/>
+				<reportElement x="0" y="6" width="100" height="22" forecolor="#BD918F" backcolor="#E69D9C" uuid="f4535214-bd54-467c-b789-db1348cf468d"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Invoice from:]]></text>
 			</staticText>
-			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="6" y="32" width="189" height="20" uuid="e1ccce9c-d248-4e97-beb6-816d87e5f8a0"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="31" width="189" height="20" uuid="e1ccce9c-d248-4e97-beb6-816d87e5f8a0"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{supplier_name}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="6" y="55" width="189" height="20" uuid="5fa3f3f4-134f-43f6-b0ae-c59e293c400a"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="0" y="51" width="189" height="20" uuid="5fa3f3f4-134f-43f6-b0ae-c59e293c400a"/>
 				<textFieldExpression><![CDATA[$F{contact_person}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="6" y="77" width="274" height="35" uuid="7738c504-bb2a-4cd2-a92a-57479bffadf8"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="0" y="71" width="189" height="31" uuid="7738c504-bb2a-4cd2-a92a-57479bffadf8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="6" y="113" width="189" height="15" uuid="19eec891-4370-425c-8f44-42ad65f8ebc9"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="0" y="103" width="189" height="15" uuid="19eec891-4370-425c-8f44-42ad65f8ebc9"/>
 				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="6" y="131" width="189" height="18" uuid="5310410c-c751-4d45-9331-07fda503c58b"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="0" y="118" width="189" height="18" uuid="5310410c-c751-4d45-9331-07fda503c58b"/>
 				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -425,7 +423,7 @@ Tallahassee, Florida]]></text>
 				<text><![CDATA[Payment Details:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="34" width="100" height="21" uuid="5fd594f6-43a4-419e-a601-5851e6385c17">
+				<reportElement x="353" y="30" width="100" height="20" uuid="5fd594f6-43a4-419e-a601-5851e6385c17">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -434,94 +432,110 @@ Tallahassee, Florida]]></text>
 				<text><![CDATA[Total Due:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="54" width="100" height="25" uuid="ed751a95-2288-4e3c-b7d5-7d43e0f10f65">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
+				<reportElement x="353" y="50" width="100" height="20" uuid="ed751a95-2288-4e3c-b7d5-7d43e0f10f65"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Payment Status:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="81" width="100" height="25" uuid="b3a1dee2-8cd3-4e7d-99ce-5cf155c4fc0a"/>
+				<reportElement x="353" y="70" width="100" height="20" uuid="b3a1dee2-8cd3-4e7d-99ce-5cf155c4fc0a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Paid date:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="107" width="100" height="27" uuid="9af70238-fcd3-4908-9ae7-fc2afe0317b5"/>
+				<reportElement x="353" y="90" width="100" height="20" uuid="9af70238-fcd3-4908-9ae7-fc2afe0317b5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cheque Number:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="455" y="107" width="100" height="26" uuid="d05acd79-8e48-44b4-9e3a-564283f48ccd"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="453" y="90" width="101" height="20" uuid="d05acd79-8e48-44b4-9e3a-564283f48ccd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[org.apache.commons.lang3.StringUtils.defaultIfBlank($F{cheque_number}, "N/A")]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="455" y="81" width="100" height="25" uuid="bb866f00-ee5b-4f84-8e2e-a33a510aac21">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="453" y="70" width="101" height="20" uuid="bb866f00-ee5b-4f84-8e2e-a33a510aac21">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{paid_date} == null ? "N/A" : $F{paid_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="460" y="58" width="95" height="18" forecolor="#C93936" uuid="35b5aa8b-b184-4ba0-85de-759d438886b8"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="453" y="50" width="101" height="20" forecolor="#C93936" uuid="35b5aa8b-b184-4ba0-85de-759d438886b8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{is_paid} ? "PAID" : "UNPAID"]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement key="" isPrintRepeatedValues="false" x="460" y="34" width="93" height="21" forecolor="#9247DE" uuid="89734569-a2a5-4586-b387-0aa0ca770438"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="" isPrintRepeatedValues="false" x="453" y="30" width="101" height="20" forecolor="#9247DE" uuid="89734569-a2a5-4586-b387-0aa0ca770438">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["$"+new java.text.DecimalFormat("#,##0.00").format($F{net_due})]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="310" y="251" width="243" height="1" forecolor="#ACE6E8" uuid="da1fd129-0fb7-4691-b1db-c39a4db5f866">
+				<reportElement x="380" y="233" width="175" height="1" forecolor="#ACE6E8" uuid="da1fd129-0fb7-4691-b1db-c39a4db5f866">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="310" y="265" width="100" height="21" uuid="d827afdc-04de-493a-aef3-9964bc3b4737"/>
+				<reportElement x="380" y="240" width="89" height="20" uuid="d827afdc-04de-493a-aef3-9964bc3b4737">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Invoice Amount:]]></text>
+				<text><![CDATA[Invoice Amount :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="310" y="295" width="100" height="21" uuid="151ea985-f031-437d-8851-d2d1070a3452"/>
+				<reportElement x="380" y="272" width="89" height="20" uuid="151ea985-f031-437d-8851-d2d1070a3452">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Credit Amount:]]></text>
+				<text><![CDATA[Credit Amount :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="310" y="324" width="100" height="21" uuid="e2d89314-d268-4a4b-b6e7-7244783cb5b3"/>
+				<reportElement x="381" y="301" width="88" height="20" uuid="e2d89314-d268-4a4b-b6e7-7244783cb5b3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Net Due:]]></text>
+				<text><![CDATA[Net Due :]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="457" y="265" width="97" height="21" forecolor="#9247DE" uuid="f2c90f7c-8e55-4370-91e0-14fb8eba775d">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="469" y="240" width="84" height="20" forecolor="#9247DE" uuid="f2c90f7c-8e55-4370-91e0-14fb8eba775d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["$"+new java.text.DecimalFormat("#,##0.00").format($F{invoice_amount})]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="457" y="295" width="97" height="21" forecolor="#9247DE" uuid="690fd135-e5c8-479a-94b3-4b7d2f075d41"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="469" y="272" width="84" height="20" forecolor="#9247DE" uuid="690fd135-e5c8-479a-94b3-4b7d2f075d41">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["$"+new java.text.DecimalFormat("#,##0.00").format($F{credit_amount})]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="457" y="324" width="97" height="21" forecolor="#9247DE" uuid="5425a8b4-7f67-4eaf-8cd8-f2f65ceeefdf">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="false">
+				<reportElement x="469" y="301" width="84" height="20" forecolor="#9247DE" uuid="5425a8b4-7f67-4eaf-8cd8-f2f65ceeefdf">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["$"+new java.text.DecimalFormat("#,##0.00").format($F{net_due})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="6" y="190" width="203" height="20" uuid="a2abe5ac-150d-44d5-969f-fafc578872d1"/>
+				<reportElement x="0" y="177" width="209" height="20" uuid="a2abe5ac-150d-44d5-969f-fafc578872d1"/>
 				<box>
 					<pen lineWidth="0.25" lineColor="#F6F6F6"/>
 					<topPen lineWidth="1.25" lineStyle="Solid" lineColor="#F7BDBC"/>
@@ -533,7 +547,7 @@ Tallahassee, Florida]]></text>
 				<text><![CDATA[Invoice Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="209" y="190" width="174" height="20" uuid="7148c838-6ece-4a3e-9e72-069b58364cc4"/>
+				<reportElement x="209" y="177" width="174" height="20" uuid="7148c838-6ece-4a3e-9e72-069b58364cc4"/>
 				<box>
 					<pen lineWidth="0.5" lineColor="#F7BDBC"/>
 					<topPen lineWidth="1.25" lineStyle="Solid" lineColor="#F7BDBC"/>
@@ -545,7 +559,7 @@ Tallahassee, Florida]]></text>
 				<text><![CDATA[Terms]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="383" y="190" width="170" height="20" uuid="2fb6c85d-68b3-49ff-8693-9b8e0bb092e2"/>
+				<reportElement x="383" y="177" width="170" height="20" uuid="2fb6c85d-68b3-49ff-8693-9b8e0bb092e2"/>
 				<box>
 					<pen lineWidth="0.75" lineColor="#F7BDBC"/>
 					<topPen lineWidth="1.25" lineStyle="Solid" lineColor="#F7BDBC"/>
@@ -556,16 +570,16 @@ Tallahassee, Florida]]></text>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Due Date]]></text>
 			</staticText>
-			<textField>
-				<reportElement mode="Opaque" x="6" y="210" width="203" height="20" backcolor="#F6F6F6" uuid="c644d26d-f05a-4dc4-afa5-a0faafb75118">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="0" y="197" width="209" height="20" backcolor="#F6F6F6" uuid="c644d26d-f05a-4dc4-afa5-a0faafb75118">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{invoice_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement mode="Opaque" x="209" y="210" width="174" height="20" backcolor="#F6F6F6" uuid="1ab9f1ce-4ac4-49c0-9695-d58c7ba9b981">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="209" y="197" width="174" height="20" backcolor="#F6F6F6" uuid="1ab9f1ce-4ac4-49c0-9695-d58c7ba9b981">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -573,8 +587,8 @@ Tallahassee, Florida]]></text>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{terms}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement mode="Opaque" x="383" y="210" width="170" height="20" backcolor="#F6F6F6" uuid="8e001773-3a9c-4220-8f36-1c35465dff50">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="383" y="197" width="170" height="20" backcolor="#F6F6F6" uuid="8e001773-3a9c-4220-8f36-1c35465dff50">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -583,46 +597,49 @@ Tallahassee, Florida]]></text>
 				<textFieldExpression><![CDATA[$F{payment_due_date}.toString().replace("-", "/").replaceAll("(\\d{4})/(\\d{2})/(\\d{2})", "$2-$3-$1")]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="310" y="289" width="243" height="1" forecolor="#ACE6E8" uuid="d8f5ee87-e72d-4b82-ae2e-043f0ab8b7a9">
+				<reportElement x="380" y="266" width="175" height="1" forecolor="#ACE6E8" uuid="d8f5ee87-e72d-4b82-ae2e-043f0ab8b7a9">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="310" y="319" width="243" height="1" forecolor="#ACE6E8" uuid="422cc5c7-1b8a-464e-b58d-bf0e95fa909b">
+				<reportElement x="380" y="296" width="175" height="1" forecolor="#ACE6E8" uuid="422cc5c7-1b8a-464e-b58d-bf0e95fa909b">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 			</line>
 		</band>
 	</columnHeader>
 	<columnFooter>
-		<band height="86">
+		<band height="50">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement x="3" y="3" width="100" height="21" uuid="12f1c694-4fad-4d2c-8c57-4e607e3a0397"/>
+				<reportElement x="3" y="0" width="100" height="20" uuid="12f1c694-4fad-4d2c-8c57-4e607e3a0397">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Description]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="3" y="26" width="553" height="30" forecolor="#56B6BF" uuid="9af3cb2a-1f92-406c-a3ec-712e5bc78981"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="false">
+				<reportElement x="3" y="20" width="551" height="30" forecolor="#56B6BF" uuid="9af3cb2a-1f92-406c-a3ec-712e5bc78981"/>
 				<textFieldExpression><![CDATA[$F{invoice_desc} == null || $F{invoice_desc}.trim().isEmpty() ? "No data to display" : $F{invoice_desc}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="60" splitType="Stretch">
+		<band height="36" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
-				<reportElement x="80" y="4" width="375" height="18" forecolor="#BD918F" uuid="15df6c29-09a6-40b4-b9aa-eba17ada1213"/>
+				<reportElement x="80" y="0" width="375" height="18" forecolor="#BD918F" uuid="15df6c29-09a6-40b4-b9aa-eba17ada1213"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA["\u00A9 Apna Agora, Tallahasse, Florida "]]></textFieldExpression>
 			</textField>
 			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="227" y="25" width="100" height="17" forecolor="#BD918F" uuid="6d1df185-c843-41ae-902e-4a6fdcd7f856"/>
+				<reportElement x="227" y="18" width="100" height="18" forecolor="#BD918F" uuid="6d1df185-c843-41ae-902e-4a6fdcd7f856">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
-	<summary>
-		<band height="50"/>
-	</summary>
 </jasperReport>
