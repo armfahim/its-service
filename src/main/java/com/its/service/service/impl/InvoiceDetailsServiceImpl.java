@@ -31,6 +31,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -193,9 +194,28 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     @Override
     public List<InvoiceDetailsResponse> findBySupplier(Long id) {
-        List<InvoiceDetails> invoiceDetails = repository.findBySupplierDetailsId(id);
+        List<InvoiceDetails> invoiceDetails = repository.findBySupplierDetailsIdAndRecordStatus(id, RecordStatus.ACTIVE);
         if (invoiceDetails.isEmpty())
             throw new AlreadyExistsException("No invoices have been found with this supplier");
+        return invoiceDetails.stream()
+                .map(DashboardResponse::mapToInvoiceDetailsResponse)
+                .toList();
+    }
+
+    @Override
+    public List<InvoiceDetailsResponse> findBySupplierOrBranch(Long supplierId, Long branchId) {
+        List<InvoiceDetails> invoiceDetails;
+        if (Objects.isNull(supplierId) && Objects.isNull(branchId)) {
+            return new ArrayList<>();
+        } else if (Objects.isNull(branchId)) {
+            invoiceDetails = repository.findBySupplierDetailsIdAndRecordStatus(supplierId, RecordStatus.ACTIVE);
+        } else if (Objects.isNull(supplierId)) {
+            invoiceDetails = repository.findByShopBranchIdAndRecordStatus(branchId, RecordStatus.ACTIVE);
+        } else {
+            invoiceDetails = repository.findBySupplierDetailsIdAndShopBranchIdAndRecordStatus(supplierId,branchId, RecordStatus.ACTIVE);
+        }
+        if (invoiceDetails.isEmpty())
+            throw new AlreadyExistsException("No purchase record have been found!");
         return invoiceDetails.stream()
                 .map(DashboardResponse::mapToInvoiceDetailsResponse)
                 .toList();

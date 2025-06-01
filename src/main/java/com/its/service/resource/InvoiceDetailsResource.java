@@ -100,6 +100,11 @@ public class InvoiceDetailsResource {
         return ok(success((service.findBySupplier(id))).getJson());
     }
 
+    @GetMapping(value = "/find/by/supplier/branch")
+    public ResponseEntity<Object> find(@RequestParam(required = false) Long supplierId, @RequestParam(required = false) Long branchId) {
+        return ok(success((service.findBySupplierOrBranch(supplierId,branchId))).getJson());
+    }
+
     @GetMapping(value = "/find-view/{id}")
     public ResponseEntity<Object> findView(@PathVariable Long id) {
         return ok(success(service.findViewById(id)).getJson());

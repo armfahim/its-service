@@ -103,5 +103,9 @@ public interface InvoiceDetailsRepository extends JpaRepository<InvoiceDetails, 
             , nativeQuery = true)
     List<MonthlyInvoiceTotalAmountProjection> findPurchaseAmountBySupplierOrYearInMonth(String year, Long supplierId, Long branchId);
 
-    List<InvoiceDetails> findBySupplierDetailsId(Long id);
+    List<InvoiceDetails> findBySupplierDetailsIdAndRecordStatus(Long id, RecordStatus recordStatus);
+
+    List<InvoiceDetails> findByShopBranchIdAndRecordStatus(Long branchId, RecordStatus recordStatus);
+
+    List<InvoiceDetails> findBySupplierDetailsIdAndShopBranchIdAndRecordStatus(Long supplierId, Long branchId, RecordStatus recordStatus);
 }

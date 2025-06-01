@@ -32,4 +32,6 @@ public interface InvoiceDetailsService extends GenericService<InvoiceDetails> {
     InvoiceDetailsDto save(InvoiceDetailsDto dto);
 
     InvoiceDetailsDto update(InvoiceDetailsDto dto);
+
+    List<InvoiceDetailsResponse> findBySupplierOrBranch(Long supplierId, Long branchId);
 }

@@ -91,11 +91,11 @@ public class DateUtils {
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
-    public static Period dateDiffAsPeriod(LocalDate from, LocalDate to){
-       return Period.between(from, to);
+    public static Period dateDiffAsPeriod(LocalDate from, LocalDate to) {
+        return Period.between(from, Objects.isNull(to) ? LocalDate.now() : to);
     }
 
-    public static boolean isBefore(LocalDate specifiedDate){
+    public static boolean isBefore(LocalDate specifiedDate) {
         System.out.println("is before" + specifiedDate.isBefore(LocalDate.now()));
         return specifiedDate.isBefore(LocalDate.now());
     }
