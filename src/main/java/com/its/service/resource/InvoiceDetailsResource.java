@@ -6,12 +6,8 @@ import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.dto.PaymentStatusDto;
 import com.its.service.dto.UpdateStatusDto;
 import com.its.service.entity.InvoiceDetails;
-import com.its.service.entity.SupplierDetails;
-import com.its.service.enums.RecordStatus;
 import com.its.service.enums.Term;
 import com.its.service.exception.AlreadyExistsException;
-import com.its.service.exception.AppException;
-import com.its.service.helper.BasicAudit;
 import com.its.service.repository.SupplierDetailsRepository;
 import com.its.service.service.InvoiceDetailsService;
 import com.its.service.utils.EnumConversion;
@@ -22,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.its.service.utils.ResponseBuilder.paginatedSuccess;
@@ -40,35 +35,12 @@ public class InvoiceDetailsResource {
 
     @PostMapping(value = "/save")
     public ResponseEntity<Object> save(@RequestBody InvoiceDetailsDto dto) {
-        service.validateInvoiceNumber(dto.getInvoiceNumber());
-        InvoiceDetails invoiceDetails = new InvoiceDetails();
-        dto.to(invoiceDetails);
-        try {
-            SupplierDetails supplierDetails = new SupplierDetails();
-            if (Objects.nonNull(dto.getSupplierDetails()))
-                supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new AlreadyExistsException("No supplier is available"));
-            invoiceDetails.setSupplierDetails(supplierDetails);
-            BasicAudit.setAttributeForCreateUpdate(invoiceDetails, false, RecordStatus.ACTIVE);
-            invoiceDetails = service.save(invoiceDetails);
-        } catch (Exception e) {
-            log.error("Failed to save invoice", e);
-            throw new AlreadyExistsException(MessageConstant.INTERNAL_SERVER_ERROR);
-        }
-        return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_SAVE_SUCCESS).getJson());
+        return ok(success(service.save(dto), MessageConstant.DATA_SAVE_SUCCESS).getJson());
     }
 
     @PutMapping(value = "/update")
     public ResponseEntity<Object> update(@RequestBody InvoiceDetailsDto dto) {
-        InvoiceDetails invoiceDetails = service.findById(dto.getId());
-        service.isInvoiceNumberChanged(dto.getInvoiceNumber(), invoiceDetails.getInvoiceNumber());
-        dto.to(invoiceDetails);
-
-        SupplierDetails supplierDetails = new SupplierDetails();
-        if (Objects.nonNull(dto.getSupplierDetails()))
-            supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new AppException("No supplier is available"));
-        invoiceDetails.setSupplierDetails(supplierDetails);
-        invoiceDetails = service.update(invoiceDetails);
-        return ok(success(InvoiceDetailsDto.from(invoiceDetails), MessageConstant.DATA_UPDATE_SUCCESS).getJson());
+        return ok(success(service.update(dto), MessageConstant.DATA_UPDATE_SUCCESS).getJson());
     }
 
     @DeleteMapping(value = "/delete")
@@ -91,10 +63,11 @@ public class InvoiceDetailsResource {
                                        @RequestParam(value = "sortBy", defaultValue = "") String orderColumnName,
                                        @RequestParam(value = "dir", defaultValue = "") String dir,
                                        @RequestParam(value = "supplier", defaultValue = "") Long supplierId,
+                                       @RequestParam(value = "branch", defaultValue = "") Long branchId,
                                        @RequestParam(value = "fromInvoiceDate", defaultValue = "") String fromInvoiceDate,
                                        @RequestParam(value = "toInvoiceDate", defaultValue = "") String toInvoiceDate) {
         try {
-            return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierId, fromInvoiceDate, toInvoiceDate)).getJson());
+            return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, supplierId, fromInvoiceDate, toInvoiceDate, branchId)).getJson());
         } catch (Exception e) {
             throw new AlreadyExistsException("Internal Server error");
         }

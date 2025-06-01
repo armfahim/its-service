@@ -38,6 +38,8 @@ public class InvoiceDetailsDto {
     private Boolean isPaid;
     private Long supplierDetails;
     private String supplierName;
+    private Long shopBranch;
+    private String branchName;
 
     public static InvoiceDetailsDto from(InvoiceDetails invoiceDetails) {
         InvoiceDetailsDto dto = new InvoiceDetailsDto();
@@ -45,6 +47,12 @@ public class InvoiceDetailsDto {
             dto.setSupplierDetails(invoiceDetails.getSupplierDetails().getId());
             dto.setSupplierName(invoiceDetails.getSupplierDetails().getSupplierName());
         }
+
+        if(Objects.nonNull(invoiceDetails.getShopBranch())) {
+            dto.setBranchName(invoiceDetails.getShopBranch().getBranchName());
+            dto.setShopBranch(invoiceDetails.getShopBranch().getId());
+        }
+
         if (Objects.nonNull(invoiceDetails.getTerm()))
             dto.setTerm(invoiceDetails.getTerm().getDisplayName());
         BeanUtils.copyProperties(invoiceDetails, dto);
@@ -74,7 +82,7 @@ public class InvoiceDetailsDto {
         }
         if (invoiceDetails.getIsPaid().equals(Boolean.FALSE) && !invoiceDetails.getTerm().equals(Term.COD)) {
             invoiceDetails.setChequeNumber(null);
-        }else{
+        } else {
             invoiceDetails.setChequeNumber(Objects.nonNull(chequeNumber) ? chequeNumber.trim() : null);
         }
     }

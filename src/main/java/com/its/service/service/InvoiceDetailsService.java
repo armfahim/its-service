@@ -1,5 +1,6 @@
 package com.its.service.service;
 
+import com.its.service.dto.InvoiceDetailsDto;
 import com.its.service.dto.InvoiceDetailsViewDto;
 import com.its.service.dto.PaymentStatusDto;
 import com.its.service.entity.InvoiceDetails;
@@ -12,7 +13,7 @@ public interface InvoiceDetailsService extends GenericService<InvoiceDetails> {
 
 
     PaginatedResponse listAndSearch(String sort, String dir, Integer page, Integer size, Long supplierId,
-                                    String fromInvoiceDate, String toInvoiceDate);
+                                    String fromInvoiceDate, String toInvoiceDate, Long branchId);
 
     List<InvoiceDetails> findAllByIsPaidFalse();
 
@@ -27,4 +28,8 @@ public interface InvoiceDetailsService extends GenericService<InvoiceDetails> {
     List<InvoiceDetailsResponse> findBySupplier(Long id);
 
     InvoiceDetails updatePaymentStatus(PaymentStatusDto dto);
+
+    InvoiceDetailsDto save(InvoiceDetailsDto dto);
+
+    InvoiceDetailsDto update(InvoiceDetailsDto dto);
 }

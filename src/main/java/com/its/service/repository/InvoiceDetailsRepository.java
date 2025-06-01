@@ -18,20 +18,24 @@ public interface InvoiceDetailsRepository extends JpaRepository<InvoiceDetails, 
 
     @Query(value = "SELECT i FROM InvoiceDetails i " +
             "JOIN SupplierDetails s ON s.id = i.supplierDetails.id " +
+            "JOIN ShopBranch sb ON sb.id = i.shopBranch.id " +
             "WHERE (:supplierId IS NULL OR s.id = :supplierId) " +
+            "AND (:branchId IS NULL OR sb.id = :branchId) " +
             "AND (:fromInvoiceDate IS NULL OR i.invoiceDate >= :fromInvoiceDate) " +
             "AND (:toInvoiceDate IS NULL OR i.invoiceDate <= :toInvoiceDate) " +
             "AND (i.recordStatus = 'ACTIVE') " +
             "AND (s.recordStatus = 'ACTIVE') ",
             countQuery = "SELECT COUNT(i) FROM InvoiceDetails i " +
                     "JOIN SupplierDetails s ON s.id = i.supplierDetails.id " +
+                    "JOIN ShopBranch sb ON sb.id = i.shopBranch.id " +
                     "WHERE (:supplierId IS NULL OR s.id = :supplierId) " +
+                    "AND (:branchId IS NULL OR sb.id = :branchId) " +
                     "AND (:fromInvoiceDate IS NULL OR i.invoiceDate >= :fromInvoiceDate) " +
                     "AND (:toInvoiceDate IS NULL OR i.invoiceDate <= :toInvoiceDate)" +
                     "AND (i.recordStatus = 'ACTIVE') " +
                     "AND (s.recordStatus = 'ACTIVE') ",
             nativeQuery = false)
-    Page<InvoiceDetails> findByListAndSearch(Long supplierId, LocalDate fromInvoiceDate, LocalDate toInvoiceDate, Pageable pageable);
+    Page<InvoiceDetails> findByListAndSearch(Long supplierId, Long branchId, LocalDate fromInvoiceDate, LocalDate toInvoiceDate, Pageable pageable);
 
     List<InvoiceDetails> findAllByRecordStatusAndSupplierDetailsRecordStatus(RecordStatus recordStatus, RecordStatus recordStatuss);
 

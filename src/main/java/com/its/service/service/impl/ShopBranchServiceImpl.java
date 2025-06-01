@@ -4,6 +4,7 @@ import com.its.service.constant.DefaultConstant;
 import com.its.service.constant.MessageConstant;
 import com.its.service.entity.ShopBranch;
 import com.its.service.exception.AlreadyExistsException;
+import com.its.service.exception.ResourceNotFoundException;
 import com.its.service.repository.ShopBranchRepository;
 import com.its.service.service.ShopBranchService;
 import com.its.service.utils.PaginatedResponse;
@@ -84,7 +85,11 @@ public class ShopBranchServiceImpl implements ShopBranchService {
 
     @Override
     public List<ShopBranch> findAll() {
-        return List.of();
+        try {
+            return repository.findAll();
+        } catch (Exception e) {
+            throw new ResourceNotFoundException(MessageConstant.NOT_FOUND);
+        }
     }
 
     @Override

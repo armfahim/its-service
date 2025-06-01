@@ -73,6 +73,10 @@ public class InvoiceDetails extends BaseEntity {
     @JoinColumn(name = "SUPPLIER_ID")
     private SupplierDetails supplierDetails;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SHOP_BRANCH_ID")
+    private ShopBranch shopBranch;
+
     public void setTermByValue(String targetValue) {
         this.term = Arrays.stream(Term.values())
                 .filter(enumTerm -> enumTerm.getDisplayName().equals(targetValue))

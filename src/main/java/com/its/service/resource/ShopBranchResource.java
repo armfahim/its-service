@@ -63,4 +63,9 @@ public class ShopBranchResource {
         return ok(paginatedSuccess(service.listAndSearch(orderColumnName, dir, page, size, branchName)).getJson());
     }
 
+    @GetMapping(value = "/find/all")
+    public ResponseEntity<Object> findAll() {
+        return ok(success(service.findAll(), MessageConstant.SUCCESS).getJson());
+    }
+
 }

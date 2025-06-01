@@ -4,11 +4,17 @@ import com.its.service.constant.DefaultConstant;
 import com.its.service.constant.MessageConstant;
 import com.its.service.dto.*;
 import com.its.service.entity.InvoiceDetails;
+import com.its.service.entity.ShopBranch;
+import com.its.service.entity.SupplierDetails;
 import com.its.service.enums.Month;
 import com.its.service.enums.RecordStatus;
 import com.its.service.enums.Term;
 import com.its.service.exception.AlreadyExistsException;
+import com.its.service.exception.AppException;
+import com.its.service.helper.BasicAudit;
 import com.its.service.repository.InvoiceDetailsRepository;
+import com.its.service.repository.ShopBranchRepository;
+import com.its.service.repository.SupplierDetailsRepository;
 import com.its.service.response.DashboardResponse;
 import com.its.service.response.InvoiceDetailsResponse;
 import com.its.service.service.InvoiceDetailsService;
@@ -33,18 +39,64 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
+
     private final InvoiceDetailsRepository repository;
+    private final SupplierDetailsRepository supplierDetailsRepository;
+    private final ShopBranchRepository shopBranchRepository;
+
+    @Override
+    @Transactional
+    public InvoiceDetailsDto save(InvoiceDetailsDto dto) {
+        validateInvoiceNumber(dto.getInvoiceNumber());
+        InvoiceDetails invoiceDetails = new InvoiceDetails();
+        dto.to(invoiceDetails);
+        try {
+
+            if (Objects.nonNull(dto.getSupplierDetails())) {
+                SupplierDetails supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new AlreadyExistsException("No supplier is available"));
+                invoiceDetails.setSupplierDetails(supplierDetails);
+            }
+
+            if (Objects.nonNull(dto.getShopBranch())) {
+                ShopBranch shopBranch = shopBranchRepository.findById(dto.getShopBranch()).orElseThrow(() -> new AlreadyExistsException("No Branch is found"));
+                invoiceDetails.setShopBranch(shopBranch);
+            }
+
+            BasicAudit.setAttributeForCreateUpdate(invoiceDetails, false, RecordStatus.ACTIVE);
+            return InvoiceDetailsDto.from(this.save(invoiceDetails));
+        } catch (Exception e) {
+            log.error("Failed to save invoice", e);
+            throw new AlreadyExistsException(MessageConstant.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @Override
     @Transactional
     public InvoiceDetails save(InvoiceDetails invoiceDetails) {
-//        if (Boolean.TRUE.equals(invoiceDetails.getIsPaid()) && Objects.isNull(invoiceDetails.getPaidDate())) {
-//            throw new AlreadyExistsException("Please provide paid date.");
-//        }
         return repository.save(invoiceDetails);
     }
 
     @Override
+    @Transactional
+    public InvoiceDetailsDto update(InvoiceDetailsDto dto) {
+        InvoiceDetails invoiceDetails = findById(dto.getId());
+        isInvoiceNumberChanged(dto.getInvoiceNumber(), invoiceDetails.getInvoiceNumber());
+        dto.to(invoiceDetails);
+
+        if (Objects.nonNull(dto.getSupplierDetails())) {
+            SupplierDetails supplierDetails = supplierDetailsRepository.findById(dto.getSupplierDetails()).orElseThrow(() -> new AppException("No supplier is available"));
+            invoiceDetails.setSupplierDetails(supplierDetails);
+        }
+        if (Objects.nonNull(dto.getShopBranch())) {
+            ShopBranch shopBranch = shopBranchRepository.findById(dto.getShopBranch()).orElseThrow((() -> new AppException("No shop branch is found")));
+            invoiceDetails.setShopBranch(shopBranch);
+        }
+
+        return InvoiceDetailsDto.from(this.update(invoiceDetails));
+    }
+
+    @Override
+    @Transactional
     public InvoiceDetails update(InvoiceDetails invoiceDetails) {
         if (Objects.isNull(invoiceDetails)) {
             throw new AlreadyExistsException(MessageConstant.DATA_NOT_PROVIDED);
@@ -94,13 +146,13 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     @Override
     public PaginatedResponse listAndSearch(String sort, String dir, Integer page, Integer size, Long supplierId,
-                                           String fromInvoiceDate, String toInvoiceDate) {
+                                           String fromInvoiceDate, String toInvoiceDate, Long branchId) {
 
         LocalDate fromDate = StringUtils.isNotEmpty(fromInvoiceDate) ? DateUtils.asLocalDate(fromInvoiceDate) : null;
         LocalDate toDate = StringUtils.isNotEmpty(toInvoiceDate) ? DateUtils.asLocalDate(toInvoiceDate) : null;
 
         sort = sort.isEmpty() ? "invoiceDate" : sort;
-        Page<InvoiceDetails> pageData = repository.findByListAndSearch(supplierId, fromDate, toDate, PaginationUtils.getPageable(sort, dir, page, size));
+        Page<InvoiceDetails> pageData = repository.findByListAndSearch(supplierId, branchId, fromDate, toDate, PaginationUtils.getPageable(sort, dir, page, size));
 
         List<InvoiceDetailsDto> data = pageData.getContent().stream().map(InvoiceDetailsDto::from).toList();
         return PaginationUtils.getPaginatedResponse(pageData, data);
