@@ -63,39 +63,45 @@ public interface InvoiceDetailsRepository extends JpaRepository<InvoiceDetails, 
 
     @Query(value = """
             SELECT
-            	SUM(invoice_amount) as totalPurchase
+                SUM(invoice_amount) AS totalPurchase
             FROM
-            	invoice_details id
-            JOIN
-                supplier_details sd ON id.supplier_id = sd.id
+                invoice_details ids
+            INNER JOIN
+                supplier_details sd ON ids.supplier_id = sd.id
+            INNER JOIN
+                shop_branch shb ON ids.shop_branch_id = shb.id
             WHERE
-            	id.record_status = 'ACTIVE'
-            	AND sd.record_status = 'ACTIVE'
-            	AND (:supplierId IS NULL or sd.id = :supplierId)
+                ids.record_status = 'ACTIVE'
+                AND sd.record_status = 'ACTIVE'
+                AND ids.supplier_id = ISNULL(:supplierId, ids.supplier_id)
+                AND ids.shop_branch_id = ISNULL(:branchId, ids.shop_branch_id)
             """
             , nativeQuery = true)
-    InvoiceTotalAmountProjection findPurchaseAmountBySupplier(Long supplierId);
+    InvoiceTotalAmountProjection findPurchaseAmountBySupplier(Long supplierId, Long branchId);
 
     @Query(value = """
-            SELECT
-            	MONTH(invoice_date) AS month,
-            	SUM(invoice_amount) AS monthlyTotal
-            FROM
-            	invoice_details id
-            JOIN
-                supplier_details sd ON id.supplier_id = sd.id
-            WHERE
-            	(:year IS NULL OR YEAR(id.invoice_date) = :year)
-            	AND (:supplierId IS NULL OR sd.id = :supplierId)
-            	AND id.record_status = 'ACTIVE'
-            	AND sd.record_status = 'ACTIVE'
-            GROUP BY
-            	MONTH(id.invoice_date)
-            ORDER BY
-            	MONTH(id.invoice_date)
+                SELECT
+                	MONTH(invoice_date) AS month,
+                	SUM(invoice_amount) AS monthlyTotal
+                FROM
+                	invoice_details id
+                INNER JOIN
+                    supplier_details sd ON id.supplier_id = sd.id
+                INNER JOIN
+            		shop_branch shb ON id.shop_branch_id = shb.id
+                WHERE
+                	YEAR(id.invoice_date) = ISNULL(:year, YEAR(id.invoice_date))
+                	AND id.supplier_id = ISNULL(:supplierId, id.supplier_id)
+                	AND id.shop_branch_id = ISNULL(:branchId, id.shop_branch_id)
+                	AND id.record_status = 'ACTIVE'
+                	AND sd.record_status = 'ACTIVE'
+                GROUP BY
+                	MONTH(id.invoice_date)
+                ORDER BY
+                	MONTH(id.invoice_date)
             """
             , nativeQuery = true)
-    List<MonthlyInvoiceTotalAmountProjection> findPurchaseAmountBySupplierOrYearInMonth(String year, Long supplierId);
+    List<MonthlyInvoiceTotalAmountProjection> findPurchaseAmountBySupplierOrYearInMonth(String year, Long supplierId, Long branchId);
 
     List<InvoiceDetails> findBySupplierDetailsId(Long id);
 }

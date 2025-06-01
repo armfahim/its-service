@@ -29,14 +29,14 @@ public class PurchaseReportsService {
         return totalAmount;
     }
 
-    public Object getPurchaseAmountBySupplier(Long supplierId) {
-        InvoiceTotalAmountProjection projection = invoiceDetailsRepository.findPurchaseAmountBySupplier(supplierId);
+    public Object getPurchaseAmountBySupplier(Long supplierId, Long branchId) {
+        InvoiceTotalAmountProjection projection = invoiceDetailsRepository.findPurchaseAmountBySupplier(supplierId, branchId);
         return Objects.nonNull(projection) ? NumberUtils.getRoundOffValue(projection.getTotalPurchase()) : null;
     }
 
-    public InvoiceTotalAmountDto getPurchaseAmountBySupplierAndYearInMonth(String year, Long supplierId) {
+    public InvoiceTotalAmountDto getPurchaseAmountBySupplierAndYearInMonth(String year, Long supplierId, Long branchId) {
         if (Objects.isNull(year)) throw new AlreadyExistsException("Please provide a year in the bar chart");
-        List<MonthlyInvoiceTotalAmountProjection> projectionsData = invoiceDetailsRepository.findPurchaseAmountBySupplierOrYearInMonth(year, supplierId);
+        List<MonthlyInvoiceTotalAmountProjection> projectionsData = invoiceDetailsRepository.findPurchaseAmountBySupplierOrYearInMonth(year, supplierId, branchId);
         if (projectionsData.isEmpty()) return null;
         // Process the data and create a modified list
         InvoiceTotalAmountDto invoiceAmountDtos = new InvoiceTotalAmountDto();

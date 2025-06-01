@@ -26,13 +26,15 @@ public class PurchaseSummaryResource {
     }
 
     @GetMapping(value = "/amount/by/supplier")
-    public ResponseEntity<Object> getPurchaseAmountBySupplier(@RequestParam(required = false) Long supplierId) {
-        return ok(success(purchaseReportsService.getPurchaseAmountBySupplier(supplierId), MessageConstant.SUCCESS).getJson());
+    public ResponseEntity<Object> getPurchaseAmountBySupplier(@RequestParam(required = false) Long supplierId,
+                                                              @RequestParam(required = false) Long branchId) {
+        return ok(success(purchaseReportsService.getPurchaseAmountBySupplier(supplierId, branchId), MessageConstant.SUCCESS).getJson());
     }
 
     @GetMapping(value = "/amount/by/supplier/year-month")
     public ResponseEntity<Object> getPurchaseAmountBySupplierAndYearInMonth(@RequestParam(required = false) String year,
-                                                                             @RequestParam(required = false) Long supplierId) {
-        return ok(success(purchaseReportsService.getPurchaseAmountBySupplierAndYearInMonth(year, supplierId), MessageConstant.SUCCESS).getJson());
+                                                                            @RequestParam(required = false) Long supplierId,
+                                                                            @RequestParam(required = false) Long branchId) {
+        return ok(success(purchaseReportsService.getPurchaseAmountBySupplierAndYearInMonth(year, supplierId, branchId), MessageConstant.SUCCESS).getJson());
     }
 }
